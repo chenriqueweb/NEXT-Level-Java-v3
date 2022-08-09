@@ -2,35 +2,25 @@ package br.com.henrique.model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
-import io.swagger.annotations.ApiModelProperty;
+import br.com.henrique.dto.MunicipioDto;
 
 @Entity
 public class Municipio {
     
     @Id
-    // @GeneratedValue(strategy = GenerationType.IDENTITY)  // Usando sequencia do DB2
-    @ApiModelProperty(value = "Código do Município", required = true)
     private Integer codigo_ID;
-    
-    @NotNull(message = "O campo não pode ser nulo")
-    @NotEmpty(message = "O campo é obrigatório é não foi preenchido")
-    @Size(min=4, max=50, message="Tamanho inválido! Digite no mínimo {min} e no máximo {max} caracteres")
-    @ApiModelProperty(value = "Nome do Município", required = true)
     private String nome;
-    
-    // FK com Estado
-    @ManyToOne
-    @JoinColumn(name="sigla")
     private Estado estado;
     
     public Municipio() {
         super();
+    }
+    
+    public Municipio(MunicipioDto municipioDto) {
+        this.codigo_ID = null;
+        this.nome = municipioDto.getNome();
+        this.estado = municipioDto.getEstado();    
     }
 
     public Municipio(Integer codigo_ID, String nome, Estado estado) {
