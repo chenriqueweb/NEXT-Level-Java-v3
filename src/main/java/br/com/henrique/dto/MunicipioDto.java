@@ -9,6 +9,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import br.com.henrique.model.Estado;
+import br.com.henrique.model.Municipio;
 import io.swagger.annotations.ApiModelProperty;
 
 @Entity
@@ -65,42 +66,7 @@ public class MunicipioDto {
         this.estado = estado;
     }
 
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((codigo_ID == null) ? 0 : codigo_ID.hashCode());
-        result = prime * result + ((estado == null) ? 0 : estado.hashCode());
-        result = prime * result + ((nome == null) ? 0 : nome.hashCode());
-        return result;
+    public Municipio converteToEntity() {
+    	return new Municipio(this);
     }
-
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        MunicipioDto other = (MunicipioDto) obj;
-        if (codigo_ID == null) {
-            if (other.codigo_ID != null)
-                return false;
-        } else if (!codigo_ID.equals(other.codigo_ID))
-            return false;
-        if (estado == null) {
-            if (other.estado != null)
-                return false;
-        } else if (!estado.equals(other.estado))
-            return false;
-        if (nome == null) {
-            if (other.nome != null)
-                return false;
-        } else if (!nome.equals(other.nome))
-            return false;
-        return true;
-    }
-
 }

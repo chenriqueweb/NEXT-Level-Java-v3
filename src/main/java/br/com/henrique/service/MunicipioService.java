@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import br.com.henrique.dto.MunicipioDto;
 import br.com.henrique.model.Municipio;
 import br.com.henrique.repository.MunicipioRepository;
 import br.com.henrique.service.exception.ObjectFoundException;
@@ -47,24 +48,24 @@ public class MunicipioService {
         return municipio;
     }
     
-    // Inclui Municipio
-    public Municipio addMunicipio(Municipio municipio) {
-        Municipio municipioBuscaID = repositMunicipio.findById(municipio.getCodigo_ID()).orElse(null);
+    // Inclui Municipio - DTO
+    public Municipio addMunicipio(MunicipioDto municipioDto) {
+        Municipio municipioBuscaID = repositMunicipio.findById(municipioDto.getCodigo_ID()).orElse(null);
         if (municipioBuscaID != null) {
             throw new ObjectFoundException("Municipio já cadastrado !");
-        }    	
-        return repositMunicipio.save(municipio);
+        }
+        
+        return repositMunicipio.save(municipioDto.converteToEntity());
     }
     
     // Atualiza um Municipio
-    public void updateMunicipio(Integer codigo, Municipio municipio) {
+    public void updateMunicipio(Integer codigo, MunicipioDto municipioDto) {
         Municipio municipioAtualizado = this.findById(codigo);
         if (municipioAtualizado == null) {
             throw new ObjectNotFoundException("Municipio nao encontrado !");
         }        
-        
-        municipioAtualizado.setNome(municipio.getNome());
-        municipioAtualizado.setEstado(municipio.getEstado());
+        municipioAtualizado.setNome(municipioDto.getNome());
+        municipioAtualizado.setEstado(municipioDto.getEstado());
         
         repositMunicipio.save(municipioAtualizado);
     }    

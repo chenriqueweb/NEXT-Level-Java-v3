@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import br.com.henrique.dto.MunicipioDto;
 import br.com.henrique.model.Municipio;
 import br.com.henrique.service.MunicipioService;
 import io.swagger.annotations.Api;
@@ -86,8 +87,8 @@ public class MunicipioController {
     @ApiResponses(value = {
     	    @ApiResponse(code = 201, message = "Municipio criado com sucesso")
     }) 
-    public ResponseEntity<Void> addMunicipio(@Valid @RequestBody Municipio municipio) {
-        Municipio municipioNovo = municipioService.addMunicipio(municipio);
+    public ResponseEntity<Void> addMunicipio(@Valid @RequestBody MunicipioDto municipioDto) {
+        Municipio municipioNovo = municipioService.addMunicipio(municipioDto);
         
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{codigo}").buildAndExpand(municipioNovo.getCodigo_ID()).toUri();
         return ResponseEntity.created(uri).build();
@@ -103,8 +104,8 @@ public class MunicipioController {
     })  
     public ResponseEntity<Void> updateMunicipio(@Valid 
     		                                    @PathVariable Integer codigo, 
-    		                                    @RequestBody Municipio municipio) {
-        municipioService.updateMunicipio(codigo, municipio);
+    		                                    @RequestBody MunicipioDto municipioDto) {
+        municipioService.updateMunicipio(codigo, municipioDto);
         return ResponseEntity.noContent().build();
     }
     

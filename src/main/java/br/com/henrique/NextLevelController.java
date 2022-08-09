@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import br.com.henrique.dto.MunicipioDto;
 import br.com.henrique.model.Atende;
 import br.com.henrique.model.Empresa;
 import br.com.henrique.model.Estado;
@@ -198,8 +199,8 @@ public class NextLevelController {
         }    
         
         @PostMapping("/municipio/form")
-        public String insreMunicipio1(Municipio municipio) {
-            municipioService.addMunicipio(municipio);
+        public String insreMunicipio1(MunicipioDto municipioDto) {
+            municipioService.addMunicipio(municipioDto);
             
             return "redirect:/municipioListar";
         }          
@@ -207,11 +208,11 @@ public class NextLevelController {
         // Atualiza dados do Municipio     
         // method Post (página)
         @PostMapping("/municipio/salvar/{codigo}")
-        public String atualizaMunicipioWeb(Municipio municipio) {
-            Municipio municipioAntes = municipioService.findById(municipio.getCodigo_ID());
+        public String atualizaMunicipioWeb(MunicipioDto municipioDto) {
+            Municipio municipioAntes = municipioService.findById(municipioDto.getCodigo_ID());
             
             municipioService.deletaMunicipio(municipioAntes.getCodigo_ID());
-            municipioService.addMunicipio(municipio);
+            municipioService.addMunicipio(municipioDto);
             
 //            municipioService.updateMunicipio(municipioAntes.getCodigo_ID(), municipio);
 
