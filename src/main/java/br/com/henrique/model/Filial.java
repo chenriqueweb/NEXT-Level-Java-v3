@@ -6,6 +6,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import br.com.henrique.dto.FilialDto;
 import io.swagger.annotations.ApiModelProperty;
 
 @Entity
@@ -33,6 +34,13 @@ public class Filial {
     
     public Filial() {
         super();
+    }
+    
+    public Filial(FilialDto filialDto) {
+        this.filialPK = null;
+        this.nome = filialDto.getNome();
+        this.cnpj = filialDto.getCnpj();
+        this.municipio = filialDto.getMunicipio();
     }
 
     public Filial(FilialPK filialPK, String nome, String cnpj, Integer municipio) {

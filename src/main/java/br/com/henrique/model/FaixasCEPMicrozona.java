@@ -6,6 +6,7 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
 
+import br.com.henrique.dto.FaixasCEPMicrozonaDto;
 import io.swagger.annotations.ApiModelProperty;
 
 @Entity
@@ -35,11 +36,17 @@ public class FaixasCEPMicrozona {
         super();
     }
 
+    public FaixasCEPMicrozona(FaixasCEPMicrozonaDto faixasCEPMicrozonaDto) {
+		this.faixasCEPMicrozonaPK = null;
+		this.CEPinicial = faixasCEPMicrozonaDto.getCEPinicial();
+		this.CEPfinal = faixasCEPMicrozonaDto.getCEPfinal();   
+    }  
+    
 	public FaixasCEPMicrozona(FaixasCEPMicrozonaPK faixasCEPMicrozonaPK, Integer cEPinicial, Integer cEPfinal) {
 		super();
 		this.faixasCEPMicrozonaPK = faixasCEPMicrozonaPK;
-		CEPinicial = cEPinicial;
-		CEPfinal = cEPfinal;
+		this.CEPinicial = cEPinicial;
+		this.CEPfinal = cEPfinal;
 	}
 	
 	public FaixasCEPMicrozonaPK getFaixasCEPMicrozonaPK() {

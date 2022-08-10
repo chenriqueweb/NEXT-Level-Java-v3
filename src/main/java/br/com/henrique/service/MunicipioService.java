@@ -58,7 +58,7 @@ public class MunicipioService {
         return repositMunicipio.save(municipioDto.converteToEntity());
     }
     
-    // Atualiza um Municipio
+    // Atualiza um Municipio - DTO
     public void updateMunicipio(Integer codigo, MunicipioDto municipioDto) {
         Municipio municipioAtualizado = this.findById(codigo);
         if (municipioAtualizado == null) {

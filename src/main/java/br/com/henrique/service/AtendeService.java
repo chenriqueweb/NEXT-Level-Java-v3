@@ -74,7 +74,7 @@ public class AtendeService {
         		  atende.setCep(cep.getCep());
         		  atende.setLogradouro(cep.getLogradouro());
         		  atende.setComplemento(cep.getComplemento());
-        		  atende.setLocalidade(cep.getLocalidade());  // Cidade - Municipi
+        		  atende.setLocalidade(cep.getLocalidade());  // Cidade - Municipio
         		  atende.setBairro(cep.getBairro());
         		  atende.setUf(cep.getUf());
         		  atende.setIbge(cep.getIbge());

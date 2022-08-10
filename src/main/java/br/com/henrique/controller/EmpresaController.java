@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import br.com.henrique.dto.EmpresaDto;
 import br.com.henrique.model.Empresa;
 import br.com.henrique.service.EmpresaService;
 import br.com.henrique.service.exception.NoNullAllowedException;
@@ -69,7 +70,7 @@ public class EmpresaController {
         return ResponseEntity.ok().body(empresa);
     }
     
-    // Inclui Empresa
+    // Inclui Empresa - DTO
     @PostMapping
     @ApiOperation(value = "Inclui uma Empresa")
     @ApiResponses(value = {
@@ -77,11 +78,11 @@ public class EmpresaController {
     })  
     public ResponseEntity<Void> addEmpresa(@Valid 
 //    		@RequestHeader(name = "X-COM-PERSIST", required = true) String headerPersist,
-    		@RequestBody Empresa empresa) {
+    		@RequestBody EmpresaDto empresaDto) {
     	
         URI uri = null;
     	try {
-             Empresa empresaNova = empresaService.addEmpresa(empresa);
+             Empresa empresaNova = empresaService.addEmpresa(empresaDto);
              uri = ServletUriComponentsBuilder
             		           .fromCurrentRequest()
             		           .path("/{codigo}")
@@ -95,7 +96,7 @@ public class EmpresaController {
 		return ResponseEntity.created(uri).build();
     }    
     
-    // Altera Empresa
+    // Altera Empresa - DTO
     @PutMapping(path = "{codigo}")
     @ApiOperation(value = "Altera os dados de uma Empresa")
     @ApiResponses(value = {
@@ -104,8 +105,8 @@ public class EmpresaController {
     	    @ApiResponse(code = 404, message = "Empresa não encontrada")    	    
     })  
     public ResponseEntity<Void> updateEmpresa(@Valid @PathVariable Integer codigo, 
-    		                                         @RequestBody Empresa empresa) {
-        empresaService.updateEmpresa(codigo, empresa);
+    		                                         @RequestBody EmpresaDto empresaDto) {
+        empresaService.updateEmpresa(codigo, empresaDto);
         return ResponseEntity.noContent().build();
     }
     

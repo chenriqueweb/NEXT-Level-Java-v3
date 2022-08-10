@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import br.com.henrique.dto.EmpresaDto;
 import br.com.henrique.model.Empresa;
 import br.com.henrique.repository.EmpresaRepository;
 import br.com.henrique.service.exception.ObjectFoundException;
@@ -41,35 +42,35 @@ public class EmpresaService {
         return empresa;
     }
 
-    // Inclui Empresa
-    public Empresa addEmpresa(Empresa empresa) {
-        Empresa empresaBuscaID = repositEmpresa.findById(empresa.getCodigo()).orElse(null);
+    // Inclui Empresa - DTO
+    public Empresa addEmpresa(EmpresaDto empresaDto) {
+        Empresa empresaBuscaID = repositEmpresa.findById(empresaDto.getCodigo()).orElse(null);
         if (empresaBuscaID != null) {
             throw new ObjectFoundException("Empresa já encontra-se cadastrada !");
         }         	
         
-        Empresa empresaBuscaCNPJ = repositEmpresa.findByraizCNPJ(empresa.getRaizCNPJ());
+        Empresa empresaBuscaCNPJ = repositEmpresa.findByraizCNPJ(empresaDto.getRaizCNPJ());
         if (empresaBuscaCNPJ != null) {
             throw new ObjectFoundException("CNPJ informado já encontra-se cadastrado para outra Empresa !");
         }         
-        return repositEmpresa.save(empresa);
+        return repositEmpresa.save(empresaDto.converteToEntity());
     }
 
-    // Atualiza uma Empresa
-    public void updateEmpresa(Integer codigo, Empresa empresa) {
+    // Atualiza uma Empresa - DTO
+    public void updateEmpresa(Integer codigo, EmpresaDto empresaDto) {
         Empresa empresaAtualizado = this.findById(codigo);
         if (empresaAtualizado == null) {
             throw new ObjectNotFoundException("Empresa nao encontrada !");
         }
         
-        Empresa empresaBuscaCNPJ = repositEmpresa.findByraizCNPJ(empresa.getRaizCNPJ());
+        Empresa empresaBuscaCNPJ = repositEmpresa.findByraizCNPJ(empresaDto.getRaizCNPJ());
         if (empresaBuscaCNPJ != null) {
             throw new ObjectFoundException("CNPJ informado já encontra-se cadastrado para outra Empresa !");
         }        
         
-        empresaAtualizado.setRazaoSocial(empresa.getRazaoSocial());
-        empresaAtualizado.setRaizCNPJ(empresa.getRaizCNPJ());
-        empresaAtualizado.setDataAbertura(empresa.getDataAbertura());
+        empresaAtualizado.setRazaoSocial(empresaDto.getRazaoSocial());
+        empresaAtualizado.setRaizCNPJ(empresaDto.getRaizCNPJ());
+        empresaAtualizado.setDataAbertura(empresaDto.getDataAbertura());
         
         repositEmpresa.save(empresaAtualizado);
     }

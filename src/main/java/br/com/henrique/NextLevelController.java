@@ -170,25 +170,25 @@ public class NextLevelController {
         
         //--------------------------------------------------------------------------------------
         // ### Municipio
-        @GetMapping("/municipioListar")
-        public ModelAndView findAllMunicipio() {
-            List<Municipio> municipios = municipioService.findAll();
-            
-            ModelAndView modelAndView = new ModelAndView("MunicipioListar");
-            modelAndView.addObject("municipios", municipios);
-            
-            return modelAndView;
-        }
-        
-        @GetMapping("/municipioListar/page")
-        public ModelAndView findAllMunicipioPage(@PageableDefault(size = 7) Pageable pageable) {            
-            Page<Municipio> municipios = municipioService.findAllPage(pageable);
-            
-            ModelAndView modelAndView = new ModelAndView("MunicipioListar");
-            modelAndView.addObject("municipios", municipios);            
-            
-            return modelAndView;
-        }          
+//        @GetMapping("/municipioListar")
+//        public ModelAndView findAllMunicipio() {
+//            List<Municipio> municipios = municipioService.findAll();
+//            
+//            ModelAndView modelAndView = new ModelAndView("MunicipioListar");
+//            modelAndView.addObject("municipios", municipios);
+//            
+//            return modelAndView;
+//        }
+//        
+//        @GetMapping("/municipioListar/page")
+//        public ModelAndView findAllMunicipioPage(@PageableDefault(size = 7) Pageable pageable) {            
+//            Page<Municipio> municipios = municipioService.findAllPage(pageable);
+//            
+//            ModelAndView modelAndView = new ModelAndView("MunicipioListar");
+//            modelAndView.addObject("municipios", municipios);            
+//            
+//            return modelAndView;
+//        }          
         
         @GetMapping("/municipio/novo")
         public ModelAndView municipioNovo() {            
@@ -198,26 +198,26 @@ public class NextLevelController {
             return modelAndView;
         }    
         
-        @PostMapping("/municipio/form")
-        public String insreMunicipio1(MunicipioDto municipioDto) {
-            municipioService.addMunicipio(municipioDto);
-            
-            return "redirect:/municipioListar";
-        }          
-        
-        // Atualiza dados do Municipio     
-        // method Post (página)
-        @PostMapping("/municipio/salvar/{codigo}")
-        public String atualizaMunicipioWeb(MunicipioDto municipioDto) {
-            Municipio municipioAntes = municipioService.findById(municipioDto.getCodigo_ID());
-            
-            municipioService.deletaMunicipio(municipioAntes.getCodigo_ID());
-            municipioService.addMunicipio(municipioDto);
-            
-//            municipioService.updateMunicipio(municipioAntes.getCodigo_ID(), municipio);
-
-            return "redirect:/municipioListar";        
-        } 
+//        @PostMapping("/municipio/form")
+//        public String insreMunicipio1(MunicipioDto municipioDto) {
+//            municipioService.addMunicipio(municipioDto);
+//            
+//            return "redirect:/municipioListar";
+//        }          
+//        
+//        // Atualiza dados do Municipio     
+//        // method Post (página)
+//        @PostMapping("/municipio/salvar/{codigo}")
+//        public String atualizaMunicipioWeb(MunicipioDto municipioDto) {
+//            Municipio municipioAntes = municipioService.findById(municipioDto.getCodigo_ID());
+//            
+//            municipioService.deletaMunicipio(municipioAntes.getCodigo_ID());
+//            municipioService.addMunicipio(municipioDto);
+//            
+////            municipioService.updateMunicipio(municipioAntes.getCodigo_ID(), municipio);
+//
+//            return "redirect:/municipioListar";        
+//        } 
         
         
         //--------------------------------------------------------------------------------------

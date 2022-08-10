@@ -7,6 +7,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import br.com.henrique.dto.EstadoDto;
 import io.swagger.annotations.ApiModelProperty;
 
 @Entity
@@ -29,6 +30,11 @@ public class Estado {
     public Estado() {
         super();
     }
+    
+    public Estado(EstadoDto estadoDto) {
+        this.sigla = null;
+        this.nome = estadoDto.getNome();        
+    }    
     
     public Estado(String sigla, String nome) {
         super();

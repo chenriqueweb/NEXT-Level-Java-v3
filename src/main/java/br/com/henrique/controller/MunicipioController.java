@@ -81,7 +81,7 @@ public class MunicipioController {
         return ResponseEntity.ok().body(municipio);
     }    
 
-    // Inclui Municipio
+    // Inclui Municipio - DTO
     @PostMapping
     @ApiOperation(value = "Inclui um Municipio")
     @ApiResponses(value = {
@@ -94,7 +94,7 @@ public class MunicipioController {
         return ResponseEntity.created(uri).build();
     }    
     
-    // Altera Municipio
+    // Altera Municipio - DTO
     @PutMapping(path = "{codigo}")
     @ApiOperation(value = "Altera os dados de um Municipio")
     @ApiResponses(value = {

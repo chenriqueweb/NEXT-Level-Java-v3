@@ -1,10 +1,6 @@
-package br.com.henrique.model;
+package br.com.henrique.dto;
 
 import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
@@ -12,17 +8,14 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import br.com.henrique.dto.MicrozonaDto;
+import br.com.henrique.model.Estado;
+import br.com.henrique.model.Microzona;
+import br.com.henrique.model.Municipio;
+import br.com.henrique.model.RotaEntrega;
 import io.swagger.annotations.ApiModelProperty;
 
-@Entity
-public class Microzona {
+public class MicrozonaDto {
     
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @ApiModelProperty(value = "Código da Microzona", required = true)
-    private Integer codigo;
-        
     @NotNull(message = "O campo não pode ser nulo")
     @NotEmpty(message = "O campo é obrigatório é não foi preenchido")
     @Size(min=5, max=50, message="Tamanho inválido! Digite no mínimo {min} e no máximo {max} caracteres")
@@ -106,31 +99,14 @@ public class Microzona {
     private RotaEntrega rotaEntrega;      
 
 
-    public Microzona() {
+    public MicrozonaDto() {
         super();
     }
-    
-    public Microzona(MicrozonaDto microzonaDto) {
-        this.codigo = null;
-        this.nome = microzonaDto.getNome();
-        this.status = microzonaDto.getStatus();
-        this.atendimentoDiario = microzonaDto.getAtendimentoDiario();
-        this.atendeSegunda = microzonaDto.getAtendeSegunda();
-        this.atendeTerca = microzonaDto.getAtendeTerca();
-        this.atendeQuarta = microzonaDto.getAtendeQuarta();
-        this.atendeQuinta = microzonaDto.getAtendeQuinta();
-        this.atendeSexta =  microzonaDto.getAtendeSexta();
-        this.atendeSabado = microzonaDto.getAtendeSabado();
-        this.estadoRota = microzonaDto.getEstadoRota();
-        this.codigoMunicipio = microzonaDto.getCodigoMunicipio();
-        this.codigoRota = microzonaDto.getCodigoRota();
-    }
 
-    public Microzona(Integer codigo, String nome, String status, String atendimentoDiario, String atendeSegunda, String atendeTerca,
+    public MicrozonaDto(String nome, String status, String atendimentoDiario, String atendeSegunda, String atendeTerca,
                     String atendeQuarta, String atendeQuinta, String atendeSexta, String atendeSabado, Estado estadoRota,
                     Municipio codigoMunicipio, Integer codigoRota) {
         super();
-        this.codigo = codigo;
         this.nome = nome;
         this.status = status;
         this.atendimentoDiario = atendimentoDiario;
@@ -148,14 +124,6 @@ public class Microzona {
     // Método para identificar registro novo
     public boolean isNovo() {
         return nome == null;
-    }
-
-    public Integer getCodigo() {
-        return codigo;
-    }
-
-    public void setCodigo(Integer codigo) {
-        this.codigo = codigo;
     }
 
     public String getNome() {
@@ -253,102 +221,9 @@ public class Microzona {
     public void setCodigoRota(Integer codigoRota) {
         this.codigoRota = codigoRota;
     }
-
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((atendeQuarta == null) ? 0 : atendeQuarta.hashCode());
-        result = prime * result + ((atendeQuinta == null) ? 0 : atendeQuinta.hashCode());
-        result = prime * result + ((atendeSabado == null) ? 0 : atendeSabado.hashCode());
-        result = prime * result + ((atendeSegunda == null) ? 0 : atendeSegunda.hashCode());
-        result = prime * result + ((atendeSexta == null) ? 0 : atendeSexta.hashCode());
-        result = prime * result + ((atendeTerca == null) ? 0 : atendeTerca.hashCode());
-        result = prime * result + ((atendimentoDiario == null) ? 0 : atendimentoDiario.hashCode());
-        result = prime * result + ((codigo == null) ? 0 : codigo.hashCode());
-        result = prime * result + ((codigoMunicipio == null) ? 0 : codigoMunicipio.hashCode());
-        result = prime * result + ((codigoRota == null) ? 0 : codigoRota.hashCode());
-        result = prime * result + ((estadoRota == null) ? 0 : estadoRota.hashCode());
-        result = prime * result + ((nome == null) ? 0 : nome.hashCode());
-        result = prime * result + ((status == null) ? 0 : status.hashCode());
-        return result;
+    
+    
+    public Microzona converteToEntity() {
+    	return new Microzona(this);
     }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        Microzona other = (Microzona) obj;
-        if (atendeQuarta == null) {
-            if (other.atendeQuarta != null)
-                return false;
-        } else if (!atendeQuarta.equals(other.atendeQuarta))
-            return false;
-        if (atendeQuinta == null) {
-            if (other.atendeQuinta != null)
-                return false;
-        } else if (!atendeQuinta.equals(other.atendeQuinta))
-            return false;
-        if (atendeSabado == null) {
-            if (other.atendeSabado != null)
-                return false;
-        } else if (!atendeSabado.equals(other.atendeSabado))
-            return false;
-        if (atendeSegunda == null) {
-            if (other.atendeSegunda != null)
-                return false;
-        } else if (!atendeSegunda.equals(other.atendeSegunda))
-            return false;
-        if (atendeSexta == null) {
-            if (other.atendeSexta != null)
-                return false;
-        } else if (!atendeSexta.equals(other.atendeSexta))
-            return false;
-        if (atendeTerca == null) {
-            if (other.atendeTerca != null)
-                return false;
-        } else if (!atendeTerca.equals(other.atendeTerca))
-            return false;
-        if (atendimentoDiario == null) {
-            if (other.atendimentoDiario != null)
-                return false;
-        } else if (!atendimentoDiario.equals(other.atendimentoDiario))
-            return false;
-        if (codigo == null) {
-            if (other.codigo != null)
-                return false;
-        } else if (!codigo.equals(other.codigo))
-            return false;
-        if (codigoMunicipio == null) {
-            if (other.codigoMunicipio != null)
-                return false;
-        } else if (!codigoMunicipio.equals(other.codigoMunicipio))
-            return false;
-        if (codigoRota == null) {
-            if (other.codigoRota != null)
-                return false;
-        } else if (!codigoRota.equals(other.codigoRota))
-            return false;
-        if (estadoRota == null) {
-            if (other.estadoRota != null)
-                return false;
-        } else if (!estadoRota.equals(other.estadoRota))
-            return false;
-        if (nome == null) {
-            if (other.nome != null)
-                return false;
-        } else if (!nome.equals(other.nome))
-            return false;
-        if (status == null) {
-            if (other.status != null)
-                return false;
-        } else if (!status.equals(other.status))
-            return false;
-        return true;
-    }
-
 }

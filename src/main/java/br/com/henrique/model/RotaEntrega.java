@@ -9,6 +9,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import br.com.henrique.dto.RotaEntregaDto;
 import io.swagger.annotations.ApiModelProperty;
 
 @Entity
@@ -58,6 +59,15 @@ public class RotaEntrega {
     
     public RotaEntrega() {
         super();
+    }
+    
+    public RotaEntrega(RotaEntregaDto rotaEntregaDto) {
+        this.rotaEntregaPK = null;
+        this.nome = rotaEntregaDto.getNome();
+        this.status = rotaEntregaDto.getStatus();
+        this.codigoEmpresa = rotaEntregaDto.getCodigoEmpresa();
+        this.codigoFilial = rotaEntregaDto.getCodigoFilial();
+        this.prazoExpedicao = rotaEntregaDto.getPrazoExpedicao();
     }
     
     public RotaEntrega(RotaEntregaPK rotaEntregaPK, String nome, String status, Integer codigoEmpresa, Integer codigoFilial,

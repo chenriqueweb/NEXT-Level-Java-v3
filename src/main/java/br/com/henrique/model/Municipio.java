@@ -2,6 +2,8 @@ package br.com.henrique.model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 import br.com.henrique.dto.MunicipioDto;
 
@@ -11,6 +13,10 @@ public class Municipio {
     @Id
     private Integer codigo_ID;
     private String nome;
+    
+    // FK com Estado
+    @ManyToOne
+    @JoinColumn(name="sigla")
     private Estado estado;
     
     public Municipio() {

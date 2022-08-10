@@ -1,7 +1,5 @@
 package br.com.henrique.dto;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotEmpty;
@@ -12,10 +10,8 @@ import br.com.henrique.model.Estado;
 import br.com.henrique.model.Municipio;
 import io.swagger.annotations.ApiModelProperty;
 
-@Entity
 public class MunicipioDto {
-    
-    @Id
+	
     // @GeneratedValue(strategy = GenerationType.IDENTITY)  // Usando sequencia do DB2
     @ApiModelProperty(value = "Código do Município", required = true)
     private Integer codigo_ID;
@@ -53,6 +49,7 @@ public class MunicipioDto {
     public void setCodigo_ID(Integer codigo_ID) {
         this.codigo_ID = codigo_ID;
     }
+    
     public String getNome() {
         return nome;
     }
