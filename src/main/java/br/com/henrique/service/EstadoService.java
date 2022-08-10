@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import br.com.henrique.dto.EstadoDto;
 import br.com.henrique.model.Estado;
 import br.com.henrique.repository.EstadoRepository;
 import br.com.henrique.service.exception.ObjectFoundException;
@@ -41,22 +42,22 @@ public class EstadoService {
         return estado;
     }
     
-    // Inclui Empresa
-    public Estado addEstado(Estado estado) {
-        Estado estadoBuscaID = repositEstado.findById(estado.getSigla()).orElse(null);
+    // Inclui Empresa - DTO
+    public Estado addEstado(EstadoDto estadoDto) {
+        Estado estadoBuscaID = repositEstado.findById(estadoDto.getSigla()).orElse(null);
         if (estadoBuscaID != null) {
             throw new ObjectFoundException("Estado já cadastrado !");
         }            	
-        return repositEstado.save(estado);
+        return repositEstado.save(estadoDto.converteToEntity());
     }
     
-    // Altera Estado
-    public void updateEstado(String sigla, Estado estado) {
+    // Altera Estado - DTO
+    public void updateEstado(String sigla, EstadoDto estadoDto) {
         Estado estadoAtualizado = this.findById(sigla);
         if (estadoAtualizado == null) {
             throw new ObjectNotFoundException("Estado nao encontrado !");
         }                
-        estadoAtualizado.setNome(estado.getNome());
+        estadoAtualizado.setNome(estadoDto.getNome());
         
         repositEstado.save(estadoAtualizado);
     }

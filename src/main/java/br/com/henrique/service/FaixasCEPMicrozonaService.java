@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import br.com.henrique.dto.FaixasCEPMicrozonaDto;
 import br.com.henrique.model.FaixasCEPMicrozona;
 import br.com.henrique.model.FaixasCEPMicrozonaPK;
 import br.com.henrique.repository.FaixasCEPMicrozonaRepository;
@@ -42,9 +43,9 @@ public class FaixasCEPMicrozonaService {
     }    
     
     
-    // Inclui Faixas de CEP da Microzona
-    public FaixasCEPMicrozona addFaixasCEPMicrozona(FaixasCEPMicrozona faixasCEPMicrozona) {
-        FaixasCEPMicrozona faixasCEPMicrozonaBuscaID = repositFaixasCEPMicrozona.findById(faixasCEPMicrozona.getFaixasCEPMicrozonaPK()).orElse(null);
+    // Inclui Faixas de CEP da Microzona - DTO
+    public FaixasCEPMicrozona addFaixasCEPMicrozona(FaixasCEPMicrozonaDto faixasCEPMicrozonaDto) {
+        FaixasCEPMicrozona faixasCEPMicrozonaBuscaID = repositFaixasCEPMicrozona.findById(faixasCEPMicrozonaDto.getFaixasCEPMicrozonaPK()).orElse(null);
         if (faixasCEPMicrozonaBuscaID != null) {
             throw new ObjectFoundException("Faixa de CEP já cadastrada !");
         }    	
@@ -59,20 +60,20 @@ public class FaixasCEPMicrozonaService {
 //            throw new ObjectFoundException("Faixa de CEP já cadastrada !");
 //        }            
         
-        return repositFaixasCEPMicrozona.save(faixasCEPMicrozona);
+        return repositFaixasCEPMicrozona.save(faixasCEPMicrozonaDto.converteToEntity());
     }
 
     
-    // Atualiza Faixas de CEP da Microzona
+    // Atualiza Faixas de CEP da Microzona - DTO
     public void updateFaixasCEPMicrozona(FaixasCEPMicrozonaPK faixasCEPMicrozonaPK, 
-                                         FaixasCEPMicrozona faixasCEPMicrozona) {
+                                         FaixasCEPMicrozonaDto faixasCEPMicrozonaDto) {
         FaixasCEPMicrozona faixasCEPMicrozonaAtualizado = findById(faixasCEPMicrozonaPK);
         if (faixasCEPMicrozonaAtualizado == null) {
             throw new ObjectNotFoundException("Faixa de CEP nao encontrada !");
         }
         
-        faixasCEPMicrozonaAtualizado.setCEPinicial(faixasCEPMicrozona.getCEPinicial());
-        faixasCEPMicrozonaAtualizado.setCEPfinal(faixasCEPMicrozona.getCEPfinal());
+        faixasCEPMicrozonaAtualizado.setCEPinicial(faixasCEPMicrozonaDto.getCEPinicial());
+        faixasCEPMicrozonaAtualizado.setCEPfinal(faixasCEPMicrozonaDto.getCEPfinal());
         
         repositFaixasCEPMicrozona.save(faixasCEPMicrozonaAtualizado);
     }

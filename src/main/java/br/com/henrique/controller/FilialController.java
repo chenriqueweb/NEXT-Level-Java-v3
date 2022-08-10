@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import br.com.henrique.dto.FilialDto;
 import br.com.henrique.model.Filial;
 import br.com.henrique.model.FilialPK;
 import br.com.henrique.service.FilialService;
@@ -76,14 +77,14 @@ public class FilialController {
         return ResponseEntity.ok().body(filialBusca);
     }
     
-    // Inclui Filial
+    // Inclui Filial - DTO
     @PostMapping
     @ApiOperation(value = "Inclui uma Filial")
     @ApiResponses(value = {
     	    @ApiResponse(code = 201, message = "Filial criada com sucesso")
     }) 
-    public ResponseEntity<Void> addFilial(@Valid @RequestBody Filial filial) {
-        Filial filialNova = filialService.addFilial(filial);
+    public ResponseEntity<Void> addFilial(@Valid @RequestBody FilialDto filialDto) {
+        Filial filialNova = filialService.addFilial(filialDto);
         
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{codigoEmpresa}")
                   .buildAndExpand(filialNova.getFilialPK().getCodigoEmpresa())
@@ -91,7 +92,7 @@ public class FilialController {
         return ResponseEntity.created(uri).build();
     }    
     
-    // Altera Filial
+    // Altera Filial - DTO
     @PutMapping(path = "/{codigoEmpresa}/{codigoFilial}")
     @ApiOperation(value = "Altera os dados de uma Filial")
     @ApiResponses(value = {
@@ -102,13 +103,13 @@ public class FilialController {
     public ResponseEntity<Void> updateFilial(@Valid 
     		                                 @PathVariable Integer codigoEmpresa,
                                              @PathVariable Integer codigoFilial, 
-                                             @RequestBody Filial filial) {
+                                             @RequestBody FilialDto filialDto) {
         
         FilialPK filialPK = new FilialPK();
         filialPK.setCodigoEmpresa(codigoEmpresa);
         filialPK.setCodigoFilial(codigoFilial);          
         
-        filialService.updateFilial(filialPK, filial);
+        filialService.updateFilial(filialPK, filialDto);
         
         return ResponseEntity.noContent().build();
     }

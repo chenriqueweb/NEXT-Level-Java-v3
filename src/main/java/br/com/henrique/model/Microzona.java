@@ -1,6 +1,5 @@
 package br.com.henrique.model;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -8,9 +7,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 import br.com.henrique.dto.MicrozonaDto;
 import io.swagger.annotations.ApiModelProperty;
@@ -23,61 +19,33 @@ public class Microzona {
     @ApiModelProperty(value = "Código da Microzona", required = true)
     private Integer codigo;
         
-    @NotNull(message = "O campo não pode ser nulo")
-    @NotEmpty(message = "O campo é obrigatório é não foi preenchido")
-    @Size(min=5, max=50, message="Tamanho inválido! Digite no mínimo {min} e no máximo {max} caracteres")
     @ApiModelProperty(value = "Nome da Microzona", required = true)
     private String nome;
     
-    @NotNull(message = "O campo não pode ser nulo")
-    @NotEmpty(message = "O campo é obrigatório é não foi preenchido")
-    @Column(columnDefinition = "Character(1)")
     @ApiModelProperty(value = "Status da Microzona", required = true)
     private String status;
 
-    @NotNull(message = "O campo não pode ser nulo")
-    @NotEmpty(message = "O campo é obrigatório é não foi preenchido")
-    @Column(columnDefinition = "Character(1)")
     @ApiModelProperty(value = "Atendimento Diário", required = true)
     private String atendimentoDiario;
     
-    @NotNull(message = "O campo não pode ser nulo")
-    @NotEmpty(message = "O campo é obrigatório é não foi preenchido")
-    @Column(columnDefinition = "Character(1)")
     @ApiModelProperty(value = "Atendimento - Segunda-feira", required = true)
     private String atendeSegunda;
     
-    @NotNull(message = "O campo não pode ser nulo")
-    @NotEmpty(message = "O campo é obrigatório é não foi preenchido")
-    @Column(columnDefinition = "Character(1)")
     @ApiModelProperty(value = "Atendimento - Terça-feira", required = true)
     private String atendeTerca;
     
-    @NotNull(message = "O campo não pode ser nulo")
-    @NotEmpty(message = "O campo é obrigatório é não foi preenchido")
-    @Column(columnDefinition = "Character(1)")
     @ApiModelProperty(value = "Atendimento - Quarta-feira", required = true)
     private String atendeQuarta;
     
-    @NotNull(message = "O campo não pode ser nulo")
-    @NotEmpty(message = "O campo é obrigatório é não foi preenchido")
-    @Column(columnDefinition = "Character(1)")
     @ApiModelProperty(value = "Atendimento - Quinta-feira", required = true)
     private String atendeQuinta;
     
-    @NotNull(message = "O campo não pode ser nulo")
-    @NotEmpty(message = "O campo é obrigatório é não foi preenchido")
-    @Column(columnDefinition = "Character(1)")
     @ApiModelProperty(value = "Atendimento - Sexta-feira", required = true)
     private String atendeSexta;
     
-    @NotNull(message = "O campo não pode ser nulo")
-    @NotEmpty(message = "O campo é obrigatório é não foi preenchido")
-    @Column(columnDefinition = "Character(1)")
     @ApiModelProperty(value = "Atendimento - Sábado", required = true)
     private String atendeSabado;
     
-    @NotNull(message = "O campo não pode ser nulo")
     @ApiModelProperty(value = "Código da Rota", required = true)
     private Integer codigoRota;
     

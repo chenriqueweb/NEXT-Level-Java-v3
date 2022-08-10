@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import br.com.henrique.dto.RotaEntregaDto;
 import br.com.henrique.model.RotaEntrega;
 import br.com.henrique.model.RotaEntregaPK;
 import br.com.henrique.service.RotaEntregaService;
@@ -76,14 +77,14 @@ public class RotaEntregaController {
         return ResponseEntity.ok().body(rotaEntregaBusca);
     }
     
-    // Inclui RotaEntrega
+    // Inclui RotaEntrega - DTO
     @PostMapping
     @ApiOperation(value = "Inclui uma RotaEntrega")
     @ApiResponses(value = {
     	    @ApiResponse(code = 201, message = "RotaEntrega criada com sucesso")
     }) 
-    public ResponseEntity<Void> addRotaEntrega(@Valid @RequestBody RotaEntrega rotaEntrega) {
-        RotaEntrega rotaEntregaNova = rotaEntregaService.addRotaEntrega(rotaEntrega);
+    public ResponseEntity<Void> addRotaEntrega(@Valid @RequestBody RotaEntregaDto rotaEntregaDto) {
+        RotaEntrega rotaEntregaNova = rotaEntregaService.addRotaEntrega(rotaEntregaDto);
         
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("{siglaEstado}/{codigoRota}")
                   .buildAndExpand(rotaEntregaNova.getRotaEntregaPK().getSiglaEstado(),
@@ -103,13 +104,13 @@ public class RotaEntregaController {
     public ResponseEntity<Void> updateRotaEntrega(@Valid 
     		                                      @PathVariable String siglaEstado,
                                                   @PathVariable Integer codigoRota, 
-                                                  @RequestBody RotaEntrega rotaEntrega) {
+                                                  @RequestBody RotaEntregaDto rotaEntregaDto) {
         
         RotaEntregaPK rotaEntregaPK = new RotaEntregaPK();
         rotaEntregaPK.setSiglaEstado(siglaEstado);
         rotaEntregaPK.setCodigoRota(codigoRota);
     
-        rotaEntregaService.updateRotaEntrega(rotaEntregaPK, rotaEntrega);
+        rotaEntregaService.updateRotaEntrega(rotaEntregaPK, rotaEntregaDto);
         
         return ResponseEntity.noContent().build();
     }

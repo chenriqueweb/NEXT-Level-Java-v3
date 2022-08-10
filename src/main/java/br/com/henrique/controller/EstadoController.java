@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import br.com.henrique.dto.EstadoDto;
 import br.com.henrique.model.Estado;
 import br.com.henrique.service.EstadoService;
 import io.swagger.annotations.Api;
@@ -71,20 +72,20 @@ public class EstadoController {
         return ResponseEntity.ok().body(estado);
     }
     
-    // Inclui Estado
+    // Inclui Estado - DTO
     @PostMapping
     @ApiOperation(value = "Inclui um Estado")
     @ApiResponses(value = {
     	    @ApiResponse(code = 201, message = "Estado criado com sucesso")
     }) 
-    public ResponseEntity<Void> addEstado(@Valid @RequestBody Estado estado) {
-        Estado estadoNovo = estadoService.addEstado(estado);
+    public ResponseEntity<Void> addEstado(@Valid @RequestBody EstadoDto estadoDto) {
+        Estado estadoNovo = estadoService.addEstado(estadoDto);
         
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{sigla}").buildAndExpand(estadoNovo.getSigla()).toUri();
         return ResponseEntity.created(uri).build();
     }
     
-    // Altera Estado
+    // Altera Estado - DTO
     @PutMapping(path = "{sigla}")
     @ApiOperation(value = "Altera os dados de um Estado")    
     @ApiResponses(value = {
@@ -94,11 +95,11 @@ public class EstadoController {
     }) 
     public ResponseEntity<Void> updateEstado(@Valid 
     		                                 @PathVariable String sigla, 
-    		                                 @RequestBody Estado estado ) {
+    		                                 @RequestBody EstadoDto estadoDto) {
 //        String teste = translator.getText("NotEmpty.nome");
 //        System.out.println(teste);
         
-        estadoService.updateEstado(sigla, estado);
+        estadoService.updateEstado(sigla, estadoDto);
         
         return ResponseEntity.noContent().build();
     }

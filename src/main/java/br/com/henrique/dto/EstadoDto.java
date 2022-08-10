@@ -9,8 +9,8 @@ import io.swagger.annotations.ApiModelProperty;
 
 public class EstadoDto {
 	
-    @NotEmpty
-    @NotNull
+    @NotEmpty(message = "O campo é obrigatório é não foi preenchido")
+    @NotNull(message = "O campo não pode ser nulo")
     @ApiModelProperty(value = "Sigla da Unidade Federativa", required = true)
     private String sigla;
 	

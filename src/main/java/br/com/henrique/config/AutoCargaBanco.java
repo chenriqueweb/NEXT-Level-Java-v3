@@ -7,6 +7,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
+import br.com.henrique.dto.EmpresaDto;
 import br.com.henrique.service.EmpresaService;
 import br.com.henrique.service.EstadoService;
 import br.com.henrique.service.FaixasCEPMicrozonaService;
@@ -48,8 +49,8 @@ public class AutoCargaBanco implements CommandLineRunner {
         
         final SimpleDateFormat formatterDate = new SimpleDateFormat("dd/MM/yyyy");      
         
-//        // Carga da Tabela: EMPRESA
-//        EmpresaDto empresa0001 = new EmpresaDto(21, "VIAVAREJO", "33041260094711", formatterDate.parse("25/08/2016"));  // "33.041.260/0947-11"
+        // Carga da Tabela: EMPRESA
+        EmpresaDto empresa0001 = new EmpresaDto(21, "VIAVAREJO", "33041260094711", formatterDate.parse("25/08/2016"));  // "33.041.260/0947-11"
 //        empresaService.addEmpresa(empresa0001);
 //        
 //        

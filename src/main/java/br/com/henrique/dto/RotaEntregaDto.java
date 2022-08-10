@@ -1,5 +1,6 @@
 package br.com.henrique.dto;
 
+import javax.persistence.EmbeddedId;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
@@ -10,9 +11,14 @@ import javax.validation.constraints.Size;
 import br.com.henrique.model.Estado;
 import br.com.henrique.model.Filial;
 import br.com.henrique.model.RotaEntrega;
+import br.com.henrique.model.RotaEntregaPK;
 import io.swagger.annotations.ApiModelProperty;
 
 public class RotaEntregaDto {
+	
+    @EmbeddedId
+    @ApiModelProperty(value = "Chave para Rota de Entrega", required = true)
+    private RotaEntregaPK rotaEntregaPK;   
     
     @NotNull(message = "O campo não pode ser nulo")
     @NotEmpty(message = "Você precisa informar algo")
@@ -56,9 +62,10 @@ public class RotaEntregaDto {
         super();
     }
     
-    public RotaEntregaDto(String nome, String status, Integer codigoEmpresa, Integer codigoFilial,
+    public RotaEntregaDto(RotaEntregaPK rotaEntregaPK, String nome, String status, Integer codigoEmpresa, Integer codigoFilial,
                     Integer prazoExpedicao) {
         super();
+        this.rotaEntregaPK = null;
         this.nome = nome;
         this.status = status;
         this.codigoEmpresa = codigoEmpresa;
@@ -66,11 +73,17 @@ public class RotaEntregaDto {
         this.prazoExpedicao = prazoExpedicao;
     }
 
-    // MÃ©todo para identificar registro novo
+    // Método para identificar registro novo
     public boolean isNovo() {
         return nome == null;
     }
 
+    public RotaEntregaPK getRotaEntregaPK() {
+        return rotaEntregaPK;
+    }
+    public void setRotaEntregaPK(RotaEntregaPK rotaEntregaPK) {
+        this.rotaEntregaPK = rotaEntregaPK;
+    }
     public String getNome() {
         return nome;
     }

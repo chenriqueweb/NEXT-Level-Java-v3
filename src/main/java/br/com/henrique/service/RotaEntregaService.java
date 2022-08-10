@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import br.com.henrique.dto.RotaEntregaDto;
 import br.com.henrique.model.Empresa;
 import br.com.henrique.model.Filial;
 import br.com.henrique.model.FilialPK;
@@ -53,43 +54,43 @@ public class RotaEntregaService {
         return rotaEntregaBusca;
     }
     
-    // Inclui Rota de Entrega
-    public RotaEntrega addRotaEntrega(RotaEntrega rotaEntrega) {
-        RotaEntrega rotaEntregaBuscaID = repositRotaEntrega.findById(rotaEntrega.getRotaEntregaPK()).orElse(null);
+    // Inclui Rota de Entrega - DTO
+    public RotaEntrega addRotaEntrega(RotaEntregaDto rotaEntregaDto) {
+        RotaEntrega rotaEntregaBuscaID = repositRotaEntrega.findById(rotaEntregaDto.getRotaEntregaPK()).orElse(null);
         if (rotaEntregaBuscaID != null) {
             throw new ObjectFoundException("Rota de Entrega já cadastrada !");
         }    	
         
-        return repositRotaEntrega.save(rotaEntrega);
+        return repositRotaEntrega.save(rotaEntregaDto.converteToEntity());
     }    
     
-    // Atualiza uma Rota de Entrega
+    // Atualiza uma Rota de Entrega - DTO
     public void updateRotaEntrega(RotaEntregaPK rotaEntregaPK,
-                                  RotaEntrega rotaEntrega) {
+                                  RotaEntregaDto rotaEntregaDto) {
         RotaEntrega rotaEntregaAtualizado = this.findById(rotaEntregaPK);
         if (rotaEntregaAtualizado == null) {
             throw new ObjectNotFoundException("Rota de Entrega nao encontrada !");
         }  
         
-        Empresa empresaBuscaID = repositEmpresa.findById(rotaEntrega.getCodigoEmpresa()).orElse(null);
+        Empresa empresaBuscaID = repositEmpresa.findById(rotaEntregaDto.getCodigoEmpresa()).orElse(null);
         if (empresaBuscaID == null) {
             throw new ObjectNotFoundException("Empresa nao encontrada !");
         }        
         
         FilialPK filialPK = new FilialPK();
-        filialPK.setCodigoEmpresa(rotaEntrega.getCodigoEmpresa());
-        filialPK.setCodigoFilial(rotaEntrega.getCodigoFilial());
+        filialPK.setCodigoEmpresa(rotaEntregaDto.getCodigoEmpresa());
+        filialPK.setCodigoFilial(rotaEntregaDto.getCodigoFilial());
         
         Filial filialBuscaID = repositFilial.findById(filialPK).orElse(null);
         if (filialBuscaID == null) {
             throw new ObjectNotFoundException("Filial nao encontrada !");
         }        
         
-        rotaEntregaAtualizado.setNome(rotaEntrega.getNome());
-        rotaEntregaAtualizado.setStatus(rotaEntrega.getStatus());
-        rotaEntregaAtualizado.setCodigoEmpresa(rotaEntrega.getCodigoEmpresa());
-        rotaEntregaAtualizado.setCodigoFilial(rotaEntrega.getCodigoFilial());
-        rotaEntregaAtualizado.setPrazoExpedicao(rotaEntrega.getPrazoExpedicao());
+        rotaEntregaAtualizado.setNome(rotaEntregaDto.getNome());
+        rotaEntregaAtualizado.setStatus(rotaEntregaDto.getStatus());
+        rotaEntregaAtualizado.setCodigoEmpresa(rotaEntregaDto.getCodigoEmpresa());
+        rotaEntregaAtualizado.setCodigoFilial(rotaEntregaDto.getCodigoFilial());
+        rotaEntregaAtualizado.setPrazoExpedicao(rotaEntregaDto.getPrazoExpedicao());
         
         repositRotaEntrega.save(rotaEntregaAtualizado);
     }

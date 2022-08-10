@@ -5,9 +5,6 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 import br.com.henrique.dto.RotaEntregaDto;
 import io.swagger.annotations.ApiModelProperty;
@@ -19,23 +16,15 @@ public class RotaEntrega {
     @ApiModelProperty(value = "Chave para Rota de Entrega", required = true)
     private RotaEntregaPK rotaEntregaPK;    
     
-    @NotNull(message = "O campo não pode ser nulo")
-    @NotEmpty(message = "Você precisa informar algo")
-    @Size(min=5, max=50, message="Tamanho inválido! Digite no mínimo {min} e no máximo {max} caracteres")
     @ApiModelProperty(value = "Nome da Rota de Entrega", required = true)
     private String nome;
 
-    @NotNull(message = "O campo não pode ser nulo")
-    @NotEmpty(message = "Você precisa informar algo")
-    @Size(min=1, max=1)
     @ApiModelProperty(value = "Status da Rota de Entrega", required = true)
     private String status;
     
-    @NotNull(message = "O campo não pode ser nulo")
     @ApiModelProperty(value = "Código da Empresa", required = true)
     private Integer codigoEmpresa;
     
-    @NotNull(message = "O campo não pode ser nulo")
     @ApiModelProperty(value = "Código da Filial", required = true)
     private Integer codigoFilial;
     

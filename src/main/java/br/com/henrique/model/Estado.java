@@ -1,11 +1,7 @@
 package br.com.henrique.model;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 import br.com.henrique.dto.EstadoDto;
 import io.swagger.annotations.ApiModelProperty;
@@ -14,15 +10,9 @@ import io.swagger.annotations.ApiModelProperty;
 public class Estado {
 	
     @Id
-    @NotEmpty
-    @NotNull
-    @Column(columnDefinition = "Character(2)")
     @ApiModelProperty(value = "Sigla da Unidade Federativa", required = true)
     private String sigla;
     
-    @NotEmpty(message = "O campo é obrigatório é não foi preenchido")
-    @NotNull(message = "O campo não pode ser nulo")
-    @Size(min=4, max=50, message="Tamanho inválido! Digite no mínimo {min} e no máximo {max} caracteres")
     @ApiModelProperty(value = "Nome do Estado", required = true)
     private String nome;
 

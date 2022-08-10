@@ -4,7 +4,6 @@ import java.util.Objects;
 
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.validation.constraints.NotNull;
 
 import br.com.henrique.dto.FaixasCEPMicrozonaDto;
 import io.swagger.annotations.ApiModelProperty;
@@ -16,13 +15,9 @@ public class FaixasCEPMicrozona {
     @ApiModelProperty(value = "Chave para Rota Faixa de CEP Microzona", required = true)
     private FaixasCEPMicrozonaPK faixasCEPMicrozonaPK;
     
-    @NotNull(message = "O campo não pode ser nulo")
-    //@Pattern(regexp = "\\d{5}-\\d{3})")
     @ApiModelProperty(value = "CEP Inicial", required = true)
     private Integer CEPinicial;
     
-    @NotNull(message = "O campo não pode ser nulo")
-    //@Pattern(regexp = "\\d{5}-\\d{3})")
     @ApiModelProperty(value = "CEP Final", required = true)
     private Integer CEPfinal;
     

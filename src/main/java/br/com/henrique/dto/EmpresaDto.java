@@ -14,7 +14,8 @@ import io.swagger.annotations.ApiModelProperty;
 public class EmpresaDto {
 	
     //@GeneratedValue(strategy = GenerationType.IDENTITY)   // Utilizando numeracao do banco DB2
-    @NotNull
+    @NotEmpty(message = "O campo é obrigatório é não foi preenchido")
+    @NotNull(message = "O campo não pode ser nulo")
     @ApiModelProperty(value = "Código da Empresa", required = true)
     private Integer codigo;
     

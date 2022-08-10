@@ -1,6 +1,8 @@
 package br.com.henrique.dto;
 
 import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
@@ -15,6 +17,10 @@ import br.com.henrique.model.RotaEntrega;
 import io.swagger.annotations.ApiModelProperty;
 
 public class MicrozonaDto {
+	
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @ApiModelProperty(value = "Código da Microzona", required = true)
+    private Integer codigo;
     
     @NotNull(message = "O campo não pode ser nulo")
     @NotEmpty(message = "O campo é obrigatório é não foi preenchido")
@@ -103,10 +109,11 @@ public class MicrozonaDto {
         super();
     }
 
-    public MicrozonaDto(String nome, String status, String atendimentoDiario, String atendeSegunda, String atendeTerca,
+    public MicrozonaDto(Integer codigo, String nome, String status, String atendimentoDiario, String atendeSegunda, String atendeTerca,
                     String atendeQuarta, String atendeQuinta, String atendeSexta, String atendeSabado, Estado estadoRota,
                     Municipio codigoMunicipio, Integer codigoRota) {
         super();
+        this.codigo = null;
         this.nome = nome;
         this.status = status;
         this.atendimentoDiario = atendimentoDiario;
@@ -126,98 +133,81 @@ public class MicrozonaDto {
         return nome == null;
     }
 
+    public Integer getCodigo() {
+        return codigo;
+    }
+    public void setCodigo(Integer codigo) {
+        this.codigo = codigo;
+    }
     public String getNome() {
         return nome;
     }
-
     public void setNome(String nome) {
         this.nome = nome;
     }
-
     public String getStatus() {
         return status;
     }
-
     public void setStatus(String status) {
         this.status = status;
     }
-
     public String getAtendimentoDiario() {
         return atendimentoDiario;
     }
-
     public void setAtendimentoDiario(String atendimentoDiario) {
         this.atendimentoDiario = atendimentoDiario;
     }
-
     public String getAtendeSegunda() {
         return atendeSegunda;
     }
-
     public void setAtendeSegunda(String atendeSegunda) {
         this.atendeSegunda = atendeSegunda;
     }
-
     public String getAtendeTerca() {
         return atendeTerca;
     }
-
     public void setAtendeTerca(String atendeTerca) {
         this.atendeTerca = atendeTerca;
     }
-
     public String getAtendeQuarta() {
         return atendeQuarta;
     }
-
     public void setAtendeQuarta(String atendeQuarta) {
         this.atendeQuarta = atendeQuarta;
     }
-
     public String getAtendeQuinta() {
         return atendeQuinta;
     }
-
     public void setAtendeQuinta(String atendeQuinta) {
         this.atendeQuinta = atendeQuinta;
     }
-
     public String getAtendeSexta() {
         return atendeSexta;
     }
-
     public void setAtendeSexta(String atendeSexta) {
         this.atendeSexta = atendeSexta;
     }
-
     public String getAtendeSabado() {
         return atendeSabado;
     }
-
     public void setAtendeSabado(String atendeSabado) {
         this.atendeSabado = atendeSabado;
     }
-
     public Estado getEstadoRota() {
         return estadoRota;
     }
-
     public void setEstadoRota(Estado estadoRota) {
         this.estadoRota = estadoRota;
     }
-
     public Municipio getCodigoMunicipio() {
         return codigoMunicipio;
     }
-
     public void setCodigoMunicipio(Municipio codigoMunicipio) {
         this.codigoMunicipio = codigoMunicipio;
     }
-
     public Integer getCodigoRota() {
         return codigoRota;
     }
-
     public void setCodigoRota(Integer codigoRota) {
         this.codigoRota = codigoRota;
     }

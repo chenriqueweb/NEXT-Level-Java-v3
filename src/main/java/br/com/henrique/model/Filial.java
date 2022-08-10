@@ -2,9 +2,6 @@ package br.com.henrique.model;
 
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 import br.com.henrique.dto.FilialDto;
 import io.swagger.annotations.ApiModelProperty;
@@ -16,19 +13,12 @@ public class Filial {
     @ApiModelProperty(value = "Chave para Filial", required = true)
     private FilialPK filialPK;
     
-    @NotNull(message = "O campo não pode ser nulo")
-    @NotEmpty(message = "O campo é obrigatório é não foi preenchido")
-    @Size(min=5, max=50, message="Tamanho inválido! Digite no mínimo {min} e no máximo {max} caracteres")
     @ApiModelProperty(value = "Nome da Filial", required = true)
     private String nome;
     
-    @NotNull(message = "O campo não pode ser nulo")
-    @NotEmpty(message = "O campo é obrigatório é não foi preenchido")
-    @Size(min=14, max=14, message="Tamanho inválido! Digite no mínimo {min} e no máximo {max} caracteres")
     @ApiModelProperty(value = "CNPJ da Filial", required = true)
     private String cnpj;
     
-    @NotNull(message = "O campo não pode ser nulo")
     @ApiModelProperty(value = "Número do Município", required = true)
     private Integer municipio;
     

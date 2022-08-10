@@ -1,13 +1,19 @@
 package br.com.henrique.dto;
 
+import javax.persistence.EmbeddedId;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import br.com.henrique.model.Filial;
+import br.com.henrique.model.FilialPK;
 import io.swagger.annotations.ApiModelProperty;
 
 public class FilialDto {
+	
+    @EmbeddedId
+    @ApiModelProperty(value = "Chave para Filial", required = true)
+    private FilialPK filialPK;
     
     @NotNull(message = "O campo não pode ser nulo")
     @NotEmpty(message = "O campo é obrigatório é não foi preenchido")
@@ -29,8 +35,9 @@ public class FilialDto {
         super();
     }
 
-    public FilialDto(String nome, String cnpj, Integer municipio) {
+    public FilialDto(FilialPK filialPK, String nome, String cnpj, Integer municipio) {
         super();
+        this.filialPK = null;
         this.nome = nome;
         this.cnpj = cnpj;
         this.municipio = municipio;
@@ -41,6 +48,12 @@ public class FilialDto {
         return nome == null;
     }     
     
+    public FilialPK getFilialPK() {
+        return filialPK;
+    }
+    public void setFilialPK(FilialPK filialPK) {
+        this.filialPK = filialPK;
+    }
     public String getNome() {
         return nome;
     }

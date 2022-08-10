@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import br.com.henrique.dto.MicrozonaDto;
 import br.com.henrique.model.Microzona;
 import br.com.henrique.service.MicrozonaService;
 import io.swagger.annotations.Api;
@@ -68,20 +69,20 @@ public class MicrozonaController {
         return ResponseEntity.ok().body(microzona);
     }    
     
-    // Inclui Micrzona
+    // Inclui Micrzona - DTO
     @PostMapping
     @ApiOperation(value = "Inclui uma Micrzona")
     @ApiResponses(value = {
     	    @ApiResponse(code = 201, message = "Micrzona criada com sucesso")
     }) 
-    public ResponseEntity<Void> addMicrozona(@Valid @RequestBody Microzona microzona) {
-        Microzona microzonaNova = microzonaService.addMicrozona(microzona);
+    public ResponseEntity<Void> addMicrozona(@Valid @RequestBody MicrozonaDto microzonaDto) {
+        Microzona microzonaNova = microzonaService.addMicrozona(microzonaDto);
         
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{codigo}").buildAndExpand(microzonaNova.getCodigo()).toUri();
         return ResponseEntity.created(uri).build();
     }        
 
-    // Altera Microzona
+    // Altera Microzona - DTO
     @PutMapping(path = "{codigo}")
     @ApiOperation(value = "Altera os dados de uma Microzona")
     @ApiResponses(value = {
@@ -91,8 +92,8 @@ public class MicrozonaController {
     }) 
     public ResponseEntity<Void> updateMicrozona(@Valid 
     		                                    @PathVariable Integer codigo, 
-                                                @RequestBody Microzona microzona) {
-        microzonaService.updateMicrozona(codigo, microzona);
+                                                @RequestBody MicrozonaDto microzonaDto) {
+        microzonaService.updateMicrozona(codigo, microzonaDto);
         return ResponseEntity.noContent().build();
     }    
         
