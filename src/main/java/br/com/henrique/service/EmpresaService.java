@@ -1,6 +1,5 @@
 package br.com.henrique.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +21,7 @@ public class EmpresaService {
 
     // Lista Empresas
     public List<Empresa> findAll() {
-        List<Empresa> empresas = new ArrayList<Empresa>();
-        empresas = repositEmpresa.findAll();
+        List<Empresa> empresas = repositEmpresa.findAll();
         
         return empresas;
     }

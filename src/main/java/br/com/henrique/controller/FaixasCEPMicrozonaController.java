@@ -102,10 +102,9 @@ public class FaixasCEPMicrozonaController {
     	    @ApiResponse(code = 400, message = "Dados inválidos"),
     	    @ApiResponse(code = 404, message = "Faixa de CEP da Microzona não encontrada")    	    
     })
-    public ResponseEntity<Void> updateFaixasCEPMicrozona(@Valid 
-    		                                             @PathVariable Integer codigoMicrozona,
+    public ResponseEntity<Void> updateFaixasCEPMicrozona(@PathVariable Integer codigoMicrozona,
                                                          @PathVariable Integer codigoSequencial, 
-                                                         @RequestBody FaixasCEPMicrozonaDto faixasCEPMicrozonaDto) {
+                                                         @Valid  @RequestBody FaixasCEPMicrozonaDto faixasCEPMicrozonaDto) {
         FaixasCEPMicrozonaPK faixasCEPMicrozonaPK = new FaixasCEPMicrozonaPK();
         faixasCEPMicrozonaPK.setCodigoMicrozona(codigoMicrozona);
         faixasCEPMicrozonaPK.setCodigoSequencial(codigoSequencial);        

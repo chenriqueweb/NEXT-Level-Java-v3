@@ -70,7 +70,7 @@ public class RotaEntrega {
         this.prazoExpedicao = prazoExpedicao;
     }
 
-    // MÃ©todo para identificar registro novo
+    // Método para identificar registro novo
     public boolean isNovo() {
         return nome == null;
     }

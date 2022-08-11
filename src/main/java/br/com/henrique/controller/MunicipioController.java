@@ -104,9 +104,8 @@ public class MunicipioController {
     	    @ApiResponse(code = 400, message = "Dados inválidos"),
     	    @ApiResponse(code = 404, message = "Municipio não encontrado")    	    
     })  
-    public ResponseEntity<Void> updateMunicipio(@Valid 
-    		                                    @PathVariable Integer codigo, 
-    		                                    @RequestBody MunicipioDto municipioDto) {
+    public ResponseEntity<Void> updateMunicipio(@PathVariable Integer codigo, 
+    		                                    @Valid  @RequestBody MunicipioDto municipioDto) {
         municipioService.updateMunicipio(codigo, municipioDto);
         return ResponseEntity.noContent().build();
     }

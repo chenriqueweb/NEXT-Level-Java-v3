@@ -1,6 +1,5 @@
 package br.com.henrique.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +22,8 @@ public class FaixasCEPMicrozonaService {
     
     // Lista Faixas de CEPs da Microzona
     public List<FaixasCEPMicrozona> findAll() {
-        List<FaixasCEPMicrozona> faixasCEPMicrozona = new ArrayList<FaixasCEPMicrozona>();
-        faixasCEPMicrozona = repositFaixasCEPMicrozona.findAll();        
+        List<FaixasCEPMicrozona> faixasCEPMicrozona = repositFaixasCEPMicrozona.findAll();
+         
         return faixasCEPMicrozona;
     }
     

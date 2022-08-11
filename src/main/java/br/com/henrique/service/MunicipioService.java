@@ -1,6 +1,5 @@
 package br.com.henrique.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,17 +19,20 @@ public class MunicipioService {
     @Autowired
     private MunicipioRepository repositMunicipio;
     
+    @Autowired
+    private EstadoService estadoService;
+    
     // Lista Municipio
     public List<Municipio> findAll() {
-        List<Municipio> municipios = new ArrayList<Municipio>();
-        municipios = repositMunicipio.findAll();        
+        List<Municipio> municipios = repositMunicipio.findAll();
+        
         return municipios;
     }
     
     // Lista Municipio por Estado
     public List<Municipio> findAllByEstado(String sigla) {
-        List<Municipio> municipios = new ArrayList<Municipio>();
-        municipios = repositMunicipio.findByestado(sigla);        
+        List<Municipio> municipios = repositMunicipio.findByEstado(estadoService.findById(sigla));        
+        
         return municipios;
     }    
     

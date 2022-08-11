@@ -1,7 +1,11 @@
 package br.com.henrique.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 import br.com.henrique.dto.EstadoDto;
 import io.swagger.annotations.ApiModelProperty;
@@ -15,6 +19,9 @@ public class Estado {
     
     @ApiModelProperty(value = "Nome do Estado", required = true)
     private String nome;
+    
+    @OneToMany(mappedBy = "estado")
+    private List<Municipio> municipios = new ArrayList<>();
 
     // Construtores da Class
     public Estado() {
@@ -82,7 +89,7 @@ public class Estado {
     }
     
     // Conversor para atualização do DTO
-    public EstadoDto converteToDto(Estado estado) {
+    public EstadoDto converteToDto() {
     	return new EstadoDto(this);
     }
 }

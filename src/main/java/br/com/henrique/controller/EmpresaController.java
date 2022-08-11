@@ -106,8 +106,8 @@ public class EmpresaController {
     	    @ApiResponse(code = 400, message = "Dados inválidos"),
     	    @ApiResponse(code = 404, message = "Empresa não encontrada")    	    
     })  
-    public ResponseEntity<Void> updateEmpresa(@Valid @PathVariable Integer codigo, 
-    		                                         @RequestBody EmpresaDto empresaDto) {
+    public ResponseEntity<Void> updateEmpresa(@PathVariable Integer codigo, 
+    		                                  @Valid @RequestBody EmpresaDto empresaDto) {
         empresaService.updateEmpresa(codigo, empresaDto);
         return ResponseEntity.noContent().build();
     }

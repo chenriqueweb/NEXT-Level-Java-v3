@@ -1,6 +1,5 @@
 package br.com.henrique.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,8 +37,7 @@ public class MicrozonaService {
 
     // Lista Microzonas
     public List<Microzona> findAll() {
-        List<Microzona> microzonas = new ArrayList<Microzona>();
-        microzonas = repositMicrozona.findAll();
+        List<Microzona> microzonas = repositMicrozona.findAll();
         
         return microzonas;
     }

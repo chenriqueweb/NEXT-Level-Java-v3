@@ -1,6 +1,5 @@
 package br.com.henrique.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,8 +33,8 @@ public class RotaEntregaService {
     
     // Lista de Rotas de Entrega
     public List<RotaEntrega> findAll() {
-        List<RotaEntrega> rotasEntregas = new ArrayList<RotaEntrega>();
-        rotasEntregas = repositRotaEntrega.findAll();        
+        List<RotaEntrega> rotasEntregas = repositRotaEntrega.findAll();
+        
         return rotasEntregas;
     }    
     

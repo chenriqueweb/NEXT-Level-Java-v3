@@ -48,7 +48,7 @@ public class EstadoController {
     })  
     public ResponseEntity<List<EstadoDto>> findAll() {
         List<Estado> estados = estadoService.findAll(); 
-        return ResponseEntity.ok().body(estados.stream().map(e -> e.converteToDto(e)).collect(Collectors.toList()));
+        return ResponseEntity.ok().body(estados.stream().map(e -> e.converteToDto()).collect(Collectors.toList()));
     }
     
     // Lista de Estado com paginação
@@ -94,9 +94,8 @@ public class EstadoController {
     	    @ApiResponse(code = 400, message = "Dados inválidos"),
     	    @ApiResponse(code = 404, message = "Estado não encontrado")    	    
     }) 
-    public ResponseEntity<Void> updateEstado(@Valid 
-    		                                 @PathVariable String sigla, 
-    		                                 @RequestBody EstadoDto estadoDto) {
+    public ResponseEntity<Void> updateEstado(@PathVariable String sigla, 
+    		                                 @Valid @RequestBody EstadoDto estadoDto) {
 //        String teste = translator.getText("NotEmpty.nome");
 //        System.out.println(teste);
         

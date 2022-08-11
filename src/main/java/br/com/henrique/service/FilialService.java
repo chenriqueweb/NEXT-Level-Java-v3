@@ -1,6 +1,5 @@
 package br.com.henrique.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,8 +27,8 @@ public class FilialService {
     
     // Lista Filiais
     public List<Filial> findAll() {
-        List<Filial> filiais = new ArrayList<Filial>();
-        filiais = repositFilial.findAll();                
+        List<Filial> filiais = repositFilial.findAll();
+        
         return filiais;
     }
     

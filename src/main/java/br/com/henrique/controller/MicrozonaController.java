@@ -92,9 +92,8 @@ public class MicrozonaController {
     	    @ApiResponse(code = 400, message = "Dados inválidos"),
     	    @ApiResponse(code = 404, message = "Microzona não encontrada")    	    
     }) 
-    public ResponseEntity<Void> updateMicrozona(@Valid 
-    		                                    @PathVariable Integer codigo, 
-                                                @RequestBody MicrozonaDto microzonaDto) {
+    public ResponseEntity<Void> updateMicrozona(@PathVariable Integer codigo, 
+    		                                    @Valid  @RequestBody MicrozonaDto microzonaDto) {
         microzonaService.updateMicrozona(codigo, microzonaDto);
         return ResponseEntity.noContent().build();
     }    

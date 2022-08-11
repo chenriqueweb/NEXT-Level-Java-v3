@@ -102,10 +102,9 @@ public class RotaEntregaController {
     	    @ApiResponse(code = 400, message = "Dados inválidos"),
     	    @ApiResponse(code = 404, message = "RotaEntrega não encontrada")    	    
     })  
-    public ResponseEntity<Void> updateRotaEntrega(@Valid 
-    		                                      @PathVariable String siglaEstado,
+    public ResponseEntity<Void> updateRotaEntrega(@PathVariable String siglaEstado,
                                                   @PathVariable Integer codigoRota, 
-                                                  @RequestBody RotaEntregaDto rotaEntregaDto) {
+                                                  @Valid  @RequestBody RotaEntregaDto rotaEntregaDto) {
         
         RotaEntregaPK rotaEntregaPK = new RotaEntregaPK();
         rotaEntregaPK.setSiglaEstado(siglaEstado);

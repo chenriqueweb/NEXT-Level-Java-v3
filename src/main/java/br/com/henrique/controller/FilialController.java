@@ -102,10 +102,9 @@ public class FilialController {
     	    @ApiResponse(code = 400, message = "Dados inválidos"),
     	    @ApiResponse(code = 404, message = "Filial não encontrada")    	    
     })  
-    public ResponseEntity<Void> updateFilial(@Valid 
-    		                                 @PathVariable Integer codigoEmpresa,
-                                             @PathVariable Integer codigoFilial, 
-                                             @RequestBody FilialDto filialDto) {
+    public ResponseEntity<Void> updateFilial(@PathVariable Integer codigoEmpresa,
+    		                                 @PathVariable Integer codigoFilial,
+                                             @Valid  @RequestBody FilialDto filialDto) {
         
         FilialPK filialPK = new FilialPK();
         filialPK.setCodigoEmpresa(codigoEmpresa);

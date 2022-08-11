@@ -4,7 +4,6 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import br.com.henrique.model.Estado;
 import br.com.henrique.model.Municipio;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -36,8 +35,7 @@ public class MunicipioDto {
         super();
         this.codigo_ID = municipio.getCodigo_ID();
         this.nome = municipio.getNome();
-        //this.estado = municipio.converteToDto(municipio).estado;  >>> erro
-        //this.estado = municipio.converteToDto(municipio).getEstado(); >>> erro
+        this.estado = municipio.getEstado().converteToDto();
     }
 
 //    // Método para identificar registro novo

@@ -1,22 +1,17 @@
 package br.com.henrique;
 
-import java.net.URI;
 import java.net.URISyntaxException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import br.com.henrique.model.Empresa;
+import br.com.henrique.dto.EmpresaDto;
 import br.com.henrique.service.EmpresaService;
 
 //@RunWith(MockitoJUnitRunner.class)
@@ -26,18 +21,18 @@ class EmpresaControllerTest {
 	
 	
     @Autowired
-    private TestRestTemplate restTemplate;
+    // private TestRestTemplate restTemplate;
     private EmpresaService empresaService;
      
     @Test
     public void testAddEmployeeSuccess() throws URISyntaxException, ParseException 
     {
-        Integer codigoEmpresa = 21;
-        final String baseUrl = "http://localhost:8080"  + "/empresa/" + codigoEmpresa;
-        URI uri = new URI(baseUrl);        
+        // Integer codigoEmpresa = 21;
+        // final String baseUrl = "http://localhost:8080"  + "/empresa/" + codigoEmpresa;
+        // URI uri = new URI(baseUrl);        
         
   	    final SimpleDateFormat formatterDate = new SimpleDateFormat("dd/MM/yyyy");
-  	    Empresa empresa0001 = new Empresa(21, "VIAVAREJO", "33041260094711", formatterDate.parse("25/08/2016"));
+  	    EmpresaDto empresa0001 = new EmpresaDto(21, "VIAVAREJO", "33041260094711", formatterDate.parse("25/08/2016"));
   	    
         System.out.println(empresa0001.getCodigo());
         System.out.println(empresa0001.getRaizCNPJ());
@@ -45,17 +40,18 @@ class EmpresaControllerTest {
         System.out.println(empresa0001.getDataAbertura());
     	
     	empresaService.addEmpresa(empresa0001);	
-        
+
+    	
     	// Busca pelo endereço e methodo POST
         HttpHeaders headers = new HttpHeaders();
         headers.set("X-COM-PERSIST", "true");      
  
-        HttpEntity<Empresa> request = new HttpEntity<>(empresa0001, headers);
+//        HttpEntity<Empresa> request = new HttpEntity<>(empresa0001, headers);
          
-        ResponseEntity<String> result = this.restTemplate.postForEntity(uri, request, String.class);
+//        ResponseEntity<String> result = this.restTemplate.postForEntity(uri, request, String.class);
          
         //Verify request succeed
-        Assert.assertEquals(201, result.getStatusCodeValue());
+//        Assert.assertEquals(201, result.getStatusCodeValue());
     }
 	
 //	private MockMvc mockMvc;
