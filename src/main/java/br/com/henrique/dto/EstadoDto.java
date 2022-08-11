@@ -31,10 +31,15 @@ public class EstadoDto {
         this.nome = nome;
     }
     
-    // Método para identificar registro novo
-    public boolean isNovo() {
-        return nome == null;
+    public EstadoDto(Estado estado) {
+        this.sigla = estado.getSigla();
+        this.nome = estado.getNome();
     }
+    
+//    // Método para identificar registro novo
+//    public boolean isNovo() {
+//        return nome == null;
+//    }
      
     public String getSigla() {
         return sigla;
@@ -49,7 +54,7 @@ public class EstadoDto {
         this.nome = nome;
     }
     
-    
+ // Conversor para atualização da Entidade
     public Estado converteToEntity() {
     	return new Estado(this);
     }

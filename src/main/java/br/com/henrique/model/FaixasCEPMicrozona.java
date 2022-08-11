@@ -80,5 +80,9 @@ public class FaixasCEPMicrozona {
 		return Objects.equals(CEPfinal, other.CEPfinal) && Objects.equals(CEPinicial, other.CEPinicial)
 				&& Objects.equals(faixasCEPMicrozonaPK, other.faixasCEPMicrozonaPK);
 	}
-
+	
+    // Conversor para atualização do DTO
+    public FaixasCEPMicrozonaDto converteToDto(FaixasCEPMicrozona faixasCEPMicrozona) {
+    	return new FaixasCEPMicrozonaDto(this);
+    }
 }

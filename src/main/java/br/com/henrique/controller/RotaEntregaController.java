@@ -2,6 +2,7 @@ package br.com.henrique.controller;
 
 import java.net.URI;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
@@ -38,15 +39,15 @@ public class RotaEntregaController {
     @Autowired
     private RotaEntregaService rotaEntregaService;
 
-    // Lista RotaEntrega
+    // Lista RotaEntrega - DTO
     @GetMapping
     @ApiOperation(value = "Lista todas as RotaEntregas")
     @ApiResponses(value = {
     	    @ApiResponse(code = 200, message = "Retorna uma lista de todas as RotaEntregas")
     })  
-    public ResponseEntity<List<RotaEntrega>> findAll() {
+    public ResponseEntity<List<RotaEntregaDto>> findAll() {
         List<RotaEntrega> rotaEntregas = rotaEntregaService.findAll();
-        return ResponseEntity.ok().body(rotaEntregas);
+        return ResponseEntity.ok().body(rotaEntregas.stream().map(e -> e.converteToDto(e)).collect(Collectors.toList()));
     }
     
     // Lista de Rotas de Entrega com paginação

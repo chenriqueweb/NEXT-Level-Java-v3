@@ -43,10 +43,18 @@ public class FilialDto {
         this.municipio = municipio;
     }
     
-    // Método para identificar registro novo
-    public boolean isNovo() {
-        return nome == null;
-    }     
+    public FilialDto(Filial filial) {
+        super();
+        this.filialPK = filial.getFilialPK();
+        this.nome = filial.getNome();
+        this.cnpj = filial.getCnpj();
+        this.municipio = filial.getMunicipio();
+    }
+    
+//    // Método para identificar registro novo
+//    public boolean isNovo() {
+//        return nome == null;
+//    }     
     
     public FilialPK getFilialPK() {
         return filialPK;
@@ -73,6 +81,7 @@ public class FilialDto {
         this.municipio = municipio;
     }
     
+    // Conversor para atualização do DTO
     public Filial converteToEntity() {
     	return new Filial(this);
     }

@@ -114,4 +114,8 @@ public class Filial {
         return true;
     }
 
+    // Conversor para atualização do DTO
+    public FilialDto converteToDto(Filial filial) {
+    	return new FilialDto(this);
+    }
 }

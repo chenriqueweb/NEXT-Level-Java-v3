@@ -103,4 +103,8 @@ public class Municipio {
         return true;
     }
 
+    // Conversor para atualização do DTO
+    public MunicipioDto converteToDto(Municipio municipio) {
+    	return new MunicipioDto(this);
+    }
 }

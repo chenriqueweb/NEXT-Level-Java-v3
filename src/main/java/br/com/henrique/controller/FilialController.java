@@ -2,6 +2,7 @@ package br.com.henrique.controller;
 
 import java.net.URI;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
@@ -38,15 +39,16 @@ public class FilialController {
     @Autowired
     private FilialService filialService;
 
-    // Lista Filiais
+    // Lista Filiais - DTO
     @GetMapping
     @ApiOperation(value = "Lista todas as Filiais")
     @ApiResponses(value = {
     	    @ApiResponse(code = 200, message = "Retorna uma lista de todas as Filiais")
     }) 
-    public ResponseEntity<List<Filial>> findAll() {
+    public ResponseEntity<List<FilialDto>> findAll() {
         List<Filial> filiais = filialService.findAll();
-        return ResponseEntity.ok().body(filiais);
+        // return ResponseEntity.ok().body(filiais);
+        return ResponseEntity.ok().body(filiais.stream().map(e -> e.converteToDto(e)).collect(Collectors.toList())); 
     }    
     
     // Lista de Filiais com paginação

@@ -23,10 +23,10 @@ public class FaixasCEPMicrozonaDto {
     @ApiModelProperty(value = "CEP Final", required = true)
     private Integer CEPfinal;
     
-    // Método para identificar registro novo
-    public boolean isNovo() {
-        return CEPinicial == 0;
-    }
+//    // Método para identificar registro novo
+//    public boolean isNovo() {
+//        return CEPinicial == 0;
+//    }
 
     // Construtor
     public FaixasCEPMicrozonaDto() {
@@ -38,6 +38,12 @@ public class FaixasCEPMicrozonaDto {
 		this.faixasCEPMicrozonaPK = faixasCEPMicrozonaPK;
 		this.CEPinicial = cEPinicial;
 		this.CEPfinal = cEPfinal;
+	}
+	
+	public FaixasCEPMicrozonaDto(FaixasCEPMicrozona faixasCEPMicrozona) {
+		this.faixasCEPMicrozonaPK = faixasCEPMicrozona.getFaixasCEPMicrozonaPK();
+		this.CEPinicial = faixasCEPMicrozona.getCEPinicial();
+		this.CEPfinal = faixasCEPMicrozona.getCEPfinal();
 	}
 	
 	public FaixasCEPMicrozonaPK getFaixasCEPMicrozonaPK() {
@@ -59,6 +65,7 @@ public class FaixasCEPMicrozonaDto {
 		CEPfinal = cEPfinal;
 	}
 	
+	// Conversor para atualização da Entidade
     public FaixasCEPMicrozona converteToEntity() {
     	return new FaixasCEPMicrozona(this);
     }

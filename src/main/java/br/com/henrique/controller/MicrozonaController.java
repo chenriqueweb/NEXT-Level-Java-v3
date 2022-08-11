@@ -2,6 +2,7 @@ package br.com.henrique.controller;
 
 import java.net.URI;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
@@ -36,15 +37,16 @@ public class MicrozonaController {
     @Autowired
     private MicrozonaService microzonaService;
 
-    // Lista Microzona
+    // Lista Microzona - DTO
     @GetMapping
     @ApiOperation(value = "Lista todas as Microzonas")
     @ApiResponses(value = {
     	    @ApiResponse(code = 200, message = "Retorna uma lista de todas as Microzonas")
     })    
-    public ResponseEntity<List<Microzona>> findAll() {
+    public ResponseEntity<List<MicrozonaDto>> findAll() {
         List<Microzona> microzonas = microzonaService.findAll();
-        return ResponseEntity.ok().body(microzonas);
+        // return ResponseEntity.ok().body(microzonas);
+        return ResponseEntity.ok().body(microzonas.stream().map(e -> e.converteToDto(e)).collect(Collectors.toList()));
     }
     
     // Lista de Microzonas com paginação

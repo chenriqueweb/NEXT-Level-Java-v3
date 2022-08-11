@@ -80,4 +80,9 @@ public class Estado {
             return false;
         return true;
     }
+    
+    // Conversor para atualização do DTO
+    public EstadoDto converteToDto(Estado estado) {
+    	return new EstadoDto(this);
+    }
 }

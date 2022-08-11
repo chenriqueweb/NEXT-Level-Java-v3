@@ -2,6 +2,7 @@ package br.com.henrique.controller;
 
 import java.net.URI;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
@@ -37,15 +38,16 @@ public class EmpresaController {
     @Autowired
     private EmpresaService empresaService; 
 
-    // Lista Empresa
+    // Lista Empresa - DTO
     @GetMapping
     @ApiOperation(value = "Lista todas as Empresas")
     @ApiResponses(value = {
     	    @ApiResponse(code = 200, message = "Retorna uma lista de todas as Empresas")
     })    
-    public ResponseEntity<List<Empresa>> findAll() {
+    public ResponseEntity<List<EmpresaDto>> findAll() {
         List<Empresa> empresas = empresaService.findAll();
-        return ResponseEntity.ok().body(empresas);
+        
+        return ResponseEntity.ok().body(empresas.stream().map(e -> e.converteToDto(e)).collect(Collectors.toList()));
     }
     
     // Lista de Empresas com paginação

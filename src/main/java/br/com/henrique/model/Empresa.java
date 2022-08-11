@@ -100,5 +100,9 @@ public class Empresa {
             return false;
         return true;
     }
+    
+    public EmpresaDto converteToDto(Empresa empresa) {
+    	return new EmpresaDto(this);
+    }
 }
 

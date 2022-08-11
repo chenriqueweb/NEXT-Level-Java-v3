@@ -319,4 +319,8 @@ public class Microzona {
         return true;
     }
 
+    // Conversor para atualização do DTO
+    public MicrozonaDto converteToDto(Microzona microzona) {
+    	return new MicrozonaDto(this);
+    }
 }

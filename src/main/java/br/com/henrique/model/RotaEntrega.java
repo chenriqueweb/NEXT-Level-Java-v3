@@ -165,6 +165,11 @@ public class RotaEntrega {
         } else if (!status.equals(other.status))
             return false;
         return true;
-    }         
+    }
+    
+    // Conversor para atualização do DTO
+    public RotaEntregaDto converteToDto(RotaEntrega rotaEntrega) {
+    	return new RotaEntregaDto(this);
+    }
 
 }

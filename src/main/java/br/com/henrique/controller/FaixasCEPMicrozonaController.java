@@ -2,6 +2,7 @@ package br.com.henrique.controller;
 
 import java.net.URI;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
@@ -37,15 +38,15 @@ public class FaixasCEPMicrozonaController {
     @Autowired
     private FaixasCEPMicrozonaService faixasCEPMicrozonaService;
 
-    // Lista Faixas de CEP Microzona
+    // Lista Faixas de CEP Microzona - DTO
     @GetMapping
     @ApiOperation(value = "Lista todas as Faixas de CEP Microzona")
     @ApiResponses(value = {
     	    @ApiResponse(code = 200, message = "Retorna uma lista de Faixas de CEP Microzona")
     }) 
-    public ResponseEntity<List<FaixasCEPMicrozona>> findAll() {
+    public ResponseEntity<List<FaixasCEPMicrozonaDto>> findAll() {
         List<FaixasCEPMicrozona> faixasCEPMicrozona = faixasCEPMicrozonaService.findAll();
-        return ResponseEntity.ok().body(faixasCEPMicrozona);
+        return ResponseEntity.ok().body(faixasCEPMicrozona.stream().map(e -> e.converteToDto(e)).collect(Collectors.toList()));
     }    
 
     // Lista de Faixas de CEP Microzona com paginação

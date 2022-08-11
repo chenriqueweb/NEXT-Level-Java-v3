@@ -72,11 +72,20 @@ public class RotaEntregaDto {
         this.codigoFilial = codigoFilial;
         this.prazoExpedicao = prazoExpedicao;
     }
-
-    // Método para identificar registro novo
-    public boolean isNovo() {
-        return nome == null;
+    
+    public RotaEntregaDto(RotaEntrega rotaEntrega) {
+    	this.rotaEntregaPK = rotaEntrega.getRotaEntregaPK();
+    	this.nome = rotaEntrega.getNome();
+    	this.status = rotaEntrega.getStatus();
+    	this.codigoEmpresa = rotaEntrega.getCodigoEmpresa();
+    	this.codigoFilial = rotaEntrega.getCodigoFilial();
+    	this.prazoExpedicao = rotaEntrega.getPrazoExpedicao();
     }
+
+//    // Método para identificar registro novo
+//    public boolean isNovo() {
+//        return nome == null;
+//    }
 
     public RotaEntregaPK getRotaEntregaPK() {
         return rotaEntregaPK;
@@ -114,7 +123,8 @@ public class RotaEntregaDto {
     public void setPrazoExpedicao(Integer prazoExpedicao) {
         this.prazoExpedicao = prazoExpedicao;
     }
-    
+
+    // Conversor para atualização da Entidade
     public RotaEntrega converteToEntity() {
     	return new RotaEntrega(this);
     }

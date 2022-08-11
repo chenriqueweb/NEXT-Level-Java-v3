@@ -48,11 +48,18 @@ public class EmpresaDto {
         this.raizCNPJ = raizCNPJ;
         this.dataAbertura = dataAbertura;
     }
+    
+    public EmpresaDto(Empresa empresa) {
+        this.codigo = empresa.getCodigo();
+        this.razaoSocial = empresa.getRazaoSocial();
+        this.raizCNPJ = empresa.getRaizCNPJ();
+        this.dataAbertura = empresa.getDataAbertura();    	
+    }
 
-    // Método para identificar registro novo
-    public boolean isNovo() {
-        return razaoSocial == null;
-    } 
+//    // Método para identificar registro novo
+//    public boolean isNovo() {
+//        return razaoSocial == null;
+//    } 
     
     public Integer getCodigo() {
         return codigo;
@@ -79,6 +86,7 @@ public class EmpresaDto {
         this.dataAbertura = dataAbertura;
     }
     
+    // Conversor para atualização da Entidade
     public Empresa converteToEntity() {
     	return new Empresa(this);
     }

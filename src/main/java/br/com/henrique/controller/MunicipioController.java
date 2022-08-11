@@ -2,6 +2,7 @@ package br.com.henrique.controller;
 
 import java.net.URI;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
@@ -37,15 +38,16 @@ public class MunicipioController {
     @Autowired   
     private MunicipioService municipioService;
     
-    // Lista Municipio
+    // Lista Municipio - DTO
     @GetMapping
     @ApiOperation(value = "Lista todos os Municipios")
     @ApiResponses(value = {
     	    @ApiResponse(code = 200, message = "Retorna uma lista de todas os Municipios")
     })  
-    public ResponseEntity<List<Municipio>> findAll() {
+    public ResponseEntity<List<MunicipioDto>> findAll() {
         List<Municipio> municipios = municipioService.findAll();        
-        return ResponseEntity.ok().body(municipios);
+        // return ResponseEntity.ok().body(municipios);
+        return ResponseEntity.ok().body(municipios.stream().map(e -> e.converteToDto(e)).collect(Collectors.toList()));
     }
     
     // Lista Municipio por Estado

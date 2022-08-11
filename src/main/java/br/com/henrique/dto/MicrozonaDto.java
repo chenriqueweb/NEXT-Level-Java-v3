@@ -128,10 +128,27 @@ public class MicrozonaDto {
         this.codigoRota = codigoRota;
     }
 
-    // Método para identificar registro novo
-    public boolean isNovo() {
-        return nome == null;
+    public MicrozonaDto(Microzona microzona) {
+    	super();
+    	this.codigo = microzona.getCodigo();
+    	this.nome = microzona.getNome();
+    	this.status = microzona.getStatus();
+    	this.atendimentoDiario = microzona.getAtendimentoDiario();
+    	this.atendeSegunda = microzona.getAtendeSegunda();
+    	this.atendeTerca = microzona.getAtendeTerca();
+    	this.atendeQuarta = microzona.getAtendeQuarta();
+    	this.atendeQuinta = microzona.getAtendeQuinta();
+    	this.atendeSexta = microzona.getAtendeSexta();
+    	this.atendeSabado = microzona.getAtendeSabado();
+    	this.estadoRota = microzona.getEstadoRota();
+    	this.codigoMunicipio = microzona.getCodigoMunicipio();
+		this.codigoRota = microzona.getCodigoRota();
     }
+
+//    // Método para identificar registro novo
+//    public boolean isNovo() {
+//        return nome == null;
+//    }
 
     public Integer getCodigo() {
         return codigo;
@@ -212,7 +229,7 @@ public class MicrozonaDto {
         this.codigoRota = codigoRota;
     }
     
-    
+    // Conversor para atualização da Entidade
     public Microzona converteToEntity() {
     	return new Microzona(this);
     }

@@ -4,6 +4,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import br.com.henrique.model.Estado;
 import br.com.henrique.model.Municipio;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -30,11 +31,19 @@ public class MunicipioDto {
         this.nome = nome;
         this.estado = estadoDto;
     }
+    
+    public MunicipioDto(Municipio municipio) {
+        super();
+        this.codigo_ID = municipio.getCodigo_ID();
+        this.nome = municipio.getNome();
+        //this.estado = municipio.converteToDto(municipio).estado;  >>> erro
+        //this.estado = municipio.converteToDto(municipio).getEstado(); >>> erro
+    }
 
-    // Método para identificar registro novo
-    public boolean isNovo() {
-        return nome == null;
-    }    
+//    // Método para identificar registro novo
+//    public boolean isNovo() {
+//        return nome == null;
+//    }    
     
     public Integer getCodigo_ID() {
         return codigo_ID;
@@ -42,7 +51,6 @@ public class MunicipioDto {
     public void setCodigo_ID(Integer codigo_ID) {
         this.codigo_ID = codigo_ID;
     }
-    
     public String getNome() {
         return nome;
     }
@@ -56,6 +64,7 @@ public class MunicipioDto {
         this.estado = estado;
     }
 
+    // Conversor para atualização da Entidade
     public Municipio converteToEntity() {
     	return new Municipio(this);
     }
