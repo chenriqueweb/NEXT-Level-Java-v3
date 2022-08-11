@@ -7,6 +7,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class NextLevelJavaV3Application {
 
 	public static void main(String[] args) {
-		SpringApplication.run(NextLevelJavaV3Application.class, args);
+		SpringApplication.run(NextLevelJavaV3Application.class, args); 
 	}
 }

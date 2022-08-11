@@ -65,7 +65,7 @@ public class MunicipioService {
             throw new ObjectNotFoundException("Municipio nao encontrado !");
         }        
         municipioAtualizado.setNome(municipioDto.getNome());
-        municipioAtualizado.setEstado(municipioDto.getEstado());
+        municipioAtualizado.setEstado(municipioDto.getEstado().converteToEntity());
         
         repositMunicipio.save(municipioAtualizado);
     }    

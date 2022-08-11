@@ -110,10 +110,10 @@ public class MicrozonaDto {
     }
 
     public MicrozonaDto(Integer codigo, String nome, String status, String atendimentoDiario, String atendeSegunda, String atendeTerca,
-                    String atendeQuarta, String atendeQuinta, String atendeSexta, String atendeSabado, Estado estadoRota,
-                    Municipio codigoMunicipio, Integer codigoRota) {
+                    String atendeQuarta, String atendeQuinta, String atendeSexta, String atendeSabado, EstadoDto estadoDto,
+                    MunicipioDto municipioDto, Integer codigoRota) {
         super();
-        this.codigo = null;
+        this.codigo = codigo;
         this.nome = nome;
         this.status = status;
         this.atendimentoDiario = atendimentoDiario;
@@ -123,8 +123,8 @@ public class MicrozonaDto {
         this.atendeQuinta = atendeQuinta;
         this.atendeSexta = atendeSexta;
         this.atendeSabado = atendeSabado;
-        this.estadoRota = estadoRota;
-        this.codigoMunicipio = codigoMunicipio;
+        this.estadoRota = estadoDto.converteToEntity();
+        this.codigoMunicipio = municipioDto.converteToEntity();
         this.codigoRota = codigoRota;
     }
 

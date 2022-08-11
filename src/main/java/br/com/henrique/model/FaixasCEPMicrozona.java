@@ -32,7 +32,7 @@ public class FaixasCEPMicrozona {
     }
 
     public FaixasCEPMicrozona(FaixasCEPMicrozonaDto faixasCEPMicrozonaDto) {
-		this.faixasCEPMicrozonaPK = null;
+		this.faixasCEPMicrozonaPK = faixasCEPMicrozonaDto.getFaixasCEPMicrozonaPK();
 		this.CEPinicial = faixasCEPMicrozonaDto.getCEPinicial();
 		this.CEPfinal = faixasCEPMicrozonaDto.getCEPfinal();   
     }  

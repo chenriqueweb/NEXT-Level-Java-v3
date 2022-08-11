@@ -65,7 +65,7 @@ public class RotaEntregaDto {
     public RotaEntregaDto(RotaEntregaPK rotaEntregaPK, String nome, String status, Integer codigoEmpresa, Integer codigoFilial,
                     Integer prazoExpedicao) {
         super();
-        this.rotaEntregaPK = null;
+        this.rotaEntregaPK = rotaEntregaPK;
         this.nome = nome;
         this.status = status;
         this.codigoEmpresa = codigoEmpresa;

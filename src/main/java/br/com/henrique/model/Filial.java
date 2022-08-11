@@ -27,7 +27,7 @@ public class Filial {
     }
     
     public Filial(FilialDto filialDto) {
-        this.filialPK = null;
+        this.filialPK = filialDto.getFilialPK();
         this.nome = filialDto.getNome();
         this.cnpj = filialDto.getCnpj();
         this.municipio = filialDto.getMunicipio();

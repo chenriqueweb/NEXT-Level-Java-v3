@@ -51,7 +51,7 @@ public class RotaEntrega {
     }
     
     public RotaEntrega(RotaEntregaDto rotaEntregaDto) {
-        this.rotaEntregaPK = null;
+        this.rotaEntregaPK = rotaEntregaDto.getRotaEntregaPK();
         this.nome = rotaEntregaDto.getNome();
         this.status = rotaEntregaDto.getStatus();
         this.codigoEmpresa = rotaEntregaDto.getCodigoEmpresa();

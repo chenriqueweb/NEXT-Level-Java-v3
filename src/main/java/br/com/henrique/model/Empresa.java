@@ -33,7 +33,7 @@ public class Empresa {
     }
     
     public Empresa(EmpresaDto empresaDto) {
-        this.codigo = null;
+        this.codigo = empresaDto.getCodigo();
         this.razaoSocial = empresaDto.getRazaoSocial();
         this.raizCNPJ = empresaDto.getRazaoSocial();
         this.dataAbertura = empresaDto.getDataAbertura();        

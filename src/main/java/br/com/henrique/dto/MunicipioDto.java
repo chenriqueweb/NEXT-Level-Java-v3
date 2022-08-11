@@ -1,12 +1,9 @@
 package br.com.henrique.dto;
 
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import br.com.henrique.model.Estado;
 import br.com.henrique.model.Municipio;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -25,19 +22,13 @@ public class MunicipioDto {
     private String nome;
     
     // FK com Estado
-    @ManyToOne
-    @JoinColumn(name="sigla")
-    private Estado estado;
+    private EstadoDto estado;
     
-    public MunicipioDto() {
-        super();
-    }
-
-    public MunicipioDto(Integer codigo_ID, String nome, Estado estado) {
+    public MunicipioDto(Integer codigo_ID, String nome, EstadoDto estadoDto) {
         super();
         this.codigo_ID = codigo_ID;
         this.nome = nome;
-        this.estado = estado;
+        this.estado = estadoDto;
     }
 
     // Método para identificar registro novo
@@ -58,10 +49,10 @@ public class MunicipioDto {
     public void setNome(String nome) {
         this.nome = nome;
     }
-    public Estado getEstado() {
+    public EstadoDto getEstado() {
         return estado;
     }
-    public void setEstado(Estado estado) {
+    public void setEstado(EstadoDto estado) {
         this.estado = estado;
     }
 

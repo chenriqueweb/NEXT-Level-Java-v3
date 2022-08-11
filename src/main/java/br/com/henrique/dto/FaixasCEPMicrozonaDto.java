@@ -35,7 +35,7 @@ public class FaixasCEPMicrozonaDto {
 
 	public FaixasCEPMicrozonaDto(FaixasCEPMicrozonaPK faixasCEPMicrozonaPK, Integer cEPinicial, Integer cEPfinal) {
 		super();
-		this.faixasCEPMicrozonaPK = null;
+		this.faixasCEPMicrozonaPK = faixasCEPMicrozonaPK;
 		this.CEPinicial = cEPinicial;
 		this.CEPfinal = cEPfinal;
 	}

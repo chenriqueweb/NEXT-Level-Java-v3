@@ -37,7 +37,7 @@ public class FilialDto {
 
     public FilialDto(FilialPK filialPK, String nome, String cnpj, Integer municipio) {
         super();
-        this.filialPK = null;
+        this.filialPK = filialPK;
         this.nome = nome;
         this.cnpj = cnpj;
         this.municipio = municipio;

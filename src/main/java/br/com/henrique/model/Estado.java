@@ -22,7 +22,7 @@ public class Estado {
     }
     
     public Estado(EstadoDto estadoDto) {
-        this.sigla = null;
+        this.sigla = estadoDto.getSigla();
         this.nome = estadoDto.getNome();        
     }    
     
@@ -34,7 +34,7 @@ public class Estado {
     
     // Método para identificar registro novo
     public boolean isNovo() {
-        return sigla == null;
+        return nome == null;
     }
         
     public String getSigla() {
