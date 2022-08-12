@@ -9,7 +9,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-class NextLevelJavaV2ApplicationTests {
+class NextLevelJavaV3ApplicationTests {
 
 //    @Autowired
 //    private TestRestTemplate testRestTemplate;

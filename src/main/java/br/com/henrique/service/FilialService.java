@@ -1,6 +1,5 @@
 package br.com.henrique.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import br.com.henrique.dto.FilialDto;
 import br.com.henrique.model.Filial;
 import br.com.henrique.model.FilialPK;
 import br.com.henrique.model.Municipio;
@@ -27,8 +27,8 @@ public class FilialService {
     
     // Lista Filiais
     public List<Filial> findAll() {
-        List<Filial> filiais = new ArrayList<Filial>();
-        filiais = repositFilial.findAll();                
+        List<Filial> filiais = repositFilial.findAll();
+        
         return filiais;
     }
     
@@ -46,47 +46,47 @@ public class FilialService {
         return filialBusca;
     }
     
-    // Inclui Filial
-    public Filial addFilial(Filial filial) {
-        Filial filialBuscaID = repositFilial.findById(filial.getFilialPK()).orElse(null);
+    // Inclui Filial - DTO
+    public Filial addFilial(FilialDto filialDto) {
+        Filial filialBuscaID = repositFilial.findById(filialDto.getFilialPK()).orElse(null);
         if (filialBuscaID != null) {
             throw new ObjectFoundException("Filial já cadastrada !");
         } 	
         
-        Filial filialBuscaCNPJ = repositFilial.findByCnpj(filial.getCnpj());
+        Filial filialBuscaCNPJ = repositFilial.findByCnpj(filialDto.getCnpj());
         if (filialBuscaCNPJ != null) {
             throw new ObjectFoundException("CNPJ informado já encontra-se cadastrado para outra Filial !");
         } 	        
         
-        Municipio municipioBuscaID = repositMunicipio.findById(filial.getMunicipio()).orElse(null);
+        Municipio municipioBuscaID = repositMunicipio.findById(filialDto.getMunicipio()).orElse(null);
         if (municipioBuscaID == null) {
             throw new ObjectNotFoundException("Municipio nao encontrado !");
         }          
         
-        return repositFilial.save(filial);
+        return repositFilial.save(filialDto.converteToEntity());
     }
     
-    // Atualiza Filial
+    // Atualiza Filial - DTO
 	public void updateFilial(FilialPK filialPK, 
-                             Filial filial) {
+                             FilialDto filialDto) {
         Filial filialAtualizado = repositFilial.findById(filialPK).orElse(null);
         if (filialAtualizado == null) {
             throw new ObjectNotFoundException("Filial nao encontrada !");
         } 	   
         
-        Filial filialBuscaCNPJ = repositFilial.findByCnpj(filial.getCnpj());
+        Filial filialBuscaCNPJ = repositFilial.findByCnpj(filialDto.getCnpj());
         if (filialBuscaCNPJ != null) {
             throw new ObjectFoundException("CNPJ informado já encontra-se cadastrado para outra Filial !");
         } 	         
         
-        Municipio municipioBuscaID = repositMunicipio.findById(filial.getMunicipio()).orElse(null);
+        Municipio municipioBuscaID = repositMunicipio.findById(filialDto.getMunicipio()).orElse(null);
         if (municipioBuscaID == null) {
             throw new ObjectNotFoundException("Municipio nao encontrado !");
         }  
         
-        filialAtualizado.setNome(filial.getNome());
-        filialAtualizado.setCnpj(filial.getCnpj());
-        filialAtualizado.setMunicipio(filial.getMunicipio());
+        filialAtualizado.setNome(filialDto.getNome());
+        filialAtualizado.setCnpj(filialDto.getCnpj());
+        filialAtualizado.setMunicipio(filialDto.getMunicipio());
         
         repositFilial.save(filialAtualizado);
     }

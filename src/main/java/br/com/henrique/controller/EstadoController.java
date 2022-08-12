@@ -2,6 +2,7 @@ package br.com.henrique.controller;
 
 import java.net.URI;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import br.com.henrique.dto.EstadoDto;
 import br.com.henrique.model.Estado;
 import br.com.henrique.service.EstadoService;
 import io.swagger.annotations.Api;
@@ -38,15 +40,15 @@ public class EstadoController {
     @Autowired
     private EstadoService estadoService; 
     
-    // Lista Estado
+    // Lista Estado - DTO
     @GetMapping
     @ApiOperation(value = "Lista todas os Estados")
     @ApiResponses(value = {
     	    @ApiResponse(code = 200, message = "Retorna uma lista de todas as Estados")
     })  
-    public ResponseEntity<List<Estado>> findAll() {
+    public ResponseEntity<List<EstadoDto>> findAll() {
         List<Estado> estados = estadoService.findAll(); 
-        return ResponseEntity.ok().body(estados);
+        return ResponseEntity.ok().body(estados.stream().map(e -> e.converteToDto()).collect(Collectors.toList()));
     }
     
     // Lista de Estado com paginação
@@ -71,20 +73,20 @@ public class EstadoController {
         return ResponseEntity.ok().body(estado);
     }
     
-    // Inclui Estado
+    // Inclui Estado - DTO
     @PostMapping
     @ApiOperation(value = "Inclui um Estado")
     @ApiResponses(value = {
     	    @ApiResponse(code = 201, message = "Estado criado com sucesso")
     }) 
-    public ResponseEntity<Void> addEstado(@Valid @RequestBody Estado estado) {
-        Estado estadoNovo = estadoService.addEstado(estado);
+    public ResponseEntity<Void> addEstado(@Valid @RequestBody EstadoDto estadoDto) {
+        Estado estadoNovo = estadoService.addEstado(estadoDto);
         
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{sigla}").buildAndExpand(estadoNovo.getSigla()).toUri();
         return ResponseEntity.created(uri).build();
     }
     
-    // Altera Estado
+    // Altera Estado - DTO
     @PutMapping(path = "{sigla}")
     @ApiOperation(value = "Altera os dados de um Estado")    
     @ApiResponses(value = {
@@ -92,13 +94,12 @@ public class EstadoController {
     	    @ApiResponse(code = 400, message = "Dados inválidos"),
     	    @ApiResponse(code = 404, message = "Estado não encontrado")    	    
     }) 
-    public ResponseEntity<Void> updateEstado(@Valid 
-    		                                 @PathVariable String sigla, 
-    		                                 @RequestBody Estado estado ) {
+    public ResponseEntity<Void> updateEstado(@PathVariable String sigla, 
+    		                                 @Valid @RequestBody EstadoDto estadoDto) {
 //        String teste = translator.getText("NotEmpty.nome");
 //        System.out.println(teste);
         
-        estadoService.updateEstado(sigla, estado);
+        estadoService.updateEstado(sigla, estadoDto);
         
         return ResponseEntity.noContent().build();
     }

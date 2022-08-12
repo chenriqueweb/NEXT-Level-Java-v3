@@ -2,6 +2,7 @@ package br.com.henrique.controller;
 
 import java.net.URI;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import br.com.henrique.dto.MicrozonaDto;
 import br.com.henrique.model.Microzona;
 import br.com.henrique.service.MicrozonaService;
 import io.swagger.annotations.Api;
@@ -35,15 +37,16 @@ public class MicrozonaController {
     @Autowired
     private MicrozonaService microzonaService;
 
-    // Lista Microzona
+    // Lista Microzona - DTO
     @GetMapping
     @ApiOperation(value = "Lista todas as Microzonas")
     @ApiResponses(value = {
     	    @ApiResponse(code = 200, message = "Retorna uma lista de todas as Microzonas")
     })    
-    public ResponseEntity<List<Microzona>> findAll() {
+    public ResponseEntity<List<MicrozonaDto>> findAll() {
         List<Microzona> microzonas = microzonaService.findAll();
-        return ResponseEntity.ok().body(microzonas);
+        // return ResponseEntity.ok().body(microzonas);
+        return ResponseEntity.ok().body(microzonas.stream().map(e -> e.converteToDto(e)).collect(Collectors.toList()));
     }
     
     // Lista de Microzonas com paginação
@@ -68,20 +71,20 @@ public class MicrozonaController {
         return ResponseEntity.ok().body(microzona);
     }    
     
-    // Inclui Micrzona
+    // Inclui Micrzona - DTO
     @PostMapping
     @ApiOperation(value = "Inclui uma Micrzona")
     @ApiResponses(value = {
     	    @ApiResponse(code = 201, message = "Micrzona criada com sucesso")
     }) 
-    public ResponseEntity<Void> addMicrozona(@Valid @RequestBody Microzona microzona) {
-        Microzona microzonaNova = microzonaService.addMicrozona(microzona);
+    public ResponseEntity<Void> addMicrozona(@Valid @RequestBody MicrozonaDto microzonaDto) {
+        Microzona microzonaNova = microzonaService.addMicrozona(microzonaDto);
         
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{codigo}").buildAndExpand(microzonaNova.getCodigo()).toUri();
         return ResponseEntity.created(uri).build();
     }        
 
-    // Altera Microzona
+    // Altera Microzona - DTO
     @PutMapping(path = "{codigo}")
     @ApiOperation(value = "Altera os dados de uma Microzona")
     @ApiResponses(value = {
@@ -89,10 +92,9 @@ public class MicrozonaController {
     	    @ApiResponse(code = 400, message = "Dados inválidos"),
     	    @ApiResponse(code = 404, message = "Microzona não encontrada")    	    
     }) 
-    public ResponseEntity<Void> updateMicrozona(@Valid 
-    		                                    @PathVariable Integer codigo, 
-                                                @RequestBody Microzona microzona) {
-        microzonaService.updateMicrozona(codigo, microzona);
+    public ResponseEntity<Void> updateMicrozona(@PathVariable Integer codigo, 
+    		                                    @Valid  @RequestBody MicrozonaDto microzonaDto) {
+        microzonaService.updateMicrozona(codigo, microzonaDto);
         return ResponseEntity.noContent().build();
     }    
         

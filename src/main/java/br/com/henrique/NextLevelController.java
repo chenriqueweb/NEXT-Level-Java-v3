@@ -15,7 +15,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import br.com.henrique.dto.MunicipioDto;
+import br.com.henrique.dto.EmpresaDto;
+import br.com.henrique.dto.EstadoDto;
+import br.com.henrique.dto.FilialDto;
+import br.com.henrique.dto.MicrozonaDto;
+import br.com.henrique.dto.RotaEntregaDto;
 import br.com.henrique.model.Atende;
 import br.com.henrique.model.Empresa;
 import br.com.henrique.model.Estado;
@@ -31,7 +35,6 @@ import br.com.henrique.service.EstadoService;
 import br.com.henrique.service.FaixasCEPMicrozonaService;
 import br.com.henrique.service.FilialService;
 import br.com.henrique.service.MicrozonaService;
-import br.com.henrique.service.MunicipioService;
 import br.com.henrique.service.RotaEntregaService;
 
 @Controller
@@ -46,8 +49,8 @@ public class NextLevelController {
         @Autowired
         private EstadoService estadoService;
         
-        @Autowired
-        private MunicipioService municipioService;
+//        @Autowired
+//        private MunicipioService municipioService;
         
         @Autowired
         private RotaEntregaService rotaEntregaService;     
@@ -99,8 +102,8 @@ public class NextLevelController {
         }        
         
         @PostMapping("/empresa/form")
-        public String insereEmpresa(Empresa empresa) {
-            empresaService.addEmpresa(empresa);
+        public String insereEmpresa(EmpresaDto empresaDto) {
+            empresaService.addEmpresa(empresaDto);
             
             return "redirect:/empresaListar";
         }
@@ -108,11 +111,11 @@ public class NextLevelController {
         // Atualiza dados da Empresa     
         // method Post (página)
         @PostMapping("/empresa/salvar/{codigo}")
-        public String atualizaEmpresaWeb(Empresa empresa) {
-            Empresa empresaAntes = empresaService.findById(empresa.getCodigo());
+        public String atualizaEmpresaWeb(EmpresaDto empresaDto) {
+            Empresa empresaAntes = empresaService.findById(empresaDto.getCodigo());
             
             empresaService.deletaEmpresa(empresaAntes.getCodigo());
-            empresaService.addEmpresa(empresa);
+            empresaService.addEmpresa(empresaDto);
 
             return "redirect:/empresaListar";        
         }        
@@ -150,8 +153,8 @@ public class NextLevelController {
         }
         
         @PostMapping("/estado/form")
-        public String insreEstado(Estado estado) {
-            estadoService.addEstado(estado);
+        public String insreEstado(EstadoDto estadoDto) {
+            estadoService.addEstado(estadoDto);
             
             return "redirect:/estadoListar";
         }  
@@ -159,10 +162,10 @@ public class NextLevelController {
         // Atualiza dados da Estado     
         // method Post (página)
         @PostMapping("/estado/salvar/{sigla}")
-        public String atualizaEstadoWeb(Estado estado) {
-            Estado estadoAntes = estadoService.findById(estado.getSigla());
+        public String atualizaEstadoWeb(EstadoDto estadoDto) {
+            Estado estadoAntes = estadoService.findById(estadoDto.getSigla());
             
-            estadoService.updateEstado(estadoAntes.getSigla(), estado);
+            estadoService.updateEstado(estadoAntes.getSigla(), estadoDto);
 
             return "redirect:/estadoListar";        
         }            
@@ -170,25 +173,25 @@ public class NextLevelController {
         
         //--------------------------------------------------------------------------------------
         // ### Municipio
-        @GetMapping("/municipioListar")
-        public ModelAndView findAllMunicipio() {
-            List<Municipio> municipios = municipioService.findAll();
-            
-            ModelAndView modelAndView = new ModelAndView("MunicipioListar");
-            modelAndView.addObject("municipios", municipios);
-            
-            return modelAndView;
-        }
-        
-        @GetMapping("/municipioListar/page")
-        public ModelAndView findAllMunicipioPage(@PageableDefault(size = 7) Pageable pageable) {            
-            Page<Municipio> municipios = municipioService.findAllPage(pageable);
-            
-            ModelAndView modelAndView = new ModelAndView("MunicipioListar");
-            modelAndView.addObject("municipios", municipios);            
-            
-            return modelAndView;
-        }          
+//        @GetMapping("/municipioListar")
+//        public ModelAndView findAllMunicipio() {
+//            List<Municipio> municipios = municipioService.findAll();
+//            
+//            ModelAndView modelAndView = new ModelAndView("MunicipioListar");
+//            modelAndView.addObject("municipios", municipios);
+//            
+//            return modelAndView;
+//        }
+//        
+//        @GetMapping("/municipioListar/page")
+//        public ModelAndView findAllMunicipioPage(@PageableDefault(size = 7) Pageable pageable) {            
+//            Page<Municipio> municipios = municipioService.findAllPage(pageable);
+//            
+//            ModelAndView modelAndView = new ModelAndView("MunicipioListar");
+//            modelAndView.addObject("municipios", municipios);            
+//            
+//            return modelAndView;
+//        }          
         
         @GetMapping("/municipio/novo")
         public ModelAndView municipioNovo() {            
@@ -198,26 +201,26 @@ public class NextLevelController {
             return modelAndView;
         }    
         
-        @PostMapping("/municipio/form")
-        public String insreMunicipio1(MunicipioDto municipioDto) {
-            municipioService.addMunicipio(municipioDto);
-            
-            return "redirect:/municipioListar";
-        }          
-        
-        // Atualiza dados do Municipio     
-        // method Post (página)
-        @PostMapping("/municipio/salvar/{codigo}")
-        public String atualizaMunicipioWeb(MunicipioDto municipioDto) {
-            Municipio municipioAntes = municipioService.findById(municipioDto.getCodigo_ID());
-            
-            municipioService.deletaMunicipio(municipioAntes.getCodigo_ID());
-            municipioService.addMunicipio(municipioDto);
-            
-//            municipioService.updateMunicipio(municipioAntes.getCodigo_ID(), municipio);
-
-            return "redirect:/municipioListar";        
-        } 
+//        @PostMapping("/municipio/form")
+//        public String insreMunicipio1(MunicipioDto municipioDto) {
+//            municipioService.addMunicipio(municipioDto);
+//            
+//            return "redirect:/municipioListar";
+//        }          
+//        
+//        // Atualiza dados do Municipio     
+//        // method Post (página)
+//        @PostMapping("/municipio/salvar/{codigo}")
+//        public String atualizaMunicipioWeb(MunicipioDto municipioDto) {
+//            Municipio municipioAntes = municipioService.findById(municipioDto.getCodigo_ID());
+//            
+//            municipioService.deletaMunicipio(municipioAntes.getCodigo_ID());
+//            municipioService.addMunicipio(municipioDto);
+//            
+////            municipioService.updateMunicipio(municipioAntes.getCodigo_ID(), municipio);
+//
+//            return "redirect:/municipioListar";        
+//        } 
         
         
         //--------------------------------------------------------------------------------------
@@ -251,29 +254,28 @@ public class NextLevelController {
         }        
        
         @PostMapping("/filial/form")
-        public String insereFilial(Filial filial) {
-            filialService.addFilial(filial);
+        public String insereFilial(FilialDto filialDto) {
+            filialService.addFilial(filialDto);
             
             return "redirect:/filialListar";
         }       
-        
                 
         // Atualiza dados da Filial     
         // method Post (página)
         @PostMapping("/filial/salvar/{codigoEmpresa}/{codigoFilial}")
         public String atualizaFilialWeb(@PathVariable Integer codigoEmpresa,
                                         @PathVariable Integer codigoFilial,
-                                        Filial filial) {
+                                        FilialDto filialDto) {
 
             FilialPK filialPK = new FilialPK();
             filialPK.setCodigoEmpresa(codigoEmpresa);
             filialPK.setCodigoFilial(codigoFilial);              
-//            Filial filialAntes = filialService.findById(filialPK);            
+//          Filial filialAntes = filialService.findById(filialPK);            
             
             filialService.deletaFilial(filialPK);
-            filialService.addFilial(filial);
+            filialService.addFilial(filialDto);
             
-//            filialService.updateFilial(filialAntes.getFilialPK(), filial);
+//          filialService.updateFilial(filialAntes.getFilialPK(), filial);
 
             return "redirect:/filialListar";        
         } 
@@ -310,8 +312,8 @@ public class NextLevelController {
         }            
         
         @PostMapping("/rotaEntrega/form")
-        public String insereRotaEntrega(RotaEntrega rotaEntrega) {
-            rotaEntregaService.addRotaEntrega(rotaEntrega);
+        public String insereRotaEntrega(RotaEntregaDto rotaEntregaDto) {
+            rotaEntregaService.addRotaEntrega(rotaEntregaDto);
             
             return "redirect:/rotaEntregaListar";
         }              
@@ -319,11 +321,11 @@ public class NextLevelController {
         // Atualiza dados da Rota de Entrega
         // method Post (página)
         @PostMapping("/rotaEntrega/salvar/{siglaEstado}/{codigo}")
-        public String atualizaRotaEntregaoWeb(RotaEntrega rotaEntrega) {
-            RotaEntrega rotaEntregaAntes = rotaEntregaService.findById(rotaEntrega.getRotaEntregaPK());
+        public String atualizaRotaEntregaoWeb(RotaEntregaDto rotaEntregaDto) {
+            RotaEntrega rotaEntregaAntes = rotaEntregaService.findById(rotaEntregaDto.getRotaEntregaPK());
             
             rotaEntregaService.deletaRotaEntrega(rotaEntregaAntes.getRotaEntregaPK());
-            rotaEntregaService.addRotaEntrega(rotaEntrega);
+            rotaEntregaService.addRotaEntrega(rotaEntregaDto);
 
             return "redirect:/rotaEntregaListar";        
         }             
@@ -360,8 +362,8 @@ public class NextLevelController {
         }            
         
         @PostMapping("/microzona/form")
-        public String insereEmpresa(Microzona microzona) {
-            microzonaService.addMicrozona(microzona);
+        public String insereEmpresa(MicrozonaDto microzonaDto) {
+            microzonaService.addMicrozona(microzonaDto);
             
             return "redirect:/microzonaListar";
         }        
@@ -369,11 +371,11 @@ public class NextLevelController {
         // Atualiza dados da Microzona     
         // method Post (página)
         @PostMapping("/microzona/salvar/{codigo}")
-        public String atualizaMicrozonaWeb(Microzona microzona) {
-            Microzona microzonaAntes = microzonaService.findById(microzona.getCodigo());
+        public String atualizaMicrozonaWeb(MicrozonaDto microzonaDto) {
+            Microzona microzonaAntes = microzonaService.findById(microzonaDto.getCodigo());
             
             microzonaService.deletaMicrozona(microzonaAntes.getCodigo());
-            microzonaService.addMicrozona(microzona);
+            microzonaService.addMicrozona(microzonaDto);
 
             return "redirect:/microzonaListar";        
         }             

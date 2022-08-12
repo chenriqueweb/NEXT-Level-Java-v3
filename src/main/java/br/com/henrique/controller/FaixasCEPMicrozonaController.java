@@ -2,6 +2,7 @@ package br.com.henrique.controller;
 
 import java.net.URI;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import br.com.henrique.dto.FaixasCEPMicrozonaDto;
 import br.com.henrique.model.FaixasCEPMicrozona;
 import br.com.henrique.model.FaixasCEPMicrozonaPK;
 import br.com.henrique.service.FaixasCEPMicrozonaService;
@@ -36,15 +38,15 @@ public class FaixasCEPMicrozonaController {
     @Autowired
     private FaixasCEPMicrozonaService faixasCEPMicrozonaService;
 
-    // Lista Faixas de CEP Microzona
+    // Lista Faixas de CEP Microzona - DTO
     @GetMapping
     @ApiOperation(value = "Lista todas as Faixas de CEP Microzona")
     @ApiResponses(value = {
     	    @ApiResponse(code = 200, message = "Retorna uma lista de Faixas de CEP Microzona")
     }) 
-    public ResponseEntity<List<FaixasCEPMicrozona>> findAll() {
+    public ResponseEntity<List<FaixasCEPMicrozonaDto>> findAll() {
         List<FaixasCEPMicrozona> faixasCEPMicrozona = faixasCEPMicrozonaService.findAll();
-        return ResponseEntity.ok().body(faixasCEPMicrozona);
+        return ResponseEntity.ok().body(faixasCEPMicrozona.stream().map(e -> e.converteToDto(e)).collect(Collectors.toList()));
     }    
 
     // Lista de Faixas de CEP Microzona com paginação
@@ -76,14 +78,14 @@ public class FaixasCEPMicrozonaController {
     }
      
     
-    // Inclui Faixas de CEP da Microzona
+    // Inclui Faixas de CEP da Microzona - DTO
     @PostMapping
     @ApiOperation(value = "Inclui uma Faixa de CEP da Microzona")
     @ApiResponses(value = {
     	    @ApiResponse(code = 201, message = "Faixa de CEP da Microzona criada com sucesso")
     }) 
-    public ResponseEntity<Void> addFaixasCEPMicrozona(@Valid @RequestBody FaixasCEPMicrozona faixasCEPMicrozona) {
-        FaixasCEPMicrozona faixasCEPMicrozonaNova = faixasCEPMicrozonaService.addFaixasCEPMicrozona(faixasCEPMicrozona);
+    public ResponseEntity<Void> addFaixasCEPMicrozona(@Valid @RequestBody FaixasCEPMicrozonaDto faixasCEPMicrozonaDto) {
+        FaixasCEPMicrozona faixasCEPMicrozonaNova = faixasCEPMicrozonaService.addFaixasCEPMicrozona(faixasCEPMicrozonaDto);
 
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
                         .path("/{codigoMicrozona}")
@@ -92,7 +94,7 @@ public class FaixasCEPMicrozonaController {
         return ResponseEntity.created(uri).build();
     }
         
-    // Altera Faixa de CEP da Microzona
+    // Altera Faixa de CEP da Microzona - DTO
     @PutMapping(path = "/{codigoMicrozona}/{codigoSequencial}")
     @ApiOperation(value = "Altera os dados de uma Faixa de CEP da Microzona")
     @ApiResponses(value = {
@@ -100,15 +102,14 @@ public class FaixasCEPMicrozonaController {
     	    @ApiResponse(code = 400, message = "Dados inválidos"),
     	    @ApiResponse(code = 404, message = "Faixa de CEP da Microzona não encontrada")    	    
     })
-    public ResponseEntity<Void> updateFaixasCEPMicrozona(@Valid 
-    		                                             @PathVariable Integer codigoMicrozona,
+    public ResponseEntity<Void> updateFaixasCEPMicrozona(@PathVariable Integer codigoMicrozona,
                                                          @PathVariable Integer codigoSequencial, 
-                                                         @RequestBody FaixasCEPMicrozona faixasCEPMicrozona) {
+                                                         @Valid  @RequestBody FaixasCEPMicrozonaDto faixasCEPMicrozonaDto) {
         FaixasCEPMicrozonaPK faixasCEPMicrozonaPK = new FaixasCEPMicrozonaPK();
         faixasCEPMicrozonaPK.setCodigoMicrozona(codigoMicrozona);
         faixasCEPMicrozonaPK.setCodigoSequencial(codigoSequencial);        
         
-        faixasCEPMicrozonaService.updateFaixasCEPMicrozona(faixasCEPMicrozonaPK, faixasCEPMicrozona);
+        faixasCEPMicrozonaService.updateFaixasCEPMicrozona(faixasCEPMicrozonaPK, faixasCEPMicrozonaDto);
         
         return ResponseEntity.noContent().build();
         

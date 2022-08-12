@@ -1,22 +1,17 @@
 package br.com.henrique.dto;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import br.com.henrique.model.Estado;
 import br.com.henrique.model.Municipio;
 import io.swagger.annotations.ApiModelProperty;
 
-@Entity
 public class MunicipioDto {
-    
-    @Id
+	
     // @GeneratedValue(strategy = GenerationType.IDENTITY)  // Usando sequencia do DB2
+    @NotEmpty(message = "O campo é obrigatório é não foi preenchido")
+    @NotNull(message = "O campo não pode ser nulo")
     @ApiModelProperty(value = "Código do Município", required = true)
     private Integer codigo_ID;
     
@@ -27,25 +22,26 @@ public class MunicipioDto {
     private String nome;
     
     // FK com Estado
-    @ManyToOne
-    @JoinColumn(name="sigla")
-    private Estado estado;
+    private EstadoDto estado;
     
-    public MunicipioDto() {
-        super();
-    }
-
-    public MunicipioDto(Integer codigo_ID, String nome, Estado estado) {
+    public MunicipioDto(Integer codigo_ID, String nome, EstadoDto estadoDto) {
         super();
         this.codigo_ID = codigo_ID;
         this.nome = nome;
-        this.estado = estado;
+        this.estado = estadoDto;
+    }
+    
+    public MunicipioDto(Municipio municipio) {
+        super();
+        this.codigo_ID = municipio.getCodigo_ID();
+        this.nome = municipio.getNome();
+        this.estado = municipio.getEstado().converteToDto();
     }
 
-    // Método para identificar registro novo
-    public boolean isNovo() {
-        return nome == null;
-    }    
+//    // Método para identificar registro novo
+//    public boolean isNovo() {
+//        return nome == null;
+//    }    
     
     public Integer getCodigo_ID() {
         return codigo_ID;
@@ -59,13 +55,14 @@ public class MunicipioDto {
     public void setNome(String nome) {
         this.nome = nome;
     }
-    public Estado getEstado() {
+    public EstadoDto getEstado() {
         return estado;
     }
-    public void setEstado(Estado estado) {
+    public void setEstado(EstadoDto estado) {
         this.estado = estado;
     }
 
+    // Conversor para atualização da Entidade
     public Municipio converteToEntity() {
     	return new Municipio(this);
     }

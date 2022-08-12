@@ -1,24 +1,21 @@
-package br.com.henrique.model;
+package br.com.henrique.dto;
 
 import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
 
-import br.com.henrique.dto.AtendeDto;
+import br.com.henrique.model.Atende;
+import br.com.henrique.model.AtendePK;
 import io.swagger.annotations.ApiModelProperty;
 
-@Entity
-public class Atende {
-
+public class AtendeDto {
+	
     @EmbeddedId
     @ApiModelProperty(value = "Chave para Atende", required = true)
-    private AtendePK atendePK;
+    private AtendePK atendePK;	
 //	private String  cepRequisitado;  // "cepRequisitado: 29665000",
 //	private Integer empresaAtende;   // "empresaAtende: 21",
 //	private Integer filialAtende;    // "filialAtende: 1640",
-	
-	
+
 	// "endereco": [
-	private String  cep;             // "cep: 29665-000",
 	private String  logradouro;      // "logradouro: ",
 	private String  complemento;     // "complemento: ",
 	private String  localidade;      // "localidade: São Roque do Canaã",
@@ -38,47 +35,23 @@ public class Atende {
 	private String  nomeEstado;      // "nomeEstado: Espirito Santo"
 	
 	
-	public Atende() {
+	public AtendeDto() {
 		super();
 	}
 
-    public Atende(AtendeDto atendeDto) {
-		this.cep = null;
-		this.logradouro = atendeDto.getLogradouro();
-		this.complemento = atendeDto.getComplemento();
-		this.localidade = atendeDto.getLocalidade();
-		this.bairro = atendeDto.getBairro();
-		this.uf = atendeDto.getUf();
-		this.ibge = atendeDto.getIbge();
-		this.atendePK = atendeDto.getAtendePK();
-//		this.cepRequisitado = atendeDto.getCepRequisitado();
-//		this.empresaAtende = atendeDto.getEmpresaAtende();
-//		this.filialAtende = atendeDto.getFilialAtende();
-		this.nomeFilial = atendeDto.getNomeFilial();
-		this.cnpjFilial = atendeDto.getCnpjFilial();
-		this.microzona = atendeDto.getMicrozona();
-		this.ufRota = atendeDto.getUfRota();
-		this.codigoRota = atendeDto.getCodigoRota();
-		this.codigoMunicipio = atendeDto.getCodigoMunicipio();
-		this.municipio = atendeDto.getMunicipio();
-		this.estado = atendeDto.getEstado();
-		this.nomeEstado = atendeDto.getNomeEstado();  
-    } 
 
-
-	public Atende(AtendePK atendePK, String cep, String logradouro, String complemento, String localidade,
-			String bairro, String uf, String ibge, String nomeFilial, String cnpjFilial, Integer microzona,
-			String ufRota, Integer codigoRota, Integer codigoMunicipio, String municipio, String estado,
-			String nomeEstado) {
+	public AtendeDto(String logradouro, String complemento, String localidade, String bairro, String uf,
+			String ibge, AtendePK atendePK, String nomeFilial,
+			String cnpjFilial, Integer microzona, String ufRota, Integer codigoRota, Integer codigoMunicipio,
+			String municipio, String estado, String nomeEstado) {
 		super();
-		this.atendePK = atendePK;
-		this.cep = cep;
 		this.logradouro = logradouro;
 		this.complemento = complemento;
 		this.localidade = localidade;
 		this.bairro = bairro;
 		this.uf = uf;
 		this.ibge = ibge;
+		this.atendePK = atendePK;
 		this.nomeFilial = nomeFilial;
 		this.cnpjFilial = cnpjFilial;
 		this.microzona = microzona;
@@ -96,12 +69,6 @@ public class Atende {
 	}
 	public void setAtendePK(AtendePK atendePK) {
 		this.atendePK = atendePK;
-	}
-	public String getCep() {
-		return cep;
-	}
-	public void setCep(String cep) {
-		this.cep = cep;
 	}
 	public String getLogradouro() {
 		return logradouro;
@@ -193,5 +160,11 @@ public class Atende {
 	public void setNomeEstado(String nomeEstado) {
 		this.nomeEstado = nomeEstado;
 	}
-	
+
+
+	// Conversor para atualização do DTO    
+    public Atende converteToEntity() {
+    	return new Atende(this);
+    }
+
 }

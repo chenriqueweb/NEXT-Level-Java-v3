@@ -4,8 +4,8 @@ import java.util.Objects;
 
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.validation.constraints.NotNull;
 
+import br.com.henrique.dto.FaixasCEPMicrozonaDto;
 import io.swagger.annotations.ApiModelProperty;
 
 @Entity
@@ -15,13 +15,9 @@ public class FaixasCEPMicrozona {
     @ApiModelProperty(value = "Chave para Rota Faixa de CEP Microzona", required = true)
     private FaixasCEPMicrozonaPK faixasCEPMicrozonaPK;
     
-    @NotNull(message = "O campo não pode ser nulo")
-    //@Pattern(regexp = "\\d{5}-\\d{3})")
     @ApiModelProperty(value = "CEP Inicial", required = true)
     private Integer CEPinicial;
     
-    @NotNull(message = "O campo não pode ser nulo")
-    //@Pattern(regexp = "\\d{5}-\\d{3})")
     @ApiModelProperty(value = "CEP Final", required = true)
     private Integer CEPfinal;
     
@@ -35,11 +31,17 @@ public class FaixasCEPMicrozona {
         super();
     }
 
+    public FaixasCEPMicrozona(FaixasCEPMicrozonaDto faixasCEPMicrozonaDto) {
+		this.faixasCEPMicrozonaPK = faixasCEPMicrozonaDto.getFaixasCEPMicrozonaPK();
+		this.CEPinicial = faixasCEPMicrozonaDto.getCEPinicial();
+		this.CEPfinal = faixasCEPMicrozonaDto.getCEPfinal();   
+    }  
+    
 	public FaixasCEPMicrozona(FaixasCEPMicrozonaPK faixasCEPMicrozonaPK, Integer cEPinicial, Integer cEPfinal) {
 		super();
 		this.faixasCEPMicrozonaPK = faixasCEPMicrozonaPK;
-		CEPinicial = cEPinicial;
-		CEPfinal = cEPfinal;
+		this.CEPinicial = cEPinicial;
+		this.CEPfinal = cEPfinal;
 	}
 	
 	public FaixasCEPMicrozonaPK getFaixasCEPMicrozonaPK() {
@@ -78,5 +80,9 @@ public class FaixasCEPMicrozona {
 		return Objects.equals(CEPfinal, other.CEPfinal) && Objects.equals(CEPinicial, other.CEPinicial)
 				&& Objects.equals(faixasCEPMicrozonaPK, other.faixasCEPMicrozonaPK);
 	}
-
+	
+    // Conversor para atualização do DTO
+    public FaixasCEPMicrozonaDto converteToDto(FaixasCEPMicrozona faixasCEPMicrozona) {
+    	return new FaixasCEPMicrozonaDto(this);
+    }
 }

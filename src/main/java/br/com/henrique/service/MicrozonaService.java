@@ -1,6 +1,5 @@
 package br.com.henrique.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import br.com.henrique.dto.MicrozonaDto;
 import br.com.henrique.model.Estado;
 import br.com.henrique.model.Microzona;
 import br.com.henrique.model.Municipio;
@@ -37,8 +37,7 @@ public class MicrozonaService {
 
     // Lista Microzonas
     public List<Microzona> findAll() {
-        List<Microzona> microzonas = new ArrayList<Microzona>();
-        microzonas = repositMicrozona.findAll();
+        List<Microzona> microzonas = repositMicrozona.findAll();
         
         return microzonas;
     }
@@ -57,9 +56,9 @@ public class MicrozonaService {
         return microzona;
     }    
     
-    // Inclui Microzona
-    public Microzona addMicrozona(Microzona microzona) {
-    	Integer codigoMicrozona = microzona.getCodigo();
+    // Inclui Microzona - DTO
+    public Microzona addMicrozona(MicrozonaDto microzonaDto) {
+    	Integer codigoMicrozona = microzonaDto.getCodigo();
     	if (codigoMicrozona == null) { 
     		codigoMicrozona = 0;
     	}
@@ -69,68 +68,68 @@ public class MicrozonaService {
             throw new ObjectFoundException("Microzona já cadastrada !");
         }
         
-        Estado estado = repositEstado.findById(microzona.getEstadoRota().getSigla()).orElse(null);
+        Estado estado = repositEstado.findById(microzonaDto.getEstadoRota().getSigla()).orElse(null);
         if (estado == null) {
             throw new ObjectNotFoundException("Estado nao encontrado !");
         }            
         
-        Municipio municipioBuscaID = repositMunicipio.findById(microzona.getCodigoMunicipio().getCodigo_ID()).orElse(null);;
+        Municipio municipioBuscaID = repositMunicipio.findById(microzonaDto.getCodigoMunicipio().getCodigo_ID()).orElse(null);;
         if (municipioBuscaID == null) {
             throw new ObjectNotFoundException("Municipio nao encontrado !");
         }         
         
         RotaEntregaPK rotaEntregaPK = new RotaEntregaPK();
-        rotaEntregaPK.setCodigoRota(microzona.getCodigoRota());
-        rotaEntregaPK.setSiglaEstado(microzona.getEstadoRota().getSigla()); 
+        rotaEntregaPK.setCodigoRota(microzonaDto.getCodigoRota());
+        rotaEntregaPK.setSiglaEstado(microzonaDto.getEstadoRota().getSigla()); 
         
         RotaEntrega rotaEntregaBusca = repositRotaEntrega.findById(rotaEntregaPK).orElse(null);
         if (rotaEntregaBusca == null) {
             throw new ObjectNotFoundException("Rota de Entrega nao encontrada !"); 
         }        
         
-        return repositMicrozona.save(microzona);
+        return repositMicrozona.save(microzonaDto.converteToEntity());
     }    
     
-    // Atualiza uma Microzona
-    public void updateMicrozona(Integer codigo, Microzona microzona) {
+    // Atualiza uma Microzona - DTO
+    public void updateMicrozona(Integer codigo, MicrozonaDto microzonaDto) {
         Microzona microzonaAtualizado = this.findById(codigo);
         if (microzonaAtualizado == null) {
             throw new ObjectFoundException("Microzona nao encontrada !");
         }        
         
-        Estado estado = repositEstado.findById(microzona.getEstadoRota().getSigla()).orElse(null);
+        Estado estado = repositEstado.findById(microzonaDto.getEstadoRota().getSigla()).orElse(null);
         if (estado == null) {
             throw new ObjectNotFoundException("Estado nao encontrado !");
         }            
         
-        Municipio municipioBuscaID = repositMunicipio.findById(microzona.getCodigoMunicipio().getCodigo_ID()).orElse(null);;
+        Municipio municipioBuscaID = repositMunicipio.findById(microzonaDto.getCodigoMunicipio().getCodigo_ID()).orElse(null);;
         if (municipioBuscaID == null) {
             throw new ObjectNotFoundException("Municipio nao encontrado !");
         }         
         
         RotaEntregaPK rotaEntregaPK = new RotaEntregaPK();
-        rotaEntregaPK.setCodigoRota(microzona.getCodigoRota());
-        rotaEntregaPK.setSiglaEstado(microzona.getEstadoRota().getSigla()); 
+        rotaEntregaPK.setCodigoRota(microzonaDto.getCodigoRota());
+        rotaEntregaPK.setSiglaEstado(microzonaDto.getEstadoRota().getSigla()); 
         
         RotaEntrega rotaEntregaBusca = repositRotaEntrega.findById(rotaEntregaPK).orElse(null);
         if (rotaEntregaBusca == null) {
             throw new ObjectNotFoundException("Rota de Entrega nao encontrada !");
         }
         
-        microzonaAtualizado.setNome(microzona.getNome());
-        microzonaAtualizado.setStatus(microzona.getStatus());
-        microzonaAtualizado.setAtendimentoDiario(microzona.getAtendimentoDiario());
+        microzonaAtualizado.setNome(microzonaDto.getNome());
+        microzonaAtualizado.setStatus(microzonaDto.getStatus());
+        microzonaAtualizado.setAtendimentoDiario(microzonaDto.getAtendimentoDiario());
         
-        microzonaAtualizado.setAtendeSegunda(microzona.getAtendeSegunda());
-        microzonaAtualizado.setAtendeTerca(microzona.getAtendeTerca());
-        microzonaAtualizado.setAtendeQuarta(microzona.getAtendeQuarta());
-        microzonaAtualizado.setAtendeQuinta(microzona.getAtendeQuinta());
-        microzonaAtualizado.setAtendeSexta(microzona.getAtendeSexta());
-        microzonaAtualizado.setAtendeSabado(microzona.getAtendeSabado());
+        microzonaAtualizado.setAtendeSegunda(microzonaDto.getAtendeSegunda());
+        microzonaAtualizado.setAtendeTerca(microzonaDto.getAtendeTerca());
+        microzonaAtualizado.setAtendeQuarta(microzonaDto.getAtendeQuarta());
+        microzonaAtualizado.setAtendeQuinta(microzonaDto.getAtendeQuinta());
+        microzonaAtualizado.setAtendeSexta(microzonaDto.getAtendeSexta());
+        microzonaAtualizado.setAtendeSabado(microzonaDto.getAtendeSabado());
                 
-        microzonaAtualizado.setCodigoMunicipio(microzona.getCodigoMunicipio());
-        microzonaAtualizado.setEstadoRota(microzona.getEstadoRota());
-        microzonaAtualizado.setCodigoRota(microzona.getCodigoRota());
+        microzonaAtualizado.setCodigoMunicipio(microzonaDto.getCodigoMunicipio());
+        microzonaAtualizado.setEstadoRota(microzonaDto.getEstadoRota());
+        microzonaAtualizado.setCodigoRota(microzonaDto.getCodigoRota());
         
         repositMicrozona.save(microzonaAtualizado);
     }    

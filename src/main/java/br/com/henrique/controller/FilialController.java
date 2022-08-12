@@ -2,6 +2,7 @@ package br.com.henrique.controller;
 
 import java.net.URI;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import br.com.henrique.dto.FilialDto;
 import br.com.henrique.model.Filial;
 import br.com.henrique.model.FilialPK;
 import br.com.henrique.service.FilialService;
@@ -37,15 +39,16 @@ public class FilialController {
     @Autowired
     private FilialService filialService;
 
-    // Lista Filiais
+    // Lista Filiais - DTO
     @GetMapping
     @ApiOperation(value = "Lista todas as Filiais")
     @ApiResponses(value = {
     	    @ApiResponse(code = 200, message = "Retorna uma lista de todas as Filiais")
     }) 
-    public ResponseEntity<List<Filial>> findAll() {
+    public ResponseEntity<List<FilialDto>> findAll() {
         List<Filial> filiais = filialService.findAll();
-        return ResponseEntity.ok().body(filiais);
+        // return ResponseEntity.ok().body(filiais);
+        return ResponseEntity.ok().body(filiais.stream().map(e -> e.converteToDto(e)).collect(Collectors.toList())); 
     }    
     
     // Lista de Filiais com paginação
@@ -76,14 +79,14 @@ public class FilialController {
         return ResponseEntity.ok().body(filialBusca);
     }
     
-    // Inclui Filial
+    // Inclui Filial - DTO
     @PostMapping
     @ApiOperation(value = "Inclui uma Filial")
     @ApiResponses(value = {
     	    @ApiResponse(code = 201, message = "Filial criada com sucesso")
     }) 
-    public ResponseEntity<Void> addFilial(@Valid @RequestBody Filial filial) {
-        Filial filialNova = filialService.addFilial(filial);
+    public ResponseEntity<Void> addFilial(@Valid @RequestBody FilialDto filialDto) {
+        Filial filialNova = filialService.addFilial(filialDto);
         
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{codigoEmpresa}")
                   .buildAndExpand(filialNova.getFilialPK().getCodigoEmpresa())
@@ -91,7 +94,7 @@ public class FilialController {
         return ResponseEntity.created(uri).build();
     }    
     
-    // Altera Filial
+    // Altera Filial - DTO
     @PutMapping(path = "/{codigoEmpresa}/{codigoFilial}")
     @ApiOperation(value = "Altera os dados de uma Filial")
     @ApiResponses(value = {
@@ -99,16 +102,15 @@ public class FilialController {
     	    @ApiResponse(code = 400, message = "Dados inválidos"),
     	    @ApiResponse(code = 404, message = "Filial não encontrada")    	    
     })  
-    public ResponseEntity<Void> updateFilial(@Valid 
-    		                                 @PathVariable Integer codigoEmpresa,
-                                             @PathVariable Integer codigoFilial, 
-                                             @RequestBody Filial filial) {
+    public ResponseEntity<Void> updateFilial(@PathVariable Integer codigoEmpresa,
+    		                                 @PathVariable Integer codigoFilial,
+                                             @Valid  @RequestBody FilialDto filialDto) {
         
         FilialPK filialPK = new FilialPK();
         filialPK.setCodigoEmpresa(codigoEmpresa);
         filialPK.setCodigoFilial(codigoFilial);          
         
-        filialService.updateFilial(filialPK, filial);
+        filialService.updateFilial(filialPK, filialDto);
         
         return ResponseEntity.noContent().build();
     }

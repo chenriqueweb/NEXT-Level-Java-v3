@@ -1,6 +1,5 @@
 package br.com.henrique.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,17 +19,20 @@ public class MunicipioService {
     @Autowired
     private MunicipioRepository repositMunicipio;
     
+    @Autowired
+    private EstadoService estadoService;
+    
     // Lista Municipio
     public List<Municipio> findAll() {
-        List<Municipio> municipios = new ArrayList<Municipio>();
-        municipios = repositMunicipio.findAll();        
+        List<Municipio> municipios = repositMunicipio.findAll();
+        
         return municipios;
     }
     
     // Lista Municipio por Estado
     public List<Municipio> findAllByEstado(String sigla) {
-        List<Municipio> municipios = new ArrayList<Municipio>();
-        municipios = repositMunicipio.findByestado(sigla);        
+        List<Municipio> municipios = repositMunicipio.findByEstado(estadoService.findById(sigla));        
+        
         return municipios;
     }    
     
@@ -58,14 +60,14 @@ public class MunicipioService {
         return repositMunicipio.save(municipioDto.converteToEntity());
     }
     
-    // Atualiza um Municipio
+    // Atualiza um Municipio - DTO
     public void updateMunicipio(Integer codigo, MunicipioDto municipioDto) {
         Municipio municipioAtualizado = this.findById(codigo);
         if (municipioAtualizado == null) {
             throw new ObjectNotFoundException("Municipio nao encontrado !");
         }        
         municipioAtualizado.setNome(municipioDto.getNome());
-        municipioAtualizado.setEstado(municipioDto.getEstado());
+        municipioAtualizado.setEstado(municipioDto.getEstado().converteToEntity());
         
         repositMunicipio.save(municipioAtualizado);
     }    

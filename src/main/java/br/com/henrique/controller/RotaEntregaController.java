@@ -2,6 +2,7 @@ package br.com.henrique.controller;
 
 import java.net.URI;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import br.com.henrique.dto.RotaEntregaDto;
 import br.com.henrique.model.RotaEntrega;
 import br.com.henrique.model.RotaEntregaPK;
 import br.com.henrique.service.RotaEntregaService;
@@ -37,15 +39,15 @@ public class RotaEntregaController {
     @Autowired
     private RotaEntregaService rotaEntregaService;
 
-    // Lista RotaEntrega
+    // Lista RotaEntrega - DTO
     @GetMapping
     @ApiOperation(value = "Lista todas as RotaEntregas")
     @ApiResponses(value = {
     	    @ApiResponse(code = 200, message = "Retorna uma lista de todas as RotaEntregas")
     })  
-    public ResponseEntity<List<RotaEntrega>> findAll() {
+    public ResponseEntity<List<RotaEntregaDto>> findAll() {
         List<RotaEntrega> rotaEntregas = rotaEntregaService.findAll();
-        return ResponseEntity.ok().body(rotaEntregas);
+        return ResponseEntity.ok().body(rotaEntregas.stream().map(e -> e.converteToDto(e)).collect(Collectors.toList()));
     }
     
     // Lista de Rotas de Entrega com paginação
@@ -76,14 +78,14 @@ public class RotaEntregaController {
         return ResponseEntity.ok().body(rotaEntregaBusca);
     }
     
-    // Inclui RotaEntrega
+    // Inclui RotaEntrega - DTO
     @PostMapping
     @ApiOperation(value = "Inclui uma RotaEntrega")
     @ApiResponses(value = {
     	    @ApiResponse(code = 201, message = "RotaEntrega criada com sucesso")
     }) 
-    public ResponseEntity<Void> addRotaEntrega(@Valid @RequestBody RotaEntrega rotaEntrega) {
-        RotaEntrega rotaEntregaNova = rotaEntregaService.addRotaEntrega(rotaEntrega);
+    public ResponseEntity<Void> addRotaEntrega(@Valid @RequestBody RotaEntregaDto rotaEntregaDto) {
+        RotaEntrega rotaEntregaNova = rotaEntregaService.addRotaEntrega(rotaEntregaDto);
         
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("{siglaEstado}/{codigoRota}")
                   .buildAndExpand(rotaEntregaNova.getRotaEntregaPK().getSiglaEstado(),
@@ -100,16 +102,15 @@ public class RotaEntregaController {
     	    @ApiResponse(code = 400, message = "Dados inválidos"),
     	    @ApiResponse(code = 404, message = "RotaEntrega não encontrada")    	    
     })  
-    public ResponseEntity<Void> updateRotaEntrega(@Valid 
-    		                                      @PathVariable String siglaEstado,
+    public ResponseEntity<Void> updateRotaEntrega(@PathVariable String siglaEstado,
                                                   @PathVariable Integer codigoRota, 
-                                                  @RequestBody RotaEntrega rotaEntrega) {
+                                                  @Valid  @RequestBody RotaEntregaDto rotaEntregaDto) {
         
         RotaEntregaPK rotaEntregaPK = new RotaEntregaPK();
         rotaEntregaPK.setSiglaEstado(siglaEstado);
         rotaEntregaPK.setCodigoRota(codigoRota);
     
-        rotaEntregaService.updateRotaEntrega(rotaEntregaPK, rotaEntrega);
+        rotaEntregaService.updateRotaEntrega(rotaEntregaPK, rotaEntregaDto);
         
         return ResponseEntity.noContent().build();
     }

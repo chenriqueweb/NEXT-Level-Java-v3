@@ -2,6 +2,7 @@ package br.com.henrique.controller;
 
 import java.net.URI;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import br.com.henrique.dto.EmpresaDto;
 import br.com.henrique.model.Empresa;
 import br.com.henrique.service.EmpresaService;
 import br.com.henrique.service.exception.NoNullAllowedException;
@@ -36,15 +38,16 @@ public class EmpresaController {
     @Autowired
     private EmpresaService empresaService; 
 
-    // Lista Empresa
+    // Lista Empresa - DTO
     @GetMapping
     @ApiOperation(value = "Lista todas as Empresas")
     @ApiResponses(value = {
     	    @ApiResponse(code = 200, message = "Retorna uma lista de todas as Empresas")
     })    
-    public ResponseEntity<List<Empresa>> findAll() {
+    public ResponseEntity<List<EmpresaDto>> findAll() {
         List<Empresa> empresas = empresaService.findAll();
-        return ResponseEntity.ok().body(empresas);
+        
+        return ResponseEntity.ok().body(empresas.stream().map(e -> e.converteToDto(e)).collect(Collectors.toList()));
     }
     
     // Lista de Empresas com paginação
@@ -69,7 +72,7 @@ public class EmpresaController {
         return ResponseEntity.ok().body(empresa);
     }
     
-    // Inclui Empresa
+    // Inclui Empresa - DTO
     @PostMapping
     @ApiOperation(value = "Inclui uma Empresa")
     @ApiResponses(value = {
@@ -77,11 +80,11 @@ public class EmpresaController {
     })  
     public ResponseEntity<Void> addEmpresa(@Valid 
 //    		@RequestHeader(name = "X-COM-PERSIST", required = true) String headerPersist,
-    		@RequestBody Empresa empresa) {
+    		@RequestBody EmpresaDto empresaDto) {
     	
         URI uri = null;
     	try {
-             Empresa empresaNova = empresaService.addEmpresa(empresa);
+             Empresa empresaNova = empresaService.addEmpresa(empresaDto);
              uri = ServletUriComponentsBuilder
             		           .fromCurrentRequest()
             		           .path("/{codigo}")
@@ -95,7 +98,7 @@ public class EmpresaController {
 		return ResponseEntity.created(uri).build();
     }    
     
-    // Altera Empresa
+    // Altera Empresa - DTO
     @PutMapping(path = "{codigo}")
     @ApiOperation(value = "Altera os dados de uma Empresa")
     @ApiResponses(value = {
@@ -103,9 +106,9 @@ public class EmpresaController {
     	    @ApiResponse(code = 400, message = "Dados inválidos"),
     	    @ApiResponse(code = 404, message = "Empresa não encontrada")    	    
     })  
-    public ResponseEntity<Void> updateEmpresa(@Valid @PathVariable Integer codigo, 
-    		                                         @RequestBody Empresa empresa) {
-        empresaService.updateEmpresa(codigo, empresa);
+    public ResponseEntity<Void> updateEmpresa(@PathVariable Integer codigo, 
+    		                                  @Valid @RequestBody EmpresaDto empresaDto) {
+        empresaService.updateEmpresa(codigo, empresaDto);
         return ResponseEntity.noContent().build();
     }
     

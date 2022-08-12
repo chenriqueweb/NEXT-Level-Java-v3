@@ -1,34 +1,37 @@
 package br.com.henrique.model;
 
-import javax.persistence.Column;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.persistence.OneToMany;
 
+import br.com.henrique.dto.EstadoDto;
 import io.swagger.annotations.ApiModelProperty;
 
 @Entity
 public class Estado {
 	
     @Id
-    @NotEmpty
-    @NotNull
-    @Column(columnDefinition = "Character(2)")
     @ApiModelProperty(value = "Sigla da Unidade Federativa", required = true)
     private String sigla;
     
-    @NotEmpty(message = "O campo é obrigatório é não foi preenchido")
-    @NotNull(message = "O campo não pode ser nulo")
-    @Size(min=4, max=50, message="Tamanho inválido! Digite no mínimo {min} e no máximo {max} caracteres")
     @ApiModelProperty(value = "Nome do Estado", required = true)
     private String nome;
+    
+    @OneToMany(mappedBy = "estado")
+    private List<Municipio> municipios = new ArrayList<>();
 
     // Construtores da Class
     public Estado() {
         super();
     }
+    
+    public Estado(EstadoDto estadoDto) {
+        this.sigla = estadoDto.getSigla();
+        this.nome = estadoDto.getNome();        
+    }    
     
     public Estado(String sigla, String nome) {
         super();
@@ -38,7 +41,7 @@ public class Estado {
     
     // Método para identificar registro novo
     public boolean isNovo() {
-        return sigla == null;
+        return nome == null;
     }
         
     public String getSigla() {
@@ -83,5 +86,10 @@ public class Estado {
         } else if (!sigla.equals(other.sigla))
             return false;
         return true;
+    }
+    
+    // Conversor para atualização do DTO
+    public EstadoDto converteToDto() {
+    	return new EstadoDto(this);
     }
 }

@@ -2,6 +2,7 @@ package br.com.henrique.controller;
 
 import java.net.URI;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
@@ -37,15 +38,16 @@ public class MunicipioController {
     @Autowired   
     private MunicipioService municipioService;
     
-    // Lista Municipio
+    // Lista Municipio - DTO
     @GetMapping
     @ApiOperation(value = "Lista todos os Municipios")
     @ApiResponses(value = {
     	    @ApiResponse(code = 200, message = "Retorna uma lista de todas os Municipios")
     })  
-    public ResponseEntity<List<Municipio>> findAll() {
+    public ResponseEntity<List<MunicipioDto>> findAll() {
         List<Municipio> municipios = municipioService.findAll();        
-        return ResponseEntity.ok().body(municipios);
+        // return ResponseEntity.ok().body(municipios);
+        return ResponseEntity.ok().body(municipios.stream().map(e -> e.converteToDto(e)).collect(Collectors.toList()));
     }
     
     // Lista Municipio por Estado
@@ -81,7 +83,7 @@ public class MunicipioController {
         return ResponseEntity.ok().body(municipio);
     }    
 
-    // Inclui Municipio
+    // Inclui Municipio - DTO
     @PostMapping
     @ApiOperation(value = "Inclui um Municipio")
     @ApiResponses(value = {
@@ -94,7 +96,7 @@ public class MunicipioController {
         return ResponseEntity.created(uri).build();
     }    
     
-    // Altera Municipio
+    // Altera Municipio - DTO
     @PutMapping(path = "{codigo}")
     @ApiOperation(value = "Altera os dados de um Municipio")
     @ApiResponses(value = {
@@ -102,9 +104,8 @@ public class MunicipioController {
     	    @ApiResponse(code = 400, message = "Dados inválidos"),
     	    @ApiResponse(code = 404, message = "Municipio não encontrado")    	    
     })  
-    public ResponseEntity<Void> updateMunicipio(@Valid 
-    		                                    @PathVariable Integer codigo, 
-    		                                    @RequestBody MunicipioDto municipioDto) {
+    public ResponseEntity<Void> updateMunicipio(@PathVariable Integer codigo, 
+    		                                    @Valid  @RequestBody MunicipioDto municipioDto) {
         municipioService.updateMunicipio(codigo, municipioDto);
         return ResponseEntity.noContent().build();
     }
