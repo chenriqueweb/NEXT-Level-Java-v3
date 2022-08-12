@@ -279,9 +279,15 @@ public class AutoCargaBanco implements CommandLineRunner {
         MunicipioDto municipioES55425 = new MunicipioDto(55425, "Gov.lindenberg", estadoES);
         municipioService.addMunicipio(municipioES55425);        
 
+        
         // Carga da Tabela: FILIAL
         FilialPK filialPK = new FilialPK();
 
+        filialPK.setCodigoEmpresa(21);
+        filialPK.setCodigoFilial(1200);
+        FilialDto filial1200 = new FilialDto(filialPK, "Teste Thiago - 1200", "33041260012929", 27669);
+        filialService.addFilial(filial1200);
+        
         filialPK.setCodigoEmpresa(21);
         filialPK.setCodigoFilial(6);
         FilialDto filial0001 = new FilialDto(filialPK, "CACHOEIRO DE ITAPEMIRIM-ES", "33041260012928", 27669);
@@ -558,6 +564,7 @@ public class AutoCargaBanco implements CommandLineRunner {
         rotaEntregaPK.setCodigoRota(70); 
         RotaEntregaDto rotaEntrega314 = new RotaEntregaDto(rotaEntregaPK, "MINIHUB SDD", "A", 21, 1648, 0);
         rotaEntregaService.addRotaEntrega(rotaEntrega314);
+        
         rotaEntregaPK.setCodigoRota(71); 
         RotaEntregaDto rotaEntrega315 = new RotaEntregaDto(rotaEntregaPK, "MINIHUB SDD", "A", 21, 1949, 0);
         rotaEntregaService.addRotaEntrega(rotaEntrega315);
@@ -840,16 +847,17 @@ public class AutoCargaBanco implements CommandLineRunner {
         faixasCEPMicrozonaPK.setCodigoSequencial(1);
         FaixasCEPMicrozonaDto faixasCEPMicrozona0007 = new FaixasCEPMicrozonaDto(faixasCEPMicrozonaPK, 29950000, 29957000);
         faixasCEPMicrozonaService.addFaixasCEPMicrozona(faixasCEPMicrozona0007);
-        faixasCEPMicrozonaPK.setCodigoMicrozona(42);
+        faixasCEPMicrozonaPK.setCodigoMicrozona(44);
         faixasCEPMicrozonaPK.setCodigoSequencial(1);
         FaixasCEPMicrozonaDto faixasCEPMicrozona0008 = new FaixasCEPMicrozonaDto(faixasCEPMicrozonaPK, 29927000, 29927000);
         faixasCEPMicrozonaService.addFaixasCEPMicrozona(faixasCEPMicrozona0008);
+        
         faixasCEPMicrozonaPK.setCodigoMicrozona(43);
         faixasCEPMicrozonaPK.setCodigoSequencial(1);
         FaixasCEPMicrozonaDto faixasCEPMicrozona0009 = new FaixasCEPMicrozonaDto(faixasCEPMicrozonaPK, 29920000, 29925000);
         faixasCEPMicrozonaService.addFaixasCEPMicrozona(faixasCEPMicrozona0009);
 
-        faixasCEPMicrozonaPK.setCodigoMicrozona(44);
+        faixasCEPMicrozonaPK.setCodigoMicrozona(42);
         faixasCEPMicrozonaPK.setCodigoSequencial(1);
         FaixasCEPMicrozonaDto faixasCEPMicrozona0010 = new FaixasCEPMicrozonaDto(faixasCEPMicrozonaPK, 29920000, 29925000);
         faixasCEPMicrozonaService.addFaixasCEPMicrozona(faixasCEPMicrozona0010);

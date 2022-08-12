@@ -1,5 +1,7 @@
 package br.com.henrique.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,10 +35,11 @@ public class AtendeController {
     	    @ApiResponse(code = 404, message = "Não foi encontrada uma Filial próxima ao CEP informado"),
     	    @ApiResponse(code = 500, message = "Houve um erro e não foi possível encontrar uma Filial próxima ao CEP informado")    	    
     })  
-    public ResponseEntity<Atende> cepAtende(@PathVariable Integer cepAtende) {
+    public ResponseEntity<List<Atende>> cepAtende(@PathVariable Integer cepAtende) {
+        atendeService.retornaCEP(cepAtende);
     	
-        Atende atende = atendeService.retornaCEP(cepAtende);
+    	List<Atende> filiaisAtendidas = atendeService.findAll();
         
-        return ResponseEntity.ok().body(atende);
-    }    
+        return ResponseEntity.ok().body(filiaisAtendidas);
+    }
 }

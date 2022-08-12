@@ -1,8 +1,19 @@
 package br.com.henrique.dto;
 
+import javax.persistence.EmbeddedId;
+
 import br.com.henrique.model.Atende;
+import br.com.henrique.model.AtendePK;
+import io.swagger.annotations.ApiModelProperty;
 
 public class AtendeDto {
+	
+    @EmbeddedId
+    @ApiModelProperty(value = "Chave para Atende", required = true)
+    private AtendePK atendePK;	
+//	private String  cepRequisitado;  // "cepRequisitado: 29665000",
+//	private Integer empresaAtende;   // "empresaAtende: 21",
+//	private Integer filialAtende;    // "filialAtende: 1640",
 
 	// "endereco": [
 	private String  logradouro;      // "logradouro: ",
@@ -13,9 +24,6 @@ public class AtendeDto {
 	private String  ibge;            // "ibge: 3204955"
 
 	//	"response": [
-	private String  cepRequisitado;  // "cepRequisitado: 29665000",
-	private Integer empresaAtende;   // "empresaAtende: 21",
-	private Integer filialAtende;    // "filialAtende: 1640",
 	private String  nomeFilial;      // "nomeFilial: SERRA-JD.LIMOEIRO - DEPOSITO",
 	private String  cnpjFilial;      // "cnpjFilial: 33041260099195",
 	private Integer microzona;       // "microzona: 40",
@@ -33,7 +41,7 @@ public class AtendeDto {
 
 
 	public AtendeDto(String logradouro, String complemento, String localidade, String bairro, String uf,
-			String ibge, String cepRequisitado, Integer empresaAtende, Integer filialAtende, String nomeFilial,
+			String ibge, AtendePK atendePK, String nomeFilial,
 			String cnpjFilial, Integer microzona, String ufRota, Integer codigoRota, Integer codigoMunicipio,
 			String municipio, String estado, String nomeEstado) {
 		super();
@@ -43,9 +51,7 @@ public class AtendeDto {
 		this.bairro = bairro;
 		this.uf = uf;
 		this.ibge = ibge;
-		this.cepRequisitado = cepRequisitado;
-		this.empresaAtende = empresaAtende;
-		this.filialAtende = filialAtende;
+		this.atendePK = atendePK;
 		this.nomeFilial = nomeFilial;
 		this.cnpjFilial = cnpjFilial;
 		this.microzona = microzona;
@@ -58,6 +64,12 @@ public class AtendeDto {
 	}
 
 
+	public AtendePK getAtendePK() {
+		return atendePK;
+	}
+	public void setAtendePK(AtendePK atendePK) {
+		this.atendePK = atendePK;
+	}
 	public String getLogradouro() {
 		return logradouro;
 	}
@@ -93,24 +105,6 @@ public class AtendeDto {
 	}
 	public void setIbge(String ibge) {
 		this.ibge = ibge;
-	}
-	public String getCepRequisitado() {
-		return cepRequisitado;
-	}
-	public void setCepRequisitado(String string) {
-		this.cepRequisitado = string;
-	}
-	public Integer getEmpresaAtende() {
-		return empresaAtende;
-	}
-	public void setEmpresaAtende(Integer empresaAtende) {
-		this.empresaAtende = empresaAtende;
-	}
-	public Integer getFilialAtende() {
-		return filialAtende;
-	}
-	public void setFilialAtende(Integer filialAtende) {
-		this.filialAtende = filialAtende;
 	}
 	public String getNomeFilial() {
 		return nomeFilial;
@@ -166,10 +160,11 @@ public class AtendeDto {
 	public void setNomeEstado(String nomeEstado) {
 		this.nomeEstado = nomeEstado;
 	}
-	
-    
+
+
+	// Conversor para atualização do DTO    
     public Atende converteToEntity() {
     	return new Atende(this);
     }
-	
+
 }
