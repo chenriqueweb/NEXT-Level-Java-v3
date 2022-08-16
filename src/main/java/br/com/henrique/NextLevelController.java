@@ -10,9 +10,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.henrique.dto.EmpresaDto;
@@ -20,7 +17,6 @@ import br.com.henrique.dto.EstadoDto;
 import br.com.henrique.dto.FilialDto;
 import br.com.henrique.dto.MicrozonaDto;
 import br.com.henrique.dto.RotaEntregaDto;
-import br.com.henrique.model.Atende;
 import br.com.henrique.model.Empresa;
 import br.com.henrique.model.Estado;
 import br.com.henrique.model.FaixasCEPMicrozona;
@@ -29,7 +25,6 @@ import br.com.henrique.model.FilialPK;
 import br.com.henrique.model.Microzona;
 import br.com.henrique.model.Municipio;
 import br.com.henrique.model.RotaEntrega;
-import br.com.henrique.service.AtendeService;
 import br.com.henrique.service.EmpresaService;
 import br.com.henrique.service.EstadoService;
 import br.com.henrique.service.FaixasCEPMicrozonaService;
@@ -61,8 +56,8 @@ public class NextLevelController {
         @Autowired
         private FaixasCEPMicrozonaService faixasCEPMicrozonaService;
 
-        @Autowired
-        private AtendeService atendeService;
+//        @Autowired
+//        private AtendeService atendeService;
 
         
         // ### Página Principal
@@ -413,31 +408,31 @@ public class NextLevelController {
         
         
         //--------------------------------------------------------------------------------------        
-        // ### Atende CEP próximo Filial
-        @GetMapping("/atende/filial")
-        public ModelAndView filialAtendeBuscaWeb() throws ClassNotFoundException {
-            ModelAndView modelAndView = new ModelAndView("FilialAtende");
-            
-            return modelAndView;
-        }    
-        
-        @RequestMapping(value = "atende/filialCEP", method = RequestMethod.GET)
-        // public ModelAndView filialAtendeBuscaWeb(@PathVariable Integer cepAtende) throws ClassNotFoundException {
-        public ModelAndView filialAtendeBuscaWeb(@RequestParam(value = "cepAtende") Integer cepAtende) throws ClassNotFoundException {
-        	
-        	Atende atende = atendeService.retornaCEP(cepAtende);
-        	
-            ModelAndView modelAndView = new ModelAndView("FilialAtendeBusca");
-            modelAndView.addObject("atendeFilial", atende);
-            
-//            Class filialAtendeBusca = Class.forName((this.cepAtende(cep).getBody()).toString());
-//            modelAndView.addObject("filialAtendeBusca", filialAtendeBusca);
-            
-//            Object objectFilialAtendeBusca = this.cepAtende(cep).getBody();
-//            modelAndView.addObject("filialAtendeBusca", objectFilialAtendeBusca);  // this.cepAtende(cep).getBody());  // this.cepAtende(cep));
-            
-            return modelAndView;
-        }
-       
+//        // ### Atende CEP próximo Filial
+//        @GetMapping("/atende/filial")
+//        public ModelAndView filialAtendeBuscaWeb() throws ClassNotFoundException {
+//            ModelAndView modelAndView = new ModelAndView("FilialAtende");
+//            
+//            return modelAndView;
+//        }    
+//        
+//        @RequestMapping(value = "atende/filialCEP", method = RequestMethod.GET)
+//        // public ModelAndView filialAtendeBuscaWeb(@PathVariable Integer cepAtende) throws ClassNotFoundException {
+//        public ModelAndView filialAtendeBuscaWeb(@RequestParam(value = "cepAtende") Integer cepAtende) throws ClassNotFoundException {
+//        	
+//        	Atende atende = atendeService.retornaCEP(cepAtende);
+//        	
+//            ModelAndView modelAndView = new ModelAndView("FilialAtendeBusca");
+//            modelAndView.addObject("atendeFilial", atende);
+//            
+////            Class filialAtendeBusca = Class.forName((this.cepAtende(cep).getBody()).toString());
+////            modelAndView.addObject("filialAtendeBusca", filialAtendeBusca);
+//            
+////            Object objectFilialAtendeBusca = this.cepAtende(cep).getBody();
+////            modelAndView.addObject("filialAtendeBusca", objectFilialAtendeBusca);  // this.cepAtende(cep).getBody());  // this.cepAtende(cep));
+//            
+//            return modelAndView;
+//        }
+//       
 }
 

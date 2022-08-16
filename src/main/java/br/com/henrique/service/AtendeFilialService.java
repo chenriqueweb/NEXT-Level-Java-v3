@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.henrique.ViaCepClient;
 import br.com.henrique.model.Atende;
-import br.com.henrique.model.AtendePK;
+import br.com.henrique.model.AtendeFilial;
 import br.com.henrique.model.Cep;
 import br.com.henrique.model.Estado;
 import br.com.henrique.model.FaixasCEPMicrozona;
@@ -17,16 +17,12 @@ import br.com.henrique.model.FilialPK;
 import br.com.henrique.model.Microzona;
 import br.com.henrique.model.RotaEntrega;
 import br.com.henrique.model.RotaEntregaPK;
-import br.com.henrique.repository.AtendeRepository;
 import br.com.henrique.repository.FilialRepository;
 import br.com.henrique.repository.RotaEntregaRepository;
 import br.com.henrique.service.exception.ObjectNotFoundException;
 
 @Service
-public class AtendeService {
-
-	@Autowired
-	private AtendeRepository repositAtende;
+public class AtendeFilialService {
 
 	@Autowired
 	private FaixasCEPMicrozonaService faixasCEPMicrozonaService;
@@ -43,11 +39,12 @@ public class AtendeService {
 	@Autowired
 	private EstadoService estadoService;
 
-	// Busca CEP de Atendimento de Filial
-	public Atende retornaCEP(Integer cepAtende) {
-
+	// Lista Filiais que são Atendidas
+	public Atende addAtendeFilial (Integer cepAtende) {
+		
 		Atende atende = new Atende();
 		
+		// Chamada API publica para complementar informações do CEP 
 		Cep cep = ViaCepClient.findCep(cepAtende.toString()); // 14620000
 
 		// Dados do CEP informado
@@ -59,26 +56,27 @@ public class AtendeService {
 			atende.setBairro(cep.getBairro());
 			atende.setUf(cep.getUf());
 			atende.setIbge(cep.getIbge());
-			atende.setMunicipio(cep.getLocalidade());
-			atende.setEstado(cep.getUf());
 		} else {
+   		    // Caso não encontre nenhum CEP
 			throw new ObjectNotFoundException("Não foi encontrada uma Filial próxima ao CEP informado");
 		}
 
+		// Lista de Microzonas por CEP
 		List<FaixasCEPMicrozona> faixasCEPMicrozona = faixasCEPMicrozonaService.findAll();
-		// JSONObject objetoJson = new JSONObject();
-
+		
 		// Procura por uma faixa de CEPs
 		for (int x = 0; x < faixasCEPMicrozona.size(); x++) {
-			if (cepAtende >= faixasCEPMicrozona.get(x).getCEPinicial()  &
-			    cepAtende <= faixasCEPMicrozona.get(x).getCEPfinal()) {
-
+			if (cepAtende >= faixasCEPMicrozona.get(x).getCEPinicial()
+					& cepAtende <= faixasCEPMicrozona.get(x).getCEPfinal()) {
+				
+				AtendeFilial atendeFilial = new AtendeFilial();
+				
 				// Busca de Informações da Microzona
 				Microzona microzona = microzonaService.findById(faixasCEPMicrozona.get(x).getFaixasCEPMicrozonaPK().getCodigoMicrozona());
-				atende.setMicrozona(microzona.getCodigo());
-				atende.setUfRota(microzona.getEstadoRota().getSigla());
-				atende.setCodigoRota(microzona.getCodigoRota());
-				atende.setCodigoMunicipio(microzona.getCodigoMunicipio().getCodigo_ID());
+				atendeFilial.setMicrozona(microzona.getCodigo());
+				atendeFilial.setUfRota(microzona.getEstadoRota().getSigla());
+				atendeFilial.setCodigoRota(microzona.getCodigoRota());
+				atendeFilial.setCodigoMunicipio(microzona.getCodigoMunicipio().getCodigo_ID());
 
 				// Busca por informações da Rota de Entrega
 				RotaEntregaPK rotaEntregaPK = new RotaEntregaPK();
@@ -93,37 +91,26 @@ public class AtendeService {
 				filialPK.setCodigoFilial(rotaEntregaBusca.get().getCodigoFilial());
 
 				Optional<Filial> filialBusca = repositFilial.findById(filialPK);
-				atende.setNomeFilial(filialBusca.get().getNome());
-				atende.setCnpjFilial(filialBusca.get().getCnpj());
+				atendeFilial.setNomeFilial(filialBusca.get().getNome());
+				atendeFilial.setCnpjFilial(filialBusca.get().getCnpj());
+
+				atendeFilial.setCepRequisitado(atende.getCep());
+				atendeFilial.setEmpresaAtende(rotaEntregaBusca.get().getCodigoEmpresa());
+				atendeFilial.setFilialAtende(rotaEntregaBusca.get().getCodigoFilial());
 
 				// Bsuca por informações do Estado
-				Estado estadoBusca = estadoService.findById(cep.getUf());
-				atende.setNomeEstado(estadoBusca.getNome());
+				Estado estadoBusca = estadoService.findById(atende.getUf());
+				atendeFilial.setNomeEstado(estadoBusca.getNome());
 
-				// Chave Atende
-				AtendePK atendePK = new AtendePK();
-				atendePK.setCepRequisitado(cep.getCep());
-				atendePK.setEmpresaAtende(rotaEntregaBusca.get().getCodigoEmpresa());
-				atendePK.setFilialAtende(rotaEntregaBusca.get().getCodigoFilial());
-				atende.setAtendePK(atendePK);
+				atendeFilial.setMunicipio(atende.getLocalidade());
+				atendeFilial.setEstado(atende.getUf());
 
-				repositAtende.save(atende);
+				// Seta informações da Filial na Lista
+				atende.getAtendeFilial().add(atendeFilial);
 			}
-		}
 
-		// Caso não encontre nenhum CEP
-		if (atende.getCep() == null) {
-			throw new ObjectNotFoundException("Não foi encontrada uma Filial próxima ao CEP informado");
 		}
-
-		// return repositAtende.save(atende);
 		return atende;
+
 	}
-	
-    // Lista Filiais Atendidas
-    public List<Atende> findAll() {
-        List<Atende> atendeFiliais = repositAtende.findAll();
-        
-        return atendeFiliais;
-    }
 }

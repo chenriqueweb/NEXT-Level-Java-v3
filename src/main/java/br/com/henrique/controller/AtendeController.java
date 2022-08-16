@@ -1,7 +1,5 @@
 package br.com.henrique.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.henrique.model.Atende;
-import br.com.henrique.service.AtendeService;
+import br.com.henrique.service.AtendeFilialService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -22,12 +20,29 @@ import io.swagger.annotations.ApiResponses;
 @RequestMapping(path = "/atende")
 public class AtendeController {
     
-    @Autowired
-    private AtendeService atendeService;
-
+//    @Autowired
+//    private AtendeService atendeService;
     
-    // Busca pelo CEP próximo da Filial
-    @GetMapping(path = "{cepAtende}")
+    @Autowired
+    private AtendeFilialService atendeFilialService;
+    
+//    // Busca pelo CEP do Cliente
+//    @GetMapping(path = "{cepAtende}")
+//    @ApiOperation(value = "Consulta de Filiais por CEP")
+//    @ApiResponses(value = {
+//    	    @ApiResponse(code = 200, message = "Retorna a Filial por CEP"),
+//    	    @ApiResponse(code = 400, message = "CEP inválido"),
+//    	    @ApiResponse(code = 404, message = "Não foi encontrada uma Filial próxima ao CEP informado"),
+//    	    @ApiResponse(code = 500, message = "Houve um erro e não foi possível encontrar uma Filial próxima ao CEP informado")    	    
+//    })  
+//    public ResponseEntity<Atende> findById(@PathVariable Integer cepAtende) {
+//        Atende filiaisAtendidas = atendeService.findById(cepAtende);
+//        
+//        return ResponseEntity.ok().body(filiaisAtendidas);
+//    }
+
+    // Busca pelas Filiais próximo ao CEP do Cliente
+    @GetMapping(path = "/filial/{cepAtende}")
     @ApiOperation(value = "Consulta de Filiais por CEP")
     @ApiResponses(value = {
     	    @ApiResponse(code = 200, message = "Retorna a Filial por CEP"),
@@ -35,11 +50,10 @@ public class AtendeController {
     	    @ApiResponse(code = 404, message = "Não foi encontrada uma Filial próxima ao CEP informado"),
     	    @ApiResponse(code = 500, message = "Houve um erro e não foi possível encontrar uma Filial próxima ao CEP informado")    	    
     })  
-    public ResponseEntity<List<Atende>> cepAtende(@PathVariable Integer cepAtende) {
-        atendeService.retornaCEP(cepAtende);
+    public ResponseEntity<Atende> findAllByAtendeFilial(@PathVariable Integer cepAtende) {
     	
-    	List<Atende> filiaisAtendidas = atendeService.findAll();
+        Atende atendeFiliais = atendeFilialService.addAtendeFilial(cepAtende);
         
-        return ResponseEntity.ok().body(filiaisAtendidas);
+        return ResponseEntity.ok().body(atendeFiliais);
     }
 }
