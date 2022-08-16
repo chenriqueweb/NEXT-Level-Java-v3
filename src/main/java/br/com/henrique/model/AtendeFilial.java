@@ -4,7 +4,6 @@ import java.util.Objects;
 
 public class AtendeFilial {
 	
-	private String  cepRequisitado;  // "cepRequisitado: 29665000",
 	private Integer empresaAtende;   // "empresaAtende: 21",
 	private Integer filialAtende;    // "filialAtende: 1640",
 	private String  nomeFilial;      // "nomeFilial: SERRA-JD.LIMOEIRO - DEPOSITO",
@@ -23,11 +22,10 @@ public class AtendeFilial {
 	}
 	
 	
-	public AtendeFilial(String cepRequisitado, Integer empresaAtende, Integer filialAtende, String nomeFilial,
+	public AtendeFilial(Integer empresaAtende, Integer filialAtende, String nomeFilial,
 			String cnpjFilial, Integer microzona, String ufRota, Integer codigoRota, Integer codigoMunicipio,
 			String municipio, String estado, String nomeEstado, Atende atende) {
 		super();
-		this.cepRequisitado = cepRequisitado;
 		this.empresaAtende = empresaAtende;
 		this.filialAtende = filialAtende;
 		this.nomeFilial = nomeFilial;
@@ -42,12 +40,6 @@ public class AtendeFilial {
 	}
 
 
-	public String getCepRequisitado() {
-		return cepRequisitado;
-	}
-	public void setCepRequisitado(String cepRequisitado) {
-		this.cepRequisitado = cepRequisitado;
-	}
 	public Integer getEmpresaAtende() {
 		return empresaAtende;
 	}
@@ -118,7 +110,7 @@ public class AtendeFilial {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(cepRequisitado, cnpjFilial, codigoMunicipio, codigoRota, empresaAtende, estado,
+		return Objects.hash(cnpjFilial, codigoMunicipio, codigoRota, empresaAtende, estado,
 				filialAtende, microzona, municipio, nomeEstado, nomeFilial, ufRota);
 	}
 
@@ -132,8 +124,7 @@ public class AtendeFilial {
 		if (getClass() != obj.getClass())
 			return false;
 		AtendeFilial other = (AtendeFilial) obj;
-		return Objects.equals(cepRequisitado, other.cepRequisitado)
-				&& Objects.equals(cnpjFilial, other.cnpjFilial)
+		return Objects.equals(cnpjFilial, other.cnpjFilial)
 				&& Objects.equals(codigoMunicipio, other.codigoMunicipio)
 				&& Objects.equals(codigoRota, other.codigoRota) && Objects.equals(empresaAtende, other.empresaAtende)
 				&& Objects.equals(estado, other.estado) && Objects.equals(filialAtende, other.filialAtende)

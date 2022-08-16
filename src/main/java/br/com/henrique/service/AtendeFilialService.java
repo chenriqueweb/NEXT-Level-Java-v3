@@ -96,7 +96,6 @@ public class AtendeFilialService {
 				atendeFilial.setNomeFilial(filialBusca.get().getNome());
 				atendeFilial.setCnpjFilial(filialBusca.get().getCnpj());
 
-				atendeFilial.setCepRequisitado(atende.getCep());
 				atendeFilial.setEmpresaAtende(rotaEntregaBusca.get().getCodigoEmpresa());
 				atendeFilial.setFilialAtende(rotaEntregaBusca.get().getCodigoFilial());
 
