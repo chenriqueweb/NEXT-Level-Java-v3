@@ -29,7 +29,6 @@ public class SwaggerConfig extends WebMvcConfigurationSupport {
        return new Docket(DocumentationType.SWAGGER_2)
                          .select()
                          .apis(RequestHandlerSelectors.basePackage("br.com.henrique.controller"))
-                         .paths(Predicates.not(PathSelectors.regex("/atende/filial.*")))
                          .paths(Predicates.not(PathSelectors.regex("/atende/range*.*")))
                          .paths(Predicates.not(PathSelectors.regex("/empresa/remover.*")))
                          .paths(Predicates.not(PathSelectors.regex("/empresa/editar.*")))
