@@ -4,8 +4,6 @@ import java.util.Objects;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 
 @Entity
 public class AtendeFilial {
@@ -24,10 +22,10 @@ public class AtendeFilial {
 	private String  estado;          // "estado: ES",
 	private String  nomeEstado;      // "nomeEstado: Espirito Santo"
 	
-    // Relacionamento com Atende
-    @ManyToOne
-    @JoinColumn(name="cep")
-    private Atende atende;
+//    // Relacionamento com Atende
+//    @ManyToOne
+//    @JoinColumn(name="cep")
+//    private Atende atende;
 
 	public AtendeFilial() {
 		super();
@@ -50,7 +48,7 @@ public class AtendeFilial {
 		this.municipio = municipio;
 		this.estado = estado;
 		this.nomeEstado = nomeEstado;
-		this.atende = atende;
+//		this.atende = atende;
 	}
 
 
@@ -170,17 +168,17 @@ public class AtendeFilial {
 	public void setNomeEstado(String nomeEstado) {
 		this.nomeEstado = nomeEstado;
 	}
-	public Atende getAtende() {
-		return atende;
-	}
-	public void setAtende(Atende atende) {
-		this.atende = atende;
-	}
+//	public Atende getAtende() {
+//		return atende;
+//	}
+//	public void setAtende(Atende atende) {
+//		this.atende = atende;
+//	}
 
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(atende, cepRequisitado, cnpjFilial, codigoMunicipio, codigoRota, empresaAtende, estado,
+		return Objects.hash(cepRequisitado, cnpjFilial, codigoMunicipio, codigoRota, empresaAtende, estado,
 				filialAtende, microzona, municipio, nomeEstado, nomeFilial, ufRota);
 	}
 
@@ -194,7 +192,7 @@ public class AtendeFilial {
 		if (getClass() != obj.getClass())
 			return false;
 		AtendeFilial other = (AtendeFilial) obj;
-		return Objects.equals(atende, other.atende) && Objects.equals(cepRequisitado, other.cepRequisitado)
+		return Objects.equals(cepRequisitado, other.cepRequisitado)
 				&& Objects.equals(cnpjFilial, other.cnpjFilial)
 				&& Objects.equals(codigoMunicipio, other.codigoMunicipio)
 				&& Objects.equals(codigoRota, other.codigoRota) && Objects.equals(empresaAtende, other.empresaAtende)

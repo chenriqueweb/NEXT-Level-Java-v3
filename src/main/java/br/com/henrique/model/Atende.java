@@ -1,12 +1,9 @@
 package br.com.henrique.model;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 
 @Entity
 public class Atende {
@@ -21,9 +18,9 @@ public class Atende {
 	private String  uf;              // "uf: ES",
 	private String  ibge;            // "ibge: 3204955"
 
-    @OneToMany(mappedBy = "atende")
-    private List<AtendeFilial> atendeFilial = new ArrayList<>();
-
+//    @OneToMany(mappedBy = "atende")
+//    private List<AtendeFilial> atendeFilial = new ArrayList<>();
+//
 	public Atende() {
 		super();
 	}

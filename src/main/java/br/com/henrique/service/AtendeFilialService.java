@@ -58,6 +58,7 @@ public class AtendeFilialService {
 
 				// Busca por informações da Localidade do Cliente
 				Atende atendeBusca = atendeService.findById(cepAtende);
+//				atendeFilial.setAtende(atendeBusca);
 				
 				// Busca de Informações da Microzona
 				Microzona microzona = microzonaService.findById(faixasCEPMicrozona.get(x).getFaixasCEPMicrozonaPK().getCodigoMicrozona());
@@ -88,8 +89,8 @@ public class AtendeFilialService {
 //			atendePK.setEmpresaAtende(rotaEntregaBusca.get().getCodigoEmpresa());
 //			atendePK.setFilialAtende(rotaEntregaBusca.get().getCodigoFilial());
 //			atende.setAtendePK(atendePK);
-//
-				// atendeFilial.setCepRequisitado(cepAtende);
+
+				atendeFilial.setCepRequisitado(atendeBusca.getCep());
 				atendeFilial.setEmpresaAtende(rotaEntregaBusca.get().getCodigoEmpresa());
 				atendeFilial.setFilialAtende(rotaEntregaBusca.get().getCodigoFilial());
 

@@ -37,9 +37,8 @@ public class AtendeController {
     	    @ApiResponse(code = 404, message = "Não foi encontrada uma Filial próxima ao CEP informado"),
     	    @ApiResponse(code = 500, message = "Houve um erro e não foi possível encontrar uma Filial próxima ao CEP informado")    	    
     })  
-    public ResponseEntity<Atende> cepAtende(@PathVariable Integer cepAtende) {
-//        atendeService.retornaCEP(cepAtende);
-    	
+    public ResponseEntity<Atende> findById(@PathVariable Integer cepAtende) {
+//      atendeService.retornaCEP(cepAtende);
 //    	List<Atende> filiaisAtendidas = atendeService.findAll();
     	
     	Atende filiaisAtendidas = atendeService.findById(cepAtende);
@@ -49,6 +48,13 @@ public class AtendeController {
 
     // Busca pelas Filiais próximo ao CEP do Cliente
     @GetMapping(path = "/filial/{cepAtende}")
+    @ApiOperation(value = "Consulta de Filiais por CEP")
+    @ApiResponses(value = {
+    	    @ApiResponse(code = 200, message = "Retorna a Filial por CEP"),
+    	    @ApiResponse(code = 400, message = "CEP inválido"),
+    	    @ApiResponse(code = 404, message = "Não foi encontrada uma Filial próxima ao CEP informado"),
+    	    @ApiResponse(code = 500, message = "Houve um erro e não foi possível encontrar uma Filial próxima ao CEP informado")    	    
+    })  
     public ResponseEntity<AtendeFilial> findAllByAtendeFilial(@PathVariable Integer cepAtende) {
     	
         AtendeFilial atendeFiliais = atendeFilialService.addAtendeFilial(cepAtende);
