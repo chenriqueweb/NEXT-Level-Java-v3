@@ -44,6 +44,8 @@ public class AtendeFilialService {
 		
 		Atende atende = new Atende();
 		
+		Boolean CEPcomFiliais = false;
+		
 		// Chamada API publica para complementar informações do CEP 
 		Cep cep = ViaCepClient.findCep(cepAtende.toString()); // 14620000
 
@@ -66,8 +68,8 @@ public class AtendeFilialService {
 		
 		// Procura por uma faixa de CEPs
 		for (int x = 0; x < faixasCEPMicrozona.size(); x++) {
-			if (cepAtende >= faixasCEPMicrozona.get(x).getCEPinicial()
-					& cepAtende <= faixasCEPMicrozona.get(x).getCEPfinal()) {
+			if (cepAtende >= faixasCEPMicrozona.get(x).getCEPinicial()  &
+		  	    cepAtende <= faixasCEPMicrozona.get(x).getCEPfinal()) {
 				
 				AtendeFilial atendeFilial = new AtendeFilial();
 				
@@ -107,9 +109,16 @@ public class AtendeFilialService {
 
 				// Seta informações da Filial na Lista
 				atende.getAtendeFilial().add(atendeFilial);
+				CEPcomFiliais = true;
 			}
 
 		}
+		
+		// Caso não encontre nenhum CEP
+		if (!CEPcomFiliais) {
+			throw new ObjectNotFoundException("Não foi encontrada uma Filial próxima ao CEP informado");
+		}
+
 		return atende;
 
 	}
