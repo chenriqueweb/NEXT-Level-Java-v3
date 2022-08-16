@@ -9,7 +9,7 @@ import br.com.henrique.model.AtendeFilial;
 public interface AtendeFilialRepository extends JpaRepository<AtendeFilial, Integer>  {
 
 //	public List<AtendeFilial> findByAtende(Atende atende);
-//
-//	public List<AtendeFilial> findByAtendeFilial(Atende retornaCEP);
+
+//	public List<AtendeFilial> findByAtendeFilial(Atende atende);
 
 }

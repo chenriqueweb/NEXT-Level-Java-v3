@@ -16,7 +16,7 @@ public class AtendeService {
 	private AtendeRepository repositAtende;
 
 	// Busca CEP de Atendimento de Filial
-	public Atende retornaCEP(Integer cepAtende) {
+	public Atende findById(Integer cepAtende) {
 
 		Atende atende = new Atende();
 		

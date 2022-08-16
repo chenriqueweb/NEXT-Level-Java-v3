@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.henrique.model.Atende;
+import br.com.henrique.model.AtendeFilial;
+import br.com.henrique.service.AtendeFilialService;
 import br.com.henrique.service.AtendeService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -23,7 +25,10 @@ public class AtendeController {
     @Autowired
     private AtendeService atendeService;
     
-    // Busca pelo CEP próximo da Filial
+    @Autowired
+    private AtendeFilialService atendeFilialService;
+    
+    // Busca pelo CEP do Cliente
     @GetMapping(path = "{cepAtende}")
     @ApiOperation(value = "Consulta de Filiais por CEP")
     @ApiResponses(value = {
@@ -37,13 +42,17 @@ public class AtendeController {
     	
 //    	List<Atende> filiaisAtendidas = atendeService.findAll();
     	
-    	Atende filiaisAtendidas = atendeService.retornaCEP(cepAtende);
+    	Atende filiaisAtendidas = atendeService.findById(cepAtende);
         
         return ResponseEntity.ok().body(filiaisAtendidas);
     }
-    
-//    public ResponseEntity<List<AtendeFilial>> findAllByAtendeFilial(@PathVariable Integer cepAtende) {
-//        List<AtendeFilial> atendeFiliais = atendeFilialService.findAllByAtendeFilial(cepAtende);
-//        return ResponseEntity.ok().body(atendeFiliais);
-//    }
+
+    // Busca pelas Filiais próximo ao CEP do Cliente
+    @GetMapping(path = "/filial/{cepAtende}")
+    public ResponseEntity<AtendeFilial> findAllByAtendeFilial(@PathVariable Integer cepAtende) {
+    	
+        AtendeFilial atendeFiliais = atendeFilialService.addAtendeFilial(cepAtende);
+        
+        return ResponseEntity.ok().body(atendeFiliais);
+    }
 }
