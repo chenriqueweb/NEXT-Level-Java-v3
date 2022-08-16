@@ -2,13 +2,8 @@ package br.com.henrique.model;
 
 import java.util.Objects;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-
-@Entity
 public class AtendeFilial {
 	
-	@Id
 	private String  cepRequisitado;  // "cepRequisitado: 29665000",
 	private Integer empresaAtende;   // "empresaAtende: 21",
 	private Integer filialAtende;    // "filialAtende: 1640",
@@ -21,12 +16,8 @@ public class AtendeFilial {
 	private String  municipio;       // "municipio: São Roque do Canaã",
 	private String  estado;          // "estado: ES",
 	private String  nomeEstado;      // "nomeEstado: Espirito Santo"
-	
-//    // Relacionamento com Atende
-//    @ManyToOne
-//    @JoinColumn(name="cep")
-//    private Atende atende;
 
+	
 	public AtendeFilial() {
 		super();
 	}
@@ -48,132 +39,81 @@ public class AtendeFilial {
 		this.municipio = municipio;
 		this.estado = estado;
 		this.nomeEstado = nomeEstado;
-//		this.atende = atende;
 	}
 
 
 	public String getCepRequisitado() {
 		return cepRequisitado;
 	}
-
-
 	public void setCepRequisitado(String cepRequisitado) {
 		this.cepRequisitado = cepRequisitado;
 	}
-
-
 	public Integer getEmpresaAtende() {
 		return empresaAtende;
 	}
-
-
 	public void setEmpresaAtende(Integer empresaAtende) {
 		this.empresaAtende = empresaAtende;
 	}
-
-
 	public Integer getFilialAtende() {
 		return filialAtende;
 	}
-
-
 	public void setFilialAtende(Integer filialAtende) {
 		this.filialAtende = filialAtende;
 	}
-
-
 	public String getNomeFilial() {
 		return nomeFilial;
 	}
-
-
 	public void setNomeFilial(String nomeFilial) {
 		this.nomeFilial = nomeFilial;
 	}
-
-
 	public String getCnpjFilial() {
 		return cnpjFilial;
 	}
-
-
 	public void setCnpjFilial(String cnpjFilial) {
 		this.cnpjFilial = cnpjFilial;
 	}
-
-
 	public Integer getMicrozona() {
 		return microzona;
 	}
-
-
 	public void setMicrozona(Integer microzona) {
 		this.microzona = microzona;
 	}
-
-
 	public String getUfRota() {
 		return ufRota;
 	}
-
-
 	public void setUfRota(String ufRota) {
 		this.ufRota = ufRota;
 	}
-
-
 	public Integer getCodigoRota() {
 		return codigoRota;
 	}
-
-
 	public void setCodigoRota(Integer codigoRota) {
 		this.codigoRota = codigoRota;
 	}
-
-
 	public Integer getCodigoMunicipio() {
 		return codigoMunicipio;
 	}
-
-
 	public void setCodigoMunicipio(Integer codigoMunicipio) {
 		this.codigoMunicipio = codigoMunicipio;
 	}
-
-
 	public String getMunicipio() {
 		return municipio;
 	}
-
-
 	public void setMunicipio(String municipio) {
 		this.municipio = municipio;
 	}
-
-
 	public String getEstado() {
 		return estado;
 	}
-
-
 	public void setEstado(String estado) {
 		this.estado = estado;
 	}
-
-
 	public String getNomeEstado() {
 		return nomeEstado;
 	}
 	public void setNomeEstado(String nomeEstado) {
 		this.nomeEstado = nomeEstado;
 	}
-//	public Atende getAtende() {
-//		return atende;
-//	}
-//	public void setAtende(Atende atende) {
-//		this.atende = atende;
-//	}
 
 
 	@Override
