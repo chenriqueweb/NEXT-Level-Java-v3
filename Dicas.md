@@ -22,7 +22,7 @@ void groupAssertions() {
 ### Anotações Úteis:
 
 - **@Test:** O método anotado é um teste unitário
-- **@BeforEach:** O método anotado será executado ANTES de CADA teste unitário
+- **@BeforeEach:** O método anotado será executado ANTES de CADA teste unitário
 - **@AfterEach:** O método anotado será executado DEPOIS de CADA teste unitário
 - **@BeforeAll:** O método anotado será executado ANTES de TODOS os testes
 - **@AfterAll:**  O método anotado será executado DEPOIS de TODOS os testes

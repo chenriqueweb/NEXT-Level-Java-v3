@@ -40,6 +40,11 @@ Um dos propósitos principais é possibilitar a capacitação de Desenvolvedores
 ### Modelo de Dados
 ![Proposta](https://user-images.githubusercontent.com/66568299/178820750-9d866687-cc88-4f7f-9cbe-e5de5b6b2599.png)
 
+### Testes das APIs
+Para a realização dos testes de chamadas às APIs foi disponibilizado um arquivo JSON para ser importado no Postman.
+
+**/src/main/resources/postman/NEXT-Level_Projeto-01.postman_collection.json**
+
 ### Telas
 ![Projeto-Next-Java-pagina-principal_v2](https://user-images.githubusercontent.com/66568299/179315100-e1d919fd-b3bd-4c51-abdc-5af6416d6896.png)
 

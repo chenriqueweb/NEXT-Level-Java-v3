@@ -4,8 +4,11 @@ import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.NumberFormat;
 
 import br.com.henrique.dto.EmpresaDto;
 import io.swagger.annotations.ApiModelProperty;
@@ -20,10 +23,12 @@ public class Empresa {
     @ApiModelProperty(value = "Razão Social", required = true)
     private String razaoSocial;
     
+    @NumberFormat(pattern = "00000000")
     @ApiModelProperty(value = "Raiz do CNPJ", required = true)
     private String raizCNPJ;
     
-    @JsonFormat(pattern="dd/MM/yyyy")
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    @Temporal(TemporalType.DATE)
     @ApiModelProperty(value = "Data da Abertura", required = false)
     private Date dataAbertura;
     

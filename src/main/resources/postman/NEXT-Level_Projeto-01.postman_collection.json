@@ -1,0 +1,1220 @@
+{
+	"info": {
+		"_postman_id": "72a3939b-a5ec-4ea7-8248-cf5eb3182d34",
+		"name": "NEXT-Level_Projeto-01",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17128321"
+	},
+	"item": [
+		{
+			"name": "Listar",
+			"item": [
+				{
+					"name": "Lista-Empresas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8090/empresa",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"empresa"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Lista-Empresas - Page",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8090/empresa/page?size=10&sort=codigo,asc&&page=0",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"empresa",
+								"page"
+							],
+							"query": [
+								{
+									"key": "size",
+									"value": "10"
+								},
+								{
+									"key": "sort",
+									"value": "codigo,asc"
+								},
+								{
+									"key": null,
+									"value": null
+								},
+								{
+									"key": "page",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Lista-Estados",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8090/estado",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"estado"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Lista-Estados - Page",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8090/estado/page?size=10&sort=sigla,asc&&page=0",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"estado",
+								"page"
+							],
+							"query": [
+								{
+									"key": "size",
+									"value": "10"
+								},
+								{
+									"key": "sort",
+									"value": "sigla,asc"
+								},
+								{
+									"key": null,
+									"value": null
+								},
+								{
+									"key": "page",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Lista-Municipios",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8090/municipio",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"municipio"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Lista-Municipios-Estado",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8090/municipio/estado/ES",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"municipio",
+								"estado",
+								"ES"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Lista-Municipios - Page",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8090/municipio/page?size=10&sort=nome,asc&&page=0",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"municipio",
+								"page"
+							],
+							"query": [
+								{
+									"key": "size",
+									"value": "10"
+								},
+								{
+									"key": "sort",
+									"value": "nome,asc"
+								},
+								{
+									"key": null,
+									"value": null
+								},
+								{
+									"key": "page",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Lista-Filiais",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8090/filial",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"filial"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Lista-Filiais - Page",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8090/filial/page?size=10&sort=nome,asc&&page=0",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"filial",
+								"page"
+							],
+							"query": [
+								{
+									"key": "size",
+									"value": "10"
+								},
+								{
+									"key": "sort",
+									"value": "nome,asc"
+								},
+								{
+									"key": null,
+									"value": null
+								},
+								{
+									"key": "page",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Lista-Microzonas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8090/microzona",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"microzona"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Lista-Microzonas - Page",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8090/microzona/page?size=10&sort=nome,asc&&page=0",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"microzona",
+								"page"
+							],
+							"query": [
+								{
+									"key": "size",
+									"value": "10"
+								},
+								{
+									"key": "sort",
+									"value": "nome,asc"
+								},
+								{
+									"key": null,
+									"value": null
+								},
+								{
+									"key": "page",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Lista-Rotas_Entrega",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8090/rotaEntrega",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"rotaEntrega"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Lista-Rotas_Entrega - Page",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8090/rotaEntrega/page?size=10&sort=rotaEntregaPK,asc&&page=0",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"rotaEntrega",
+								"page"
+							],
+							"query": [
+								{
+									"key": "size",
+									"value": "10"
+								},
+								{
+									"key": "sort",
+									"value": "rotaEntregaPK,asc"
+								},
+								{
+									"key": null,
+									"value": null
+								},
+								{
+									"key": "page",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Lista-Faixa CEPs Microzona",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8090/faixasCEPMicrozona",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"faixasCEPMicrozona"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Lista-Faixa CEPs Microzona - Page",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8090/faixasCEPMicrozona/page?size=10&sort=faixasCEPMicrozonaPK,asc&&page=0",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"faixasCEPMicrozona",
+								"page"
+							],
+							"query": [
+								{
+									"key": "size",
+									"value": "10"
+								},
+								{
+									"key": "sort",
+									"value": "faixasCEPMicrozonaPK,asc"
+								},
+								{
+									"key": null,
+									"value": null
+								},
+								{
+									"key": "page",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Consulta",
+			"item": [
+				{
+					"name": "Consulta-Empresa",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8090/empresa/21",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"empresa",
+								"21"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Consulta-Estado",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8090/estado/RJ",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"estado",
+								"RJ"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Consulta-Municipio",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8090/municipio/28177",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"municipio",
+								"28177"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Consulta-Filial",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8090/filial/21/1640",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"filial",
+								"21",
+								"1640"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Consulta-Microzona",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8090/microzona/40",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"microzona",
+								"40"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Consulta-Rota_Entrega",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8090/rotaEntrega/ES/12",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"rotaEntrega",
+								"ES",
+								"12"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Consulta-Faixa CEP Microzona",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8090/faixasCEPMicrozona/35/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"faixasCEPMicrozona",
+								"35",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Insere",
+			"item": [
+				{
+					"name": "Insere-Empresa",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"codigo\": 21,\r\n    \"razaoSocial\": \"VIAVAREJO\",\r\n    \"raizCNPJ\": \"33041260094711\",\r\n    \"dataAbertura\": \"25/08/2016\",\r\n    \"novo\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8090/empresa",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"empresa"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Insere-Estado",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"sigla\": \"MT\",\r\n    \"nome\": \"Mato Grosso\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8090/estado",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"estado"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Insere-Municipio",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Campinas\",\r\n    \"estado\": {\r\n        \"sigla\": \"SP\",\r\n        \"nome\": \"São Paulo\"\r\n    }\r\n}\r\n            ",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8090/municipio",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"municipio"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Insere-Filial",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"filialPK\": {\r\n        \"codigoEmpresa\": 1,\r\n        \"codigoFilial\": 6\r\n    },\r\n    \"nome\": \"Filial-/01/06\",\r\n    \"cnpj\": \"666.111.0001/01\",\r\n    \"municipio\": 2\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8090/filial",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"filial"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Insere-Microzona",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Microzona-66\",\r\n    \"status\": \"A\",\r\n    \"atendimentoDiario\": \"N\",\r\n    \"atendeSegunda\": \"S\",\r\n    \"atendeTerca\": \"N\",\r\n    \"atendeQuarta\": \"S\",\r\n    \"atendeQuinta\": \"N\",\r\n    \"atendeSexta\": \"S\",\r\n    \"atendeSabado\": \"N\",\r\n    \"estadoRota\": {\r\n    \"sigla\": \"RJ\",\r\n    \"nome\": \"Rio de Janeiro\",\r\n    \"novo\": false\r\n},\r\n     \"codigoMunicipio\": {\r\n        \"codigo_ID\": 1,\r\n        \"nome\": \"Barra do Pirai\",\r\n        \"estado\": {\r\n            \"sigla\": \"RJ\",\r\n            \"nome\": \"Rio de Janeiro\",\r\n            \"novo\": false\r\n          }\r\n    },\r\n     \"codigoRota\": 1\r\n}   ",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8090/microzona",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"microzona"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Insere-Rota_Entrega",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"rotaEntregaPK\": {\r\n        \"siglaEstado\": \"RJ\",\r\n        \"codigoRota\": 6\r\n    },\r\n    \"nome\": \"Rota-66\",\r\n    \"status\": \"A\",\r\n    \"codigoEmpresa\": 1,\r\n    \"codigoFilial\": 1,\r\n    \"prazoExpedicao\": 10\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8090/rotaEntrega",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"rotaEntrega"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Insere-Faixa CEPs Microzona",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"faixasCEPMicrozonaPK\": {\r\n        \"codigoMicrozona\": 1,\r\n        \"codigoSequencial\": 6\r\n    },\r\n    \"novo\": false,\r\n    \"cepinicial\": 6001,\r\n    \"cepfinal\": 7000\r\n}    \r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8090/faixasCEPMicrozona",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"faixasCEPMicrozona"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Alteração",
+			"item": [
+				{
+					"name": "Altera-Empresa",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"codigo\": 21,\r\n    \"razaoSocial\": \"VIAVAREJ-22\",\r\n    \"raizCNPJ\": \"33041260094712\",\r\n    \"dataAbertura\": \"15/88/2016\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8090/empresa/21",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"empresa",
+								"21"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Altera-Estado",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8090/estado/RJ",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"estado",
+								"RJ"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Altera-Municipio",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"codigo_ID\": 28177,\r\n    \"nome\": \"Serra222\",\r\n    \"estado\": {\r\n        \"sigla\": \"ES\",\r\n        \"nome\": \"Espirito Santo\",\r\n        \"novo\": false\r\n    },\r\n    \"novo\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8090/municipio/28177",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"municipio",
+								"28177"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Altera-Filial",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"filialPK\": {\r\n        \"codigoEmpresa\": 21,\r\n        \"codigoFilial\": 1640\r\n    },\r\n    \"nome\": \"SERRA-JD.LIMOEIRO - DEPOSITO-222\",\r\n    \"cnpj\": \"33041260099195\",\r\n    \"municipio\": 28177,\r\n    \"novo\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8090/filial/21/1640",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"filial",
+								"21",
+								"1640"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Altera-Microzona",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"AGUIA BRANCA -ZONA URBANA-222\",\r\n    \"status\": \"A\",\r\n    \"atendimentoDiario\": \"N\",\r\n    \"atendeSegunda\": \" \",\r\n    \"atendeTerca\": \" \",\r\n    \"atendeQuarta\": \"X\",\r\n    \"atendeQuinta\": \" \",\r\n    \"atendeSexta\": \" \",\r\n    \"atendeSabado\": \"X\",\r\n    \"codigoRota\": 12,\r\n    \"estadoRota\": {\r\n        \"sigla\": \"ES\",\r\n        \"nome\": \"Espirito Santo\",\r\n        \"novo\": false\r\n    },\r\n    \"codigoMunicipio\": {\r\n        \"codigo_ID\": 27545,\r\n        \"nome\": \"Aguia branca\",\r\n        \"estado\": {\r\n            \"sigla\": \"ES\",\r\n            \"nome\": \"Espirito Santo\",\r\n            \"novo\": false\r\n        },\r\n        \"novo\": false\r\n    },\r\n    \"novo\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8090/microzona/40",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"microzona",
+								"40"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Altera-Rota_Entrega",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"1640_LINHARES_NP-333444\",\r\n    \"status\": \"A\",\r\n    \"codigoEmpresa\": 21,\r\n    \"codigoFilial\": 1640,\r\n    \"prazoExpedicao\": 0,\r\n    \"novo\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8090/rotaEntrega/ES/12",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"rotaEntrega",
+								"ES",
+								"12"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Altera-Faixa CEP Microzona",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cepinicial\": 29620001,\r\n    \"cepfinal\": 29620002,\r\n    \"novo\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8090/faixasCEPMicrozona/35/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"faixasCEPMicrozona",
+								"35",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Exclusão",
+			"item": [
+				{
+					"name": "Exclui-Empresa",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8090/empresa/4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"empresa",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Exclui-Estado",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8090/estado/MG",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"estado",
+								"MG"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Exclui-Municipio",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8090/municipio/5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"municipio",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Exclui-Filial",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8090/filial/1/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"filial",
+								"1",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Exclui-Microzona",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8090/microzona/5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"microzona",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Exclui-Rota_Entrega",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8090/rotaEntrega/RJ/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"rotaEntrega",
+								"RJ",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Exclui-Faixa CEP Microzona",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8090/faixasCEPMicrozona/1/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"faixasCEPMicrozona",
+								"1",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "CEP Atende - Rota",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8090/atende/29920000",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"atende",
+						"29920000"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CEP Atende Filial - Rota",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8090/atende/filial/29920000",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"atende",
+						"filial",
+						"29920000"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
