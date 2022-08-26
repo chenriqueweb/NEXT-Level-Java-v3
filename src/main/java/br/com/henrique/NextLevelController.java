@@ -10,13 +10,18 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.henrique.dto.EmpresaDto;
 import br.com.henrique.dto.EstadoDto;
 import br.com.henrique.dto.FilialDto;
 import br.com.henrique.dto.MicrozonaDto;
+import br.com.henrique.dto.MunicipioDto;
 import br.com.henrique.dto.RotaEntregaDto;
+import br.com.henrique.model.Atende;
 import br.com.henrique.model.Empresa;
 import br.com.henrique.model.Estado;
 import br.com.henrique.model.FaixasCEPMicrozona;
@@ -25,11 +30,13 @@ import br.com.henrique.model.FilialPK;
 import br.com.henrique.model.Microzona;
 import br.com.henrique.model.Municipio;
 import br.com.henrique.model.RotaEntrega;
+import br.com.henrique.service.AtendeFilialService;
 import br.com.henrique.service.EmpresaService;
 import br.com.henrique.service.EstadoService;
 import br.com.henrique.service.FaixasCEPMicrozonaService;
 import br.com.henrique.service.FilialService;
 import br.com.henrique.service.MicrozonaService;
+import br.com.henrique.service.MunicipioService;
 import br.com.henrique.service.RotaEntregaService;
 
 @Controller
@@ -44,8 +51,8 @@ public class NextLevelController {
         @Autowired
         private EstadoService estadoService;
         
-//        @Autowired
-//        private MunicipioService municipioService;
+        @Autowired
+        private MunicipioService municipioService;
         
         @Autowired
         private RotaEntregaService rotaEntregaService;     
@@ -56,8 +63,8 @@ public class NextLevelController {
         @Autowired
         private FaixasCEPMicrozonaService faixasCEPMicrozonaService;
 
-//        @Autowired
-//        private AtendeService atendeService;
+        @Autowired
+        private AtendeFilialService atendeFilialService;
 
         
         // ### Página Principal
@@ -168,25 +175,25 @@ public class NextLevelController {
         
         //--------------------------------------------------------------------------------------
         // ### Municipio
-//        @GetMapping("/municipioListar")
-//        public ModelAndView findAllMunicipio() {
-//            List<Municipio> municipios = municipioService.findAll();
-//            
-//            ModelAndView modelAndView = new ModelAndView("MunicipioListar");
-//            modelAndView.addObject("municipios", municipios);
-//            
-//            return modelAndView;
-//        }
-//        
-//        @GetMapping("/municipioListar/page")
-//        public ModelAndView findAllMunicipioPage(@PageableDefault(size = 7) Pageable pageable) {            
-//            Page<Municipio> municipios = municipioService.findAllPage(pageable);
-//            
-//            ModelAndView modelAndView = new ModelAndView("MunicipioListar");
-//            modelAndView.addObject("municipios", municipios);            
-//            
-//            return modelAndView;
-//        }          
+        @GetMapping("/municipioListar")
+        public ModelAndView findAllMunicipio() {
+            List<Municipio> municipios = municipioService.findAll();
+            
+            ModelAndView modelAndView = new ModelAndView("MunicipioListar");
+            modelAndView.addObject("municipios", municipios);
+            
+            return modelAndView;
+        }
+        
+        @GetMapping("/municipioListar/page")
+        public ModelAndView findAllMunicipioPage(@PageableDefault(size = 7) Pageable pageable) {            
+            Page<Municipio> municipios = municipioService.findAllPage(pageable);
+            
+            ModelAndView modelAndView = new ModelAndView("MunicipioListar");
+            modelAndView.addObject("municipios", municipios);            
+            
+            return modelAndView;
+        }          
         
         @GetMapping("/municipio/novo")
         public ModelAndView municipioNovo() {            
@@ -196,26 +203,26 @@ public class NextLevelController {
             return modelAndView;
         }    
         
-//        @PostMapping("/municipio/form")
-//        public String insreMunicipio1(MunicipioDto municipioDto) {
-//            municipioService.addMunicipio(municipioDto);
-//            
-//            return "redirect:/municipioListar";
-//        }          
-//        
-//        // Atualiza dados do Municipio     
-//        // method Post (página)
-//        @PostMapping("/municipio/salvar/{codigo}")
-//        public String atualizaMunicipioWeb(MunicipioDto municipioDto) {
-//            Municipio municipioAntes = municipioService.findById(municipioDto.getCodigo_ID());
-//            
-//            municipioService.deletaMunicipio(municipioAntes.getCodigo_ID());
-//            municipioService.addMunicipio(municipioDto);
-//            
-////            municipioService.updateMunicipio(municipioAntes.getCodigo_ID(), municipio);
-//
-//            return "redirect:/municipioListar";        
-//        } 
+        @PostMapping("/municipio/form")
+        public String insreMunicipio1(MunicipioDto municipioDto) {
+            municipioService.addMunicipio(municipioDto);
+            
+            return "redirect:/municipioListar";
+        }          
+        
+        // Atualiza dados do Municipio     
+        // method Post (página)
+        @PostMapping("/municipio/salvar/{codigo}")
+        public String atualizaMunicipioWeb(MunicipioDto municipioDto) {
+            Municipio municipioAntes = municipioService.findById(municipioDto.getCodigo_ID());
+            
+            municipioService.deletaMunicipio(municipioAntes.getCodigo_ID());
+            municipioService.addMunicipio(municipioDto);
+            
+//            municipioService.updateMunicipio(municipioAntes.getCodigo_ID(), municipio);
+
+            return "redirect:/municipioListar";        
+        } 
         
         
         //--------------------------------------------------------------------------------------
@@ -408,31 +415,22 @@ public class NextLevelController {
         
         
         //--------------------------------------------------------------------------------------        
-//        // ### Atende CEP próximo Filial
-//        @GetMapping("/atende/filial")
-//        public ModelAndView filialAtendeBuscaWeb() throws ClassNotFoundException {
-//            ModelAndView modelAndView = new ModelAndView("FilialAtende");
-//            
-//            return modelAndView;
-//        }    
-//        
-//        @RequestMapping(value = "atende/filialCEP", method = RequestMethod.GET)
-//        // public ModelAndView filialAtendeBuscaWeb(@PathVariable Integer cepAtende) throws ClassNotFoundException {
-//        public ModelAndView filialAtendeBuscaWeb(@RequestParam(value = "cepAtende") Integer cepAtende) throws ClassNotFoundException {
-//        	
-//        	Atende atende = atendeService.retornaCEP(cepAtende);
-//        	
-//            ModelAndView modelAndView = new ModelAndView("FilialAtendeBusca");
-//            modelAndView.addObject("atendeFilial", atende);
-//            
-////            Class filialAtendeBusca = Class.forName((this.cepAtende(cep).getBody()).toString());
-////            modelAndView.addObject("filialAtendeBusca", filialAtendeBusca);
-//            
-////            Object objectFilialAtendeBusca = this.cepAtende(cep).getBody();
-////            modelAndView.addObject("filialAtendeBusca", objectFilialAtendeBusca);  // this.cepAtende(cep).getBody());  // this.cepAtende(cep));
-//            
-//            return modelAndView;
-//        }
-//       
+        // ### Atende CEP próximo Filial
+        @GetMapping("/atende/filial")
+        public ModelAndView filialAtendeBuscaWeb() throws ClassNotFoundException {
+            ModelAndView modelAndView = new ModelAndView("FilialAtende");
+            
+            return modelAndView;
+        }    
+        
+        @RequestMapping(value = "atende/filialCEP", method = RequestMethod.GET)
+        public ModelAndView filialAtendeBuscaWeb(@RequestParam(value = "cepAtende") Integer cepAtende) throws ClassNotFoundException {
+        	
+        	Atende atendeFilial = atendeFilialService.addAtendeFilial(cepAtende);
+        	
+            ModelAndView modelAndView = new ModelAndView("FilialAtendeBusca");
+            modelAndView.addObject("atendeFilial", atendeFilial);
+            
+            return modelAndView;
+        }
 }
-
