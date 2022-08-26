@@ -262,48 +262,43 @@ to {
 		    <br>
 		    <br>
    		    <h3 style="color: #BDB76B; font-weight: bold; font-size: 20px;">
-				Dados da Filial
+				Dados da Filial que atende nas proximidades
 			</h3>
 
 			<table >
+				<thead>
+					<tr>
+						<th>Empresa</th>
+						<th>Filial</th>
+						<th>Nome</th>
+						<th>CNPJ</th>
+						<th>Microzona</th>
+						<th>UF da Rota</th>
+						<th>Codigo Rota</th>
+						<th>Codigo Municipio</th>
+						<th>Municipio</th>
+						<th>Sigla do Estado</th>
+						<th>Nome do Estado</th>
+						<th>MAPA</th>
+					</tr>
+				</thead>	
+						
  				<tbody>
- 				
-                    <tr>					
-	    				<td>Empresa Atende: </td> <td th:text="${atendeFilial.atendeFilial[1].empresaAtende}"></td>
-                    </tr>
-                    
-                    <tr>					
-	    				<td>Filial Atende: </td> <td th:text="${atendeFilial.atendeFilial[1].filialAtende}"></td>
-                    <tr>					
-                    <tr>					
-	    				<td>Nome Filial: </td> <td th:text="${atendeFilial.atendeFilial[1].nomeFilial}"></td>
-                    </tr>					
-                    <tr>					
-	    				<td>CNPJ Filial: </td> <td th:text="${atendeFilial.atendeFilial[1].cnpjFilial}"></td>
-                    <tr>					
-                    <tr>					
-	    				<td>Microzona: </td> <td th:text="${atendeFilial.atendeFilial[1].microzona}"></td>
-                    </tr>					
-                    <tr>					
-	    				<td>UF da Rota: </td> <td th:text="${atendeFilial.atendeFilial[1].ufRota}"></td>
-                    <tr>					
-                    <tr>					
-	    				<td>Codigo Rota: </td> <td th:text="${atendeFilial.atendeFilial[1].codigoRota}"></td>
-                    </tr>					
-                    <tr>					
-	    				<td>Codigo Municipio: </td> <td th:text="${atendeFilial.atendeFilial[1].codigoMunicipio}"></td>
-                    <tr>					
-                    <tr>					
-	    				<td>Municipio: </td> <td th:text="${atendeFilial.atendeFilial[1].municipio}"></td>
-                    </tr>					
-                    <tr>					
-	    				<td>Sigla do Estado: </td> <td th:text="${atendeFilial.atendeFilial[1].estado}"></td>
-                    <tr>					
-                    <tr>					
-	    				<td>Nome do Estado: </td> <td th:text="${atendeFilial.atendeFilial[1].nomeEstado}"></td>	    			
+    			    <tr th:each="atende: ${atendeFilial.atendeFilial}">
+	    				<td th:text="${atende.empresaAtende}"></td>
+	    				<td th:text="${atende.filialAtende}"></td>
+	    				<td th:text="${atende.nomeFilial}"></td>
+	    				<td th:text="${atende.cnpjFilial}"></td>
+	    				<td th:text="${atende.microzona}"></td>
+	    				<td th:text="${atende.ufRota}"></td>
+	    				<td th:text="${atende.codigoRota}"></td>
+	    				<td th:text="${atende.codigoMunicipio}"></td>
+	    				<td th:text="${atende.municipio}"></td>
+	    				<td th:text="${atende.estado}"></td>
+	    				<td th:text="${atende.nomeEstado}"></td>		
 	    			</tr>
- 				
  				</tbody>
+ 				
 			</table>
 
 		</section>
