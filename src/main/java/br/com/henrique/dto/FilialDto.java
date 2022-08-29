@@ -31,16 +31,21 @@ public class FilialDto {
     @ApiModelProperty(value = "Número do Município", required = true)
     private Integer municipio;
     
+    @NotNull(message = "O campo não pode ser nulo")
+    @ApiModelProperty(value = "CEP da Filial", required = true)
+    private String cepFilial;
+    
     public FilialDto() {
         super();
     }
 
-    public FilialDto(FilialPK filialPK, String nome, String cnpj, Integer municipio) {
+    public FilialDto(FilialPK filialPK, String nome, String cnpj, Integer municipio, String cepFilial) {
         super();
         this.filialPK = filialPK;
         this.nome = nome;
         this.cnpj = cnpj;
         this.municipio = municipio;
+        this.cepFilial = cepFilial;
     }
     
     public FilialDto(Filial filial) {
@@ -49,6 +54,7 @@ public class FilialDto {
         this.nome = filial.getNome();
         this.cnpj = filial.getCnpj();
         this.municipio = filial.getMunicipio();
+        this.cepFilial = filial.getCepFilial();
     }
     
 //    // Método para identificar registro novo
@@ -79,6 +85,12 @@ public class FilialDto {
     }
     public void setMunicipio(Integer municipio) {
         this.municipio = municipio;
+    }
+    public String getCepFilial() {
+        return cepFilial;
+    }
+    public void setCepFilial(String cepFilial) {
+        this.cepFilial = cepFilial;
     }
     
     // Conversor para atualização do DTO

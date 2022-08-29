@@ -22,6 +22,9 @@ public class Filial {
     @ApiModelProperty(value = "Número do Município", required = true)
     private Integer municipio;
     
+    @ApiModelProperty(value = "CEP da Filial", required = true)
+    private String cepFilial;
+    
     public Filial() {
         super();
     }
@@ -31,14 +34,16 @@ public class Filial {
         this.nome = filialDto.getNome();
         this.cnpj = filialDto.getCnpj();
         this.municipio = filialDto.getMunicipio();
+        this.cepFilial = filialDto.getCepFilial();
     }
 
-    public Filial(FilialPK filialPK, String nome, String cnpj, Integer municipio) {
+    public Filial(FilialPK filialPK, String nome, String cnpj, Integer municipio, String cepFilial) {
         super();
         this.filialPK = filialPK;
         this.nome = nome;
         this.cnpj = cnpj;
         this.municipio = municipio;
+        this.cepFilial = cepFilial;
     }
     
     // Método para identificar registro novo
@@ -69,6 +74,12 @@ public class Filial {
     }
     public void setMunicipio(Integer municipio) {
         this.municipio = municipio;
+    }
+    public String getCepFilial() {
+        return cepFilial;
+    }
+    public void setCepFilial(String cepFilial) {
+        this.cepFilial = cepFilial;
     }
 
     @Override

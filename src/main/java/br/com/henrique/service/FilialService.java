@@ -87,6 +87,7 @@ public class FilialService {
         filialAtualizado.setNome(filialDto.getNome());
         filialAtualizado.setCnpj(filialDto.getCnpj());
         filialAtualizado.setMunicipio(filialDto.getMunicipio());
+        filialAtualizado.setCepFilial(filialDto.getCepFilial());
         
         repositFilial.save(filialAtualizado);
     }

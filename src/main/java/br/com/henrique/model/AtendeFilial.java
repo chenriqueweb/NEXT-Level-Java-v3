@@ -8,14 +8,14 @@ public class AtendeFilial {
 	private Integer filialAtende;    // "filialAtende: 1640",
 	private String  nomeFilial;      // "nomeFilial: SERRA-JD.LIMOEIRO - DEPOSITO",
 	private String  cnpjFilial;      // "cnpjFilial: 33041260099195",
+	private String  cepFilial;       // "cepFilial: 29168074"
 	private Integer microzona;       // "microzona: 40",
 	private String  ufRota;          // "ufRota: ES",
 	private Integer codigoRota;      // "codigoRota: 12",
 	private Integer codigoMunicipio; // "codigoMunicipio: 27545",
 	private String  municipio;       // "municipio: São Roque do Canaã",
 	private String  estado;          // "estado: ES",
-	private String  nomeEstado;      // "nomeEstado: Espirito Santo"
-
+	private String  nomeEstado;      // "nomeEstado: Espirito Santo",
 	
 	public AtendeFilial() {
 		super();
@@ -24,7 +24,7 @@ public class AtendeFilial {
 	
 	public AtendeFilial(Integer empresaAtende, Integer filialAtende, String nomeFilial,
 			String cnpjFilial, Integer microzona, String ufRota, Integer codigoRota, Integer codigoMunicipio,
-			String municipio, String estado, String nomeEstado, Atende atende) {
+			String municipio, String estado, String nomeEstado, String cepFilial, Atende atende) {
 		super();
 		this.empresaAtende = empresaAtende;
 		this.filialAtende = filialAtende;
@@ -37,6 +37,7 @@ public class AtendeFilial {
 		this.municipio = municipio;
 		this.estado = estado;
 		this.nomeEstado = nomeEstado;
+		this.cepFilial = cepFilial;
 	}
 
 
@@ -63,6 +64,12 @@ public class AtendeFilial {
 	}
 	public void setCnpjFilial(String cnpjFilial) {
 		this.cnpjFilial = cnpjFilial;
+	}
+	public String getCepFilial() {
+		return cepFilial;
+	}
+	public void setCepFilial(String cepFilial) {
+		this.cepFilial = cepFilial;
 	}
 	public Integer getMicrozona() {
 		return microzona;
@@ -111,7 +118,7 @@ public class AtendeFilial {
 	@Override
 	public int hashCode() {
 		return Objects.hash(cnpjFilial, codigoMunicipio, codigoRota, empresaAtende, estado,
-				filialAtende, microzona, municipio, nomeEstado, nomeFilial, ufRota);
+				filialAtende, microzona, municipio, nomeEstado, nomeFilial, ufRota, cepFilial);
 	}
 
 
@@ -130,7 +137,7 @@ public class AtendeFilial {
 				&& Objects.equals(estado, other.estado) && Objects.equals(filialAtende, other.filialAtende)
 				&& Objects.equals(microzona, other.microzona) && Objects.equals(municipio, other.municipio)
 				&& Objects.equals(nomeEstado, other.nomeEstado) && Objects.equals(nomeFilial, other.nomeFilial)
-				&& Objects.equals(ufRota, other.ufRota);
+				&& Objects.equals(ufRota, other.ufRota) && Objects.equals(cepFilial, other.cepFilial);
 	}
 
 }

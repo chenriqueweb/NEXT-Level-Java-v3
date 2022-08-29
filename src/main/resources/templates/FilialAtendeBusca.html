@@ -274,12 +274,13 @@ to {
 						<th>Filial</th>
 						<th>Nome</th>
 						<th>CNPJ</th>
+						<th>CEP</th>
 						<th>Microzona</th>
 						<th>UF da Rota</th>
 						<th>Codigo Rota</th>
-						<th>Codigo Municipio</th>
+<!--					<th>Codigo Municipio</th>  -->
 						<th>Municipio</th>
-						<th>Sigla do Estado</th>
+<!--					<th>Sigla do Estado</th>  -->
 						<th>Nome do Estado</th>
 						<th>MAPA</th>
 					</tr>
@@ -291,17 +292,22 @@ to {
 	    				<td th:text="${atende.filialAtende}"></td>
 	    				<td th:text="${atende.nomeFilial}"></td>
 	    				<td th:text="${atende.cnpjFilial}"></td>
+	    				<td th:text="${atende.cepFilial}"></td>
 	    				<td th:text="${atende.microzona}"></td>
 	    				<td th:text="${atende.ufRota}"></td>
 	    				<td th:text="${atende.codigoRota}"></td>
-	    				<td th:text="${atende.codigoMunicipio}"></td>
+<!--     				<td th:text="${atende.codigoMunicipio}"></td>  -->
 	    				<td th:text="${atende.municipio}"></td>
-	    				<td th:text="${atende.estado}"></td>
+<!--    				<td th:text="${atende.estado}"></td>  -->
 	    				<td th:text="${atende.nomeEstado}"></td>		
 	
 						<td>
-                              <a th:href="@{https://www.google.com/maps/dir/{cepOrigem}/{cepFilial}
-                                          (cepOrigem=${atendeFilial.cep},cepFilial=${atende.codigoRota})}">
+                              <a th:href="@{https://www.google.com/maps/dir/{cepOrigem},{localidade}-{uf}/{cepFilial},{municipio}-{estado}
+                                          (uf=${atendeFilial.uf},cepOrigem=${atendeFilial.cep},
+                                           localidade=${atendeFilial.localidade},
+                                           cepFilial=${atende.cepFilial},municipio=${atende.municipio},
+                                           estado=${atende.estado}
+                                          )}">
                               <button>Abrir</button>
                            </a>
 						</td>

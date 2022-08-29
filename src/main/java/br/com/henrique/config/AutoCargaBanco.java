@@ -122,6 +122,7 @@ public class AutoCargaBanco implements CommandLineRunner {
         
         
         // Carga da Tabela: MUNICIPIO
+        // Espirito Santo
         MunicipioDto municipioES27529 = new MunicipioDto(27529, "Afonso claudio", estadoES);
         municipioService.addMunicipio(municipioES27529);
         MunicipioDto municipioES27537 = new MunicipioDto(27537, "Agua doce do no", estadoES);
@@ -278,87 +279,99 @@ public class AutoCargaBanco implements CommandLineRunner {
         municipioService.addMunicipio(municipioES53040);
         MunicipioDto municipioES55425 = new MunicipioDto(55425, "Gov.lindenberg", estadoES);
         municipioService.addMunicipio(municipioES55425);        
+        
+        // Sao Paulo
+        MunicipioDto municipioSP2682 = new MunicipioDto(2682, "Jundiai", estadoSP);
+        municipioService.addMunicipio(municipioSP2682);
 
         
         // Carga da Tabela: FILIAL
         FilialPK filialPK = new FilialPK();
 
+//        filialPK.setCodigoEmpresa(21);
+//        filialPK.setCodigoFilial(1200);
+//        FilialDto filial1200 = new FilialDto(filialPK, "Teste Thiago - 1200", "33041260012929", 27669, "13203850");
+//        filialService.addFilial(filial1200);
+        
+        // Sao Paulo
         filialPK.setCodigoEmpresa(21);
         filialPK.setCodigoFilial(1200);
-        FilialDto filial1200 = new FilialDto(filialPK, "Teste Thiago - 1200", "33041260012929", 27669);
+        FilialDto filial1200 = new FilialDto(filialPK, "JUNDIAI-CASTANHO", "33041260094711", 2682, "13203850");
         filialService.addFilial(filial1200);
-        
+
+
+        // Espirito Santo
         filialPK.setCodigoEmpresa(21);
         filialPK.setCodigoFilial(6);
-        FilialDto filial0001 = new FilialDto(filialPK, "CACHOEIRO DE ITAPEMIRIM-ES", "33041260012928", 27669);
+        FilialDto filial0001 = new FilialDto(filialPK, "CACHOEIRO DE ITAPEMIRIM-ES", "33041260012928", 27669, "29300205");
         filialService.addFilial(filial0001);
         filialPK.setCodigoEmpresa(21);
         filialPK.setCodigoFilial(53);
-        FilialDto filial0002 = new FilialDto(filialPK, "CENTRO-ES", "33041260019930", 28231);
+        FilialDto filial0002 = new FilialDto(filialPK, "CENTRO-ES", "33041260019930", 28231, "29010361");
         filialService.addFilial(filial0002);
         filialPK.setCodigoEmpresa(21);
         filialPK.setCodigoFilial(123);
-        FilialDto filial0003 = new FilialDto(filialPK, "CARIACICA 2 - ES", "33041260017300", 27677);
+        FilialDto filial0003 = new FilialDto(filialPK, "CARIACICA 2 - ES", "33041260017300", 27677, "29146205");
         filialService.addFilial(filial0003);
         filialPK.setCodigoEmpresa(21);
         filialPK.setCodigoFilial(132);
-        FilialDto filial0004 = new FilialDto(filialPK, "SHOP VITÓRIA-ES", "33041260017059", 28231);
+        FilialDto filial0004 = new FilialDto(filialPK, "SHOP VITÓRIA-ES", "33041260017059", 28231, "29050420");
         filialService.addFilial(filial0004);
         filialPK.setCodigoEmpresa(21);
         filialPK.setCodigoFilial(1638);
-        FilialDto filial0005 = new FilialDto(filialPK, "SHOP PRAIA DA COSTA-ES", "33041260099438", 28223);
+        FilialDto filial0005 = new FilialDto(filialPK, "SHOP PRAIA DA COSTA-ES", "33041260099438", 28223, "29101950");
         filialService.addFilial(filial0005);
         filialPK.setCodigoEmpresa(21);
         filialPK.setCodigoFilial(1639);
-        FilialDto filial0006 = new FilialDto(filialPK, "VITÓRIA-ES", "33041260099608", 28231);
+        FilialDto filial0006 = new FilialDto(filialPK, "VITÓRIA-ES", "33041260099608", 28231, "29010002");
         filialService.addFilial(filial0006);
         filialPK.setCodigoEmpresa(21);
         filialPK.setCodigoFilial(1640);
-        FilialDto filial0007 = new FilialDto(filialPK, "SERRA-JD.LIMOEIRO - DEPOSITO", "33041260099195", 28177);
+        FilialDto filial0007 = new FilialDto(filialPK, "SERRA-JD.LIMOEIRO - DEPOSITO", "33041260099195", 28177, "29168074");
         filialService.addFilial(filial0007);
         filialPK.setCodigoEmpresa(21);
         filialPK.setCodigoFilial(1641);
-        FilialDto filial0008 = new FilialDto(filialPK, "CARIACICA-ES", "33041260098970", 27677);
+        FilialDto filial0008 = new FilialDto(filialPK, "CARIACICA-ES", "33041260098970", 27677, "29146201");
         filialService.addFilial(filial0008);
         filialPK.setCodigoEmpresa(21);
         filialPK.setCodigoFilial(1642);
-        FilialDto filial0009 = new FilialDto(filialPK, "CACHOEIRO DE ITAPEMIRIM 2 - ES", "33041260098890", 27669);
+        FilialDto filial0009 = new FilialDto(filialPK, "CACHOEIRO DE ITAPEMIRIM 2 - ES", "33041260098890", 27669, "29300792");
         filialService.addFilial(filial0009);
         filialPK.setCodigoEmpresa(21);
         filialPK.setCodigoFilial(1645);
-        FilialDto filial0010 = new FilialDto(filialPK, "GUARAPARI-ES", "33041260099004", 27782);
+        FilialDto filial0010 = new FilialDto(filialPK, "GUARAPARI-ES", "33041260099004", 27782, "29215002");
         filialService.addFilial(filial0010);
         filialPK.setCodigoEmpresa(21);
         filialPK.setCodigoFilial(1646);
-        FilialDto filial0011 = new FilialDto(filialPK, "VILA VELHA-ES", "33041260099519", 28223);
+        FilialDto filial0011 = new FilialDto(filialPK, "VILA VELHA-ES", "33041260099519", 28223, "29100401");
         filialService.addFilial(filial0011);
         filialPK.setCodigoEmpresa(21);
         filialPK.setCodigoFilial(1648);
-        FilialDto filial0012 = new FilialDto(filialPK, "SERRA-ES", "33041260099357", 28177);
+        FilialDto filial0012 = new FilialDto(filialPK, "SERRA-ES", "33041260099357", 28177, "29165130");
         filialService.addFilial(filial0012);
         filialPK.setCodigoEmpresa(21);
         filialPK.setCodigoFilial(1706);
-        FilialDto filial0013 = new FilialDto(filialPK, "SHOP BOULEVARD VILA VELHA - ES", "33041260142708", 28223);
+        FilialDto filial0013 = new FilialDto(filialPK, "SHOP BOULEVARD VILA VELHA - ES", "33041260142708", 28223, "29103800");
         filialService.addFilial(filial0013);
         filialPK.setCodigoEmpresa(21);
         filialPK.setCodigoFilial(1715);
-        FilialDto filial0014 = new FilialDto(filialPK, "SHOP MESTRE ALVARO - ES", "33041260141817", 28177);
+        FilialDto filial0014 = new FilialDto(filialPK, "SHOP MESTRE ALVARO - ES", "33041260141817", 28177, "29160161");
         filialService.addFilial(filial0014);
         filialPK.setCodigoEmpresa(21);
         filialPK.setCodigoFilial(1764);
-        FilialDto filial0015 = new FilialDto(filialPK, "SHOP MOXUARA -  ES", "33041260150212", 27677);
+        FilialDto filial0015 = new FilialDto(filialPK, "SHOP MOXUARA -  ES", "33041260150212", 27677, "29145910");
         filialService.addFilial(filial0015);
         filialPK.setCodigoEmpresa(21);
         filialPK.setCodigoFilial(1772);
-        FilialDto filial0016 = new FilialDto(filialPK, "SHOP VILA VELHA - ES", "33041260150050", 28223);
+        FilialDto filial0016 = new FilialDto(filialPK, "SHOP VILA VELHA - ES", "33041260150050", 28223, "29107900");
         filialService.addFilial(filial0016);
         filialPK.setCodigoEmpresa(21);
         filialPK.setCodigoFilial(1949);
-        FilialDto filial0018 = new FilialDto(filialPK, "SÃO MATEUS - ES", "33041260051826", 28169);
+        FilialDto filial0018 = new FilialDto(filialPK, "SÃO MATEUS - ES", "33041260051826", 28169, "29930900");
         filialService.addFilial(filial0018);
         filialPK.setCodigoEmpresa(21);
         filialPK.setCodigoFilial(2204);
-        FilialDto filial0019 = new FilialDto(filialPK, "GLORIA VILA VELHA - ES", "33041260183498", 28223);
+        FilialDto filial0019 = new FilialDto(filialPK, "GLORIA VILA VELHA - ES", "33041260183498", 28223, "29106405");
         filialService.addFilial(filial0019);
         
 
