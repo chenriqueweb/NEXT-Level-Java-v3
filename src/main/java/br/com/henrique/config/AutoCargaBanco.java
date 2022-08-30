@@ -287,17 +287,17 @@ public class AutoCargaBanco implements CommandLineRunner {
         
         // Carga da Tabela: FILIAL
         FilialPK filialPK = new FilialPK();
-
-//        filialPK.setCodigoEmpresa(21);
-//        filialPK.setCodigoFilial(1200);
-//        FilialDto filial1200 = new FilialDto(filialPK, "Teste Thiago - 1200", "33041260012929", 27669, "13203850");
-//        filialService.addFilial(filial1200);
         
-        // Sao Paulo
         filialPK.setCodigoEmpresa(21);
         filialPK.setCodigoFilial(1200);
-        FilialDto filial1200 = new FilialDto(filialPK, "JUNDIAI-CASTANHO", "33041260094711", 2682, "13203850");
+        FilialDto filial1200 = new FilialDto(filialPK, "Teste Thiago - 1200", "33041260012929", 27669, "29300205");
         filialService.addFilial(filial1200);
+        
+        // Sao Paulo
+//        filialPK.setCodigoEmpresa(21);
+//        filialPK.setCodigoFilial(1200);
+//        FilialDto filial1200 = new FilialDto(filialPK, "JUNDIAI-CASTANHO", "33041260094711", 2682, "13203850");
+//        filialService.addFilial(filial1200);
 
 
         // Espirito Santo

@@ -302,11 +302,10 @@ to {
 	    				<td th:text="${atende.nomeEstado}"></td>		
 	
 						<td>
-                              <a th:href="@{https://www.google.com/maps/dir/{cepOrigem},{localidade}-{uf}/{cepFilial},{municipio}-{estado}
+                              <a th:href="@{https://www.google.com/maps/dir/{cepOrigem},{localidade}-{uf}/{cepFilial},{estado}
                                           (uf=${atendeFilial.uf},cepOrigem=${atendeFilial.cep},
                                            localidade=${atendeFilial.localidade},
-                                           cepFilial=${atende.cepFilial},municipio=${atende.municipio},
-                                           estado=${atende.estado}
+                                           cepFilial=${atende.cepFilial},estado=${atende.estado}
                                           )}">
                               <button>Abrir</button>
                            </a>
